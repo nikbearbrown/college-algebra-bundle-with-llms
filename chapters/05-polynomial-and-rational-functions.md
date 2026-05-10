@@ -1,308 +1,283 @@
 # Chapter 5 — Polynomial and Rational Functions
 
-## 1. Chapter Opening
-
-Galileo drops a cannonball from the Tower of Pisa in 1589 (the experiment may be apocryphal but the physics is real). The ball falls. He measures the distance fallen at one second, two seconds, three seconds. Plot the data: $16$ ft, $64$ ft, $144$ ft. The pairing is not linear — the differences grow. The relationship is *quadratic*: $d(t) = 16t^2$. Every additional second adds more distance than the second before, because gravity is accelerating the ball.
-
-A quadratic is the simplest *nonlinear* function. Its graph is a parabola. Beyond quadratic lie cubic, quartic, and higher-degree polynomials — each adding more flexibility, more zeros, more turning points. Beyond polynomials lie *rational functions*: polynomials divided by polynomials, with the new behavior that they can be undefined at certain inputs and shoot off to infinity near them.
-
-This chapter develops the technique for working with these richer function families. Quadratics first (the simplest case, and the one that appears in projectile motion, optimization problems, and conic sections). Polynomial functions of higher degree (with their full set of zeros and end behavior). Rational functions (with their asymptotes and discontinuities).
-
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Identify** the vertex, axis of symmetry, intercepts, maximum or minimum, and end behavior of a quadratic function.
-- **Sketch** the graph of a polynomial function from its formula, including its zeros (with multiplicities), end behavior, and turning points.
-- **Find** the zeros of a polynomial function using factoring, the rational zero theorem, and synthetic division.
-- **Identify** the domain, vertical and horizontal asymptotes, and intercepts of a rational function and sketch its graph.
-- **Solve** applications involving polynomial and rational functions, including direct, inverse, and joint variation.
-
-### Prerequisites
-
-Chapters 1–4. The factoring techniques from Chapter 1, the equation-solving from Chapter 2, the function concept from Chapter 3, and the linear-modeling logic from Chapter 4 all return as tools applied to richer functions.
+*What happens when a curve is allowed to bend more than once.*
 
 ---
 
-## 2. Concept 1 — Quadratic Functions
+## The cannonball and the accountant
 
-A quadratic function has the form
+In 1589, Galileo dropped weights from the Tower of Pisa — or so the story goes. What is certain is that he measured falling objects carefully enough to notice something that wasn't obvious: the distance a falling body travels isn't proportional to the time it falls. It grows *faster* than that. In the first second, a ball falls 16 feet. By the second second, it has fallen 64 feet total. By the third, 144 feet. The differences keep growing.
+
+That relationship is $d(t) = 16t^2$. The distance depends on the *square* of the time. Plot it and you get a parabola. The parabola is not linear — it has a bend — and the bend is what captures the physics of acceleration.
+
+<!-- → [CHART: side-by-side comparison of $d = 16t$ (linear, straight line) vs $d(t) = 16t^2$ (quadratic, parabola) on the same axes for $t = 0$ to $4$ seconds, with data points marked at $t = 1, 2, 3$ — student should see immediately why "grows faster than proportional" means a curve, not a line] -->
+
+Now imagine an accountant keeping revenue records. Quarter one: modest. Quarter two: better. Quarter three: a spike. Quarter four: lower again. One bend isn't enough to describe that curve. Two bends might do it. A cubic polynomial, not a quadratic. If the seasonal pattern is complicated enough, maybe a quartic.
+
+And now imagine a factory where output per worker rises as the team grows, peaks when the team is optimally sized, then falls as coordination problems set in — but output also depends on machine availability, which is a ratio of working machines to total machines, and when that denominator approaches zero, output collapses to nothing. That's a rational function: a polynomial divided by a polynomial, undefined at a point, shooting toward infinity nearby.
+
+This chapter is about all three of these: the quadratic (one bend, the simplest nonlinear case), the general polynomial (as many bends as you need), and the rational function (with the new phenomenon of things going infinite at specific inputs). Three families, increasingly rich, each containing the previous one as a special case.
+
+---
+
+## Part 1 — Quadratic functions: the bend with a name
+
+A *quadratic function* has the form
 
 $$f(x) = ax^2 + bx + c, \quad a \neq 0$$
 
-The graph is a *parabola*. If $a > 0$, the parabola opens upward (cup-shaped). If $a < 0$, downward (cap-shaped). The parabola has a single *vertex* — the lowest point if it opens up, the highest if it opens down.
+The graph is a *parabola*. If $a > 0$, it opens upward — like a bowl catching rain. If $a < 0$, downward — like an arch. The single distinguishing feature of a parabola is its *vertex*: the bottom of the bowl or the top of the arch, depending on which way it opens.
 
-### Finding the vertex
+<!-- → [IMAGE: two parabolas side by side — left opens upward ($a > 0$) with vertex labeled as minimum, right opens downward ($a < 0$) with vertex labeled as maximum; axis of symmetry shown as a dashed vertical line through each vertex; student should be able to read off direction, vertex location, and axis from this picture before any formula is introduced] -->
 
-Two ways to locate the vertex.
+The vertex matters because it is the extreme point — the minimum of the function if $a > 0$, the maximum if $a < 0$. Every optimization problem that leads to a quadratic gets answered at the vertex.
 
-**By formula.** The vertex of $f(x) = ax^2 + bx + c$ is at
+### Finding the vertex two ways
 
-$$x = -\frac{b}{2a}, \quad y = f\!\left(-\frac{b}{2a}\right)$$
+**By formula.** The $x$-coordinate of the vertex of $f(x) = ax^2 + bx + c$ is
+
+$$x = -\frac{b}{2a}$$
+
+Plug that back in to get the $y$-coordinate.
 
 **By completing the square.** Rewrite $f(x)$ in *vertex form*:
 
 $$f(x) = a(x - h)^2 + k$$
 
-The vertex is $(h, k)$. The parabola opens up if $a > 0$, down if $a < 0$.
+The vertex is $(h, k)$. This form makes the vertex obvious by inspection; the formula derivation and the completing-the-square derivation produce the same answer by different routes.
 
 **Example.** Find the vertex of $f(x) = 2x^2 - 8x + 5$.
 
 By formula: $x = -\frac{-8}{2 \cdot 2} = 2$. Then $f(2) = 8 - 16 + 5 = -3$. Vertex: $(2, -3)$.
 
-By completing the square: $f(x) = 2(x^2 - 4x) + 5 = 2(x^2 - 4x + 4 - 4) + 5 = 2(x - 2)^2 - 8 + 5 = 2(x - 2)^2 - 3$. Vertex: $(2, -3)$. Same answer.
+By completing the square:
 
-### Maximum or minimum
+$$f(x) = 2(x^2 - 4x) + 5 = 2(x^2 - 4x + 4 - 4) + 5 = 2(x - 2)^2 - 8 + 5 = 2(x - 2)^2 - 3$$
 
-Because the vertex is the extreme point, it gives the maximum or minimum value of the function.
+Vertex: $(2, -3)$. Same answer, different route. The vertex form makes it clear that the function is minimized when $(x - 2)^2 = 0$, i.e., when $x = 2$.
 
-If $a > 0$: minimum value is $k$ (the $y$-coordinate of the vertex), occurring at $x = h$.
+### A quadratic optimization problem
 
-If $a < 0$: maximum value is $k$, occurring at $x = h$.
+A farmer has 100 feet of fencing to enclose a rectangular pen. What dimensions maximize the area?
 
-This is the key fact for *optimization problems*. Set up the quantity to be optimized as a quadratic in one variable; the vertex tells you the answer.
+Let $x$ be one side. The perimeter constraint gives $2x + 2y = 100$, so $y = 50 - x$. The area is:
 
-**Example — fencing optimization.** A farmer has 100 ft of fencing to enclose a rectangular pen. What dimensions maximize the area?
+$$A(x) = x(50 - x) = -x^2 + 50x$$
 
-Let $x$ be one side. The perimeter is $2x + 2y = 100$, so $y = 50 - x$. Area $A(x) = x(50 - x) = -x^2 + 50x$.
+This is a downward-opening parabola ($a = -1$). The maximum is at the vertex:
 
-This is a downward parabola. Vertex: $x = -\frac{50}{2 \cdot (-1)} = 25$. So $y = 25$ as well, and $A = 625$ ft². The pen is a $25 \times 25$ square — a special case of a general result: *for a fixed perimeter, the rectangle of maximum area is a square*.
+$$x = -\frac{50}{2 \cdot (-1)} = 25$$
 
-### Trade-off
+So $y = 25$ as well, and the maximum area is $625$ ft². The pen is a square. This turns out to be a general fact: for a fixed perimeter, the rectangle with maximum area is always a square. The quadratic structure reveals it.
 
-Quadratic functions are powerful enough to describe many physical phenomena (projectile motion, area optimization, parabolic mirrors) but limited to a single bend. Functions with multiple bends require higher-degree polynomials, the topic of the next concept.
+The quadratic is a powerful model precisely because it has exactly one bend. That's enough to capture acceleration in physics, maximization in economics, and the geometry of parabolic mirrors. When one bend isn't enough, you need more.
 
 ---
 
-## 3. Concept 2 — Polynomial Functions
+## Part 2 — Polynomial functions: bending as many times as needed
 
-A *polynomial function* has the form
+A *polynomial function* of degree $n$ has the form
 
-$$f(x) = a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0$$
+$$f(x) = a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0, \quad a_n \neq 0$$
 
-The largest exponent $n$ is the *degree*. The coefficient $a_n$ is the *leading coefficient*. The constant $a_0$ is the *y-intercept*: $f(0) = a_0$.
+Degree 2 is the quadratic we just finished. Degree 3 is cubic — it can have two bends. Degree 4 is quartic — three possible bends. In general, a polynomial of degree $n$ has at most $n - 1$ turning points. Adding degree adds flexibility.
 
-### End behavior
+The graph of a polynomial is smooth (no corners) and continuous (no breaks). The shapes it can take on are constrained by its degree, its leading coefficient, and where it crosses zero.
 
-What happens as $x \to \pm\infty$? The end behavior of a polynomial is determined entirely by its *leading term* $a_n x^n$.
+### End behavior: the long-run story
 
-| Degree | Leading coefficient | Left end | Right end |
+As $x$ goes to $\pm\infty$, the behavior of the whole polynomial is determined entirely by the *leading term* $a_n x^n$. The lower-degree terms get dominated.
+
+Four cases:
+
+| Degree | Leading coefficient | Left end ($x \to -\infty$) | Right end ($x \to +\infty$) |
 |---|---|---|---|
-| Even ($n = 2, 4, 6, \ldots$) | Positive | $+\infty$ | $+\infty$ |
+| Even | Positive | $+\infty$ | $+\infty$ |
 | Even | Negative | $-\infty$ | $-\infty$ |
-| Odd ($n = 1, 3, 5, \ldots$) | Positive | $-\infty$ | $+\infty$ |
+| Odd | Positive | $-\infty$ | $+\infty$ |
 | Odd | Negative | $+\infty$ | $-\infty$ |
 
-So $f(x) = -2x^4 + \ldots$ goes to $-\infty$ on both ends; $f(x) = x^3 + \ldots$ goes from $-\infty$ on the left to $+\infty$ on the right.
+Even-degree polynomials have both ends going the same direction (both up or both down). Odd-degree polynomials have the ends going opposite directions. The leading coefficient determines which direction.
 
-### Zeros and multiplicities
+<!-- → [IMAGE: four small polynomial sketches arranged in a 2×2 grid corresponding to the four table rows — top-left: even/positive (both ends up, U-shape); top-right: even/negative (both ends down, ∩-shape); bottom-left: odd/positive (left down, right up); bottom-right: odd/negative (left up, right down); each labeled with a representative function; student should use this as a quick-reference card before reading the examples below] -->
 
-A *zero* of a polynomial is a value $x = r$ where $f(r) = 0$. By the *factor theorem*, $r$ is a zero if and only if $(x - r)$ is a factor of $f(x)$.
+So $f(x) = -2x^4 + 7x^2 - 3$ goes to $-\infty$ on both ends (even degree, negative leading coefficient). And $f(x) = x^3 + 5x - 2$ goes from $-\infty$ on the left to $+\infty$ on the right (odd degree, positive leading coefficient).
 
-The *multiplicity* of a zero is the number of times its factor appears. If $f(x) = (x - 2)^3 (x + 1)$, the zero $x = 2$ has multiplicity 3 and $x = -1$ has multiplicity 1.
+### Zeros and the factor theorem
 
-Multiplicity affects the *graph behavior at the zero*:
+A *zero* of $f$ is any $x$ where $f(x) = 0$. The *factor theorem* says: $r$ is a zero if and only if $(x - r)$ is a factor of $f(x)$.
 
-- **Odd multiplicity:** the graph crosses the $x$-axis at the zero.
-- **Even multiplicity:** the graph touches the $x$-axis but does not cross (it "bounces" off).
+This is the key connection between the algebra (finding roots of an equation) and the geometry (where the graph crosses the $x$-axis). Every zero is a crossing point or a touch point.
 
-### Turning points
+The *multiplicity* of a zero is how many times the corresponding factor appears. If $f(x) = (x - 2)^3(x + 1)$, the zero $x = 2$ has multiplicity 3 and $x = -1$ has multiplicity 1.
 
-A polynomial of degree $n$ has at most $n - 1$ turning points (places where the graph changes from increasing to decreasing or vice versa). A cubic has at most 2 turning points; a quartic has at most 3.
+Multiplicity controls what the graph does at that zero:
+
+- **Odd multiplicity:** the graph crosses the $x$-axis. It comes from one side and exits the other.
+- **Even multiplicity:** the graph touches the $x$-axis but turns around without crossing. It "bounces" off.
+
+A zero of multiplicity 1 crosses cleanly. A zero of multiplicity 2 bounces off, like a ball touching the floor and rebounding. A zero of multiplicity 3 crosses but with an S-shaped inflection — it flattens out as it passes through.
+
+<!-- → [IMAGE: three close-up sketches of a curve near a zero — left: multiplicity 1, the curve crosses the x-axis at a nonzero angle (clean crossing); center: multiplicity 2, the curve touches and turns back without crossing (bounce); right: multiplicity 3, the curve crosses but flattens to a horizontal tangent at the zero (S-shaped inflection crossing); each labeled with its multiplicity and the phrase "crosses," "bounces," or "inflection cross" — this is the single picture students need to internalize before the sketching example] -->
 
 ### Finding zeros
 
-Three techniques for finding zeros of a polynomial:
+When the polynomial doesn't factor by inspection, two tools help.
 
-**1. Factoring.** If you can factor the polynomial, set each factor to zero. Works for low-degree polynomials with rational zeros.
-
-**2. The rational zero theorem.** If a polynomial with integer coefficients has a rational zero $\frac{p}{q}$ (in lowest terms), then $p$ divides the constant term and $q$ divides the leading coefficient. This gives a finite list of *candidates* to test.
+**The rational zero theorem.** If a polynomial with integer coefficients has a rational zero $p/q$ (fully reduced), then $p$ divides the constant term and $q$ divides the leading coefficient. This gives a finite list of candidates to test — not a proof that any of them work, but a finite search space instead of an infinite one.
 
 **Example.** Find the zeros of $f(x) = 2x^3 - 5x^2 - 4x + 3$.
 
-Constant term 3, leading coefficient 2. Possible rational zeros: $\pm 1, \pm 3, \pm \frac{1}{2}, \pm \frac{3}{2}$. Test $x = 3$: $f(3) = 54 - 45 - 12 + 3 = 0$. So $x = 3$ is a zero, and $(x - 3)$ is a factor.
+The constant term is 3, the leading coefficient is 2. Candidates: $\pm 1, \pm 3, \pm \frac{1}{2}, \pm \frac{3}{2}$.
 
-**3. Synthetic division.** Divide by $(x - r)$ to factor out a known zero. For $f(x) = 2x^3 - 5x^2 - 4x + 3$ divided by $(x - 3)$:
+Test $x = 3$: $f(3) = 54 - 45 - 12 + 3 = 0$. Hit. So $(x - 3)$ is a factor.
 
-$$2x^3 - 5x^2 - 4x + 3 = (x - 3)(2x^2 + x - 1) = (x - 3)(2x - 1)(x + 1)$$
+**Synthetic division.** Once one zero $r$ is found, divide $f(x)$ by $(x - r)$ using synthetic division to get the remaining factor. For $f(x) = 2x^3 - 5x^2 - 4x + 3$ divided by $(x - 3)$:
 
-Zeros: $x = 3, x = \frac{1}{2}, x = -1$.
+$$2x^3 - 5x^2 - 4x + 3 = (x - 3)(2x^2 + x - 1)$$
+
+Factor $2x^2 + x - 1 = (2x - 1)(x + 1)$. All three zeros: $x = 3$, $x = \frac{1}{2}$, $x = -1$.
+
+### Sketching a polynomial from its features
+
+**Example.** Sketch $f(x) = (x + 2)(x - 1)^2(x - 3)$.
+
+Zeros: $-2$ (multiplicity 1), $1$ (multiplicity 2), $3$ (multiplicity 1).
+
+Behavior at zeros: multiplicity 1 → cross at $-2$ and $3$; multiplicity 2 → bounce at $1$.
+
+Degree: $1 + 2 + 1 = 4$. Even degree.
+
+Leading coefficient: positive (multiplying the highest-degree terms gives $x^4$).
+
+End behavior: even degree, positive leading → both ends go to $+\infty$.
+
+$y$-intercept: $f(0) = (2)(1)(-3) = -6$.
+
+Now assemble: the graph starts at $+\infty$ on the left, comes down, crosses at $-2$, continues down to $-6$ at $x = 0$, bounces at $x = 1$ (touching but not crossing), comes back down, crosses at $x = 3$, then rises to $+\infty$. No guessing about crossings or bounces — the multiplicities determine them entirely.
+
+<!-- → [IMAGE: complete sketch of $f(x) = (x+2)(x-1)^2(x-3)$ on the interval $[-3, 4]$, with all four features explicitly annotated: zero at $x = -2$ marked "cross (mult. 1)," zero at $x = 1$ marked "bounce (mult. 2)," zero at $x = 3$ marked "cross (mult. 1)," y-intercept at $(0,-6)$ labeled, and arrows on both ends pointing upward to indicate $+\infty$; student should verify each feature against the analysis above before trusting their own sketches] -->
 
 ### The fundamental theorem of algebra
 
-A polynomial of degree $n$ has *exactly* $n$ zeros, counting multiplicities and including complex zeros. So a cubic has 3 zeros, a quartic has 4, etc. Some may be repeated; some may be complex.
+A polynomial of degree $n$ has exactly $n$ zeros, counted with multiplicity and including complex zeros. This is the fundamental theorem of algebra. A cubic has 3 zeros, a quartic has 4, and so on. Some may be repeated; some may be complex. If the polynomial has real coefficients and a complex zero $a + bi$, then its conjugate $a - bi$ is also a zero — complex zeros of real-coefficient polynomials come in pairs.
 
-### Worked example
-
-Sketch the graph of $f(x) = (x + 2)(x - 1)^2(x - 3)$.
-
-**Zeros:** $-2$ (multiplicity 1), $1$ (multiplicity 2), $3$ (multiplicity 1).
-
-**Behavior at zeros:** $-2$ and $3$ have odd multiplicity → graph crosses. $1$ has even multiplicity → graph bounces.
-
-**Degree:** $1 + 2 + 1 = 4$. Even degree.
-
-**Leading coefficient:** $+1$ (multiplying out). Even degree, positive leading → graph goes to $+\infty$ on both ends.
-
-**Y-intercept:** $f(0) = 2 \cdot 1 \cdot (-3) = -6$.
-
-So the graph: starts at $+\infty$ on the left, comes down, crosses at $x = -2$, bounces off the $x$-axis at $x = 1$, goes back down (or stays low), crosses at $x = 3$, then heads to $+\infty$. With $y$-intercept $-6$.
-
-### Trade-off
-
-Polynomial functions are flexible enough to model many real-world phenomena (population dynamics, projectile motion, economic curves) but their flexibility is bounded by degree. A polynomial of degree $n$ has at most $n - 1$ turning points; a sinusoidal pattern with infinitely many oscillations cannot be captured by any polynomial. Trigonometric functions (chapters 7–9) handle that.
+The theorem guarantees that the zero-finding process terminates: there are exactly $n$ things to find, no more and no fewer.
 
 ---
 
-## 4. Concept 3 — Rational Functions
+## Part 3 — Rational functions: when a denominator can be zero
 
 A *rational function* is a ratio of two polynomials:
 
 $$f(x) = \frac{p(x)}{q(x)}, \quad q(x) \not\equiv 0$$
 
-The denominator can be zero at specific points; at those points, the function is *undefined*. This single feature — undefined points — gives rational functions their characteristic shape: vertical asymptotes, where the function shoots to $\pm\infty$ near the bad inputs.
+Division by zero is not defined. So wherever $q(x) = 0$, the function is undefined. That fact — which sounds like a technicality — is what gives rational functions their most interesting behavior.
 
-### Domain
+Near a point where the denominator goes to zero (and the numerator doesn't), the function doesn't just get large. It gets *arbitrarily* large, positively or negatively, depending on which side you approach from. The graph shoots off toward infinity. The function has a *vertical asymptote* there.
 
-The domain excludes any $x$ where $q(x) = 0$.
+### Domain and vertical asymptotes
 
-For $f(x) = \frac{x + 1}{x^2 - 4} = \frac{x + 1}{(x-2)(x+2)}$: domain is $(-\infty, -2) \cup (-2, 2) \cup (2, \infty)$.
+The domain of a rational function excludes all $x$ where $q(x) = 0$.
 
-### Vertical asymptotes
+A *vertical asymptote* is a vertical line $x = c$ that the graph approaches but never crosses. It occurs at each zero of the denominator that does not cancel with a zero of the numerator.
 
-A *vertical asymptote* is a vertical line $x = c$ that the graph approaches but never crosses. They occur where the denominator is zero (after simplifying) and the numerator is nonzero.
+**Example.** $f(x) = \frac{x + 1}{(x - 2)(x + 2)}$.
 
-For $f(x) = \frac{x + 1}{(x-2)(x+2)}$: vertical asymptotes at $x = 2$ and $x = -2$ (the numerator is nonzero at both points).
+Domain: all real numbers except $x = 2$ and $x = -2$.
 
-### Removable discontinuities (holes)
+Vertical asymptotes: $x = 2$ and $x = -2$ (the numerator $x + 1$ is nonzero at both points, so neither cancels).
 
-If a factor cancels between numerator and denominator, the function has a *hole* at that point — not a vertical asymptote.
+### Holes
 
-For $f(x) = \frac{x^2 - 4}{x - 2} = \frac{(x-2)(x+2)}{x - 2} = x + 2$ for $x \neq 2$. The function equals $x + 2$ everywhere except at $x = 2$, where it is undefined. The graph is the line $y = x + 2$ with a hole at $(2, 4)$.
+When a factor cancels between numerator and denominator, something subtler happens.
 
-### Horizontal asymptotes
+$f(x) = \frac{x^2 - 4}{x - 2} = \frac{(x-2)(x+2)}{x-2} = x + 2$ for $x \neq 2$.
 
-A *horizontal asymptote* is a horizontal line $y = c$ that the graph approaches as $x \to \pm\infty$. Determined by comparing degrees of numerator and denominator.
+The function equals the line $y = x + 2$ everywhere except $x = 2$, where it is undefined. The graph is a straight line with a single point missing — a *hole* at $(2, 4)$. Not a vertical asymptote; not a crossing; a single missing point. Factor cancellation is how you detect holes.
 
-Let $\deg(p) = n$ and $\deg(q) = m$.
+<!-- → [IMAGE: two side-by-side graphs — left: $f(x) = \frac{x^2-4}{x-2}$, which looks exactly like the line $y = x + 2$ but with an open circle (hole) at the point $(2, 4)$; right: a different rational function with a true vertical asymptote, showing the curve shooting to $\pm\infty$; labels distinguish "hole (factor cancels)" from "vertical asymptote (factor does not cancel)" — students consistently confuse these two and need the visual contrast] -->
 
-- $n < m$: horizontal asymptote $y = 0$.
-- $n = m$: horizontal asymptote $y = \frac{a_n}{b_m}$ (ratio of leading coefficients).
-- $n > m$: no horizontal asymptote (graph goes to $\pm\infty$). If $n = m + 1$, there is a *slant asymptote* (a non-horizontal line).
+### Horizontal asymptotes: the long-run behavior
 
-**Example.** $f(x) = \frac{2x^2 + 3}{x^2 - 4}$: degrees equal, ratio of leading coefficients $\frac{2}{1} = 2$. Horizontal asymptote $y = 2$.
+As $x \to \pm\infty$, the lower-degree terms in numerator and denominator get dominated by the highest-degree terms. Three cases, determined by comparing degrees:
 
-### Worked example
+Let $n = \deg(p)$ and $m = \deg(q)$.
+
+- **$n < m$:** the denominator dominates. $f(x) \to 0$. Horizontal asymptote $y = 0$.
+- **$n = m$:** numerator and denominator grow at the same rate. Horizontal asymptote $y = \frac{a_n}{b_m}$, the ratio of leading coefficients.
+- **$n > m$:** the numerator dominates. No horizontal asymptote. If $n = m + 1$, there is a *slant asymptote* — a non-horizontal line the graph approaches at the ends.
+
+**Example.** $f(x) = \frac{2x^2 + 3}{x^2 - 4}$. Degrees equal. Leading coefficients $2$ and $1$. Horizontal asymptote $y = \frac{2}{1} = 2$.
+
+The graph approaches $y = 2$ from above or below as $x$ gets large, but never reaches it on either side.
+
+### A full worked example
 
 Graph $f(x) = \frac{x - 1}{x + 2}$.
 
 **Domain:** $x \neq -2$.
 
-**Vertical asymptote:** $x = -2$ (denominator zero, numerator nonzero).
+**Vertical asymptote:** $x = -2$ (denominator zero, numerator nonzero at that point).
 
-**Horizontal asymptote:** Degrees equal. Ratio of leading coefficients $\frac{1}{1} = 1$. Asymptote $y = 1$.
+**Horizontal asymptote:** Degrees equal, leading coefficients both 1. $y = 1$.
 
-**X-intercept:** Numerator zero when $x = 1$. So $(1, 0)$.
+**$x$-intercept:** Numerator zero at $x = 1$. Point: $(1, 0)$.
 
-**Y-intercept:** $f(0) = \frac{-1}{2} = -\frac{1}{2}$. So $(0, -\frac{1}{2})$.
+**$y$-intercept:** $f(0) = \frac{-1}{2}$. Point: $(0, -\frac{1}{2})$.
 
-The graph has two branches separated by $x = -2$. The right branch (for $x > -2$) passes through $(0, -\frac{1}{2})$ and $(1, 0)$, then approaches $y = 1$ from below as $x \to \infty$. The left branch (for $x < -2$) approaches $y = 1$ from above as $x \to -\infty$ and shoots to $-\infty$ as $x \to -2^-$.
+Now think about where the graph lives in each region. For $x > -2$: the function passes through $(0, -\frac{1}{2})$ and $(1, 0)$, then approaches $y = 1$ from below as $x \to +\infty$. For $x < -2$: as $x \to -2^-$, the denominator approaches zero from below, so $f$ goes to $+\infty$; as $x \to -\infty$, $f$ approaches $y = 1$ from above.
 
-### Variation — a special case of rational functions
+The function never equals 1 (the horizontal asymptote), because that would require $\frac{x-1}{x+2} = 1 \Rightarrow x - 1 = x + 2 \Rightarrow -1 = 2$, a contradiction.
 
-**Direct variation:** $y = kx$. $y$ is proportional to $x$.
+<!-- → [IMAGE: complete graph of $f(x) = \frac{x-1}{x+2}$, showing both branches separated by the vertical asymptote $x = -2$ (dashed vertical line) and approaching the horizontal asymptote $y = 1$ (dashed horizontal line) from below on the right and from above on the left; intercepts $(1, 0)$ and $(0, -\frac{1}{2})$ marked; the two branches clearly labeled "right branch" and "left branch"; student should use this graph to verify each analytical result from the worked example above] -->
 
-**Inverse variation:** $y = \frac{k}{x}$. $y$ is inversely proportional to $x$.
+### Variation: rational structure in disguise
 
-**Joint variation:** $y = kxz$ (or with more variables). $y$ varies with multiple quantities at once.
+Several applied relationships are rational functions in simple forms.
 
-The constant $k$ is the *constant of variation*, found by plugging in one known data point.
+**Inverse variation:** $y = \frac{k}{x}$. The output halves when the input doubles. Pressure and volume in a gas at constant temperature. Time and speed for a fixed distance.
 
-**Example.** Light intensity $I$ varies inversely as the square of distance $r$: $I = \frac{k}{r^2}$. If $I = 100$ at $r = 5$ m, find $I$ at $r = 10$ m.
+**Inverse-square variation:** $y = \frac{k}{x^2}$. Light intensity falls off with the square of distance from the source. So does gravitational force.
 
-$100 = \frac{k}{25}$, so $k = 2500$. At $r = 10$: $I = \frac{2500}{100} = 25$. Doubling the distance reduces intensity to one-fourth — the *inverse-square law*.
+**Example.** Light intensity $I$ varies inversely with the square of distance $r$: $I = \frac{k}{r^2}$. At $r = 5$ m, $I = 100$ lux. Find $I$ at $r = 10$ m.
 
-### Trade-off
+$100 = \frac{k}{25}$, so $k = 2500$. At $r = 10$: $I = \frac{2500}{100} = 25$ lux.
 
-Rational functions are flexible enough to model relationships with discontinuities — situations where a quantity blows up near a critical input (light intensity at distance zero, the price of a good when supply approaches zero). The cost is that you must be careful about the domain; the "interesting" inputs are exactly where the function is undefined, and analyzing the behavior near them requires the asymptote machinery.
+Doubling the distance reduces intensity to one-quarter. This is the inverse-square law, and it governs light, gravity, electrostatic force, and sound in open air. The rational structure of $y = k/x^2$ encodes it exactly.
 
 ---
 
-## 5. Integration — One Worked Problem
+## Putting it together: a box from a flat sheet
 
-A rectangular box is to be built from a flat sheet of cardboard $20$ inches wide and $30$ inches long, by cutting equal squares of side $x$ from the four corners and folding up the sides.
+A rectangular sheet of cardboard is 30 inches long and 20 inches wide. Cut equal squares of side $x$ from each corner, fold up the flaps, and you have a box.
 
-(a) Express the box's volume $V$ as a function of $x$.
+**Building the volume function.** After cutting, the length of the box is $30 - 2x$, the width is $20 - 2x$, and the height is $x$. The volume is:
 
-The box dimensions: length $30 - 2x$, width $20 - 2x$, height $x$. So:
 $$V(x) = x(30 - 2x)(20 - 2x) = x(600 - 100x + 4x^2) = 4x^3 - 100x^2 + 600x$$
 
-This is a *cubic polynomial* in $x$.
+This is a cubic polynomial in $x$.
 
-(b) What is the domain (in context)?
+**Domain.** The cut size must be positive ($x > 0$), and the width must remain positive ($20 - 2x > 0$, so $x < 10$). The domain is $(0, 10)$.
 
-Physical constraints: $x > 0$ (cuts must be positive), $x < 10$ (otherwise width $20 - 2x \leq 0$). Domain: $(0, 10)$.
+**Shape of the function on the domain.** At $x = 0$: $V = 0$ (no box). At $x = 10$: $V = 0$ again (the width disappears, no box). On the interval $(0, 10)$, the volume is positive — it rises from zero, reaches a peak, and falls back to zero. The maximum is somewhere in the interior.
 
-(c) For what value of $x$ is the volume maximized?
+The cubic $V(x) = 4x^3 - 100x^2 + 600x$ factors as $V(x) = 4x(x^2 - 25x + 150)$. The zeros of the quadratic factor are at $x = \frac{25 \pm \sqrt{625 - 600}}{2} = \frac{25 \pm 5}{2}$, giving $x = 10$ and $x = 15$. So on $(0, 10)$, the only zero is at the boundary.
 
-This requires calculus (or graphing). For our purposes, plot the cubic on $(0, 10)$. The cubic crosses zero at $x = 0$ and $x = 10$ (and at $x = 15$, outside the domain). The maximum on $(0, 10)$ is at some interior point. Numerical inspection or calculus shows the maximum at $x \approx 3.92$, with $V \approx 1056$ in³. The point: *cubic functions can model real geometric optimization problems*, and the graph (with its turning points and zeros) is the analytic tool.
+Finding the interior maximum precisely requires calculus — setting the derivative to zero. The answer is $x \approx 3.92$ in, giving a maximum volume of about 1056 in³. For now, the polynomial structure tells us the shape: starts and ends at zero, has exactly one peak, and the location of that peak is determined by the algebra.
 
-(d) Sketch the graph of $V(x)$ on its domain.
+The whole problem is a study in what polynomial structure reveals. The volume formula came from a geometric construction. Its zeros came from the physical constraints. The existence of a maximum came from the end behavior (zero at both boundaries, positive in between). The polynomial didn't just represent the answer — it told us where to look.
 
-Cubic, leading coefficient $+4$, so end behavior: $-\infty$ left, $+\infty$ right (outside the domain). On the domain $(0, 10)$: starts at $V(0) = 0$, rises to a peak around $x \approx 3.92$ (max volume ~1056), then falls to $V(10) = 0$.
-
-The example used Concepts 1 (quadratic-like analysis), 2 (cubic polynomial behavior), and the principle that polynomial functions model geometric structure directly.
-
-[FIGURE: Two-panel figure. Top: a flat rectangle 30 × 20 with squares of side $x$ marked at each corner; arrows indicate folding. Bottom: a graph of $V(x) = 4x^3 - 100x^2 + 600x$ on $[0, 10]$, with the maximum point at $x \approx 3.92$ marked. The student should notice that the polynomial structure of the volume reflects the geometric structure of the box.]
+<!-- → [IMAGE: two-panel figure — left panel: top-down and perspective view of the cardboard sheet (30 × 20) with squares of side $x$ cut from each corner and fold lines indicated, dimensions $30-2x$, $20-2x$, and $x$ labeled; right panel: graph of $V(x) = 4x^3 - 100x^2 + 600x$ on the domain $(0, 10)$, starting and ending at zero, with the maximum point at $x \approx 3.92$, $V \approx 1056$ marked; the zeros at $x = 0$ and $x = 10$ labeled as "no box (no height)" and "no box (no width)"; student should see how the geometry of the left panel maps exactly onto the zeros and shape of the right panel] -->
 
 ---
 
-## 6. Exercises
+## The design philosophy of the three families
 
-### Warm-up
+Polynomial functions are smooth and continuous. They can bend as many times as their degree permits, no more. They are unbounded — as $x$ grows, a polynomial grows too, without limit. They cannot have asymptotes, holes, or discontinuities. Their values at large $x$ are dominated by the leading term.
 
-**Exercise 5.1.** Find the vertex and the maximum or minimum of $f(x) = -2x^2 + 8x - 3$. Difficulty: low.
+Rational functions inherit polynomials' smoothness wherever the denominator is nonzero, then add the new feature: points where the function is undefined, with asymptotic behavior nearby. The domain is no longer all real numbers. Rationals can model bounded outputs (horizontal asymptotes tell you what the function approaches, and it actually approaches it), and they can model blowups (vertical asymptotes tell you where the function escapes to infinity).
 
-**Exercise 5.2.** State the end behavior of $f(x) = -3x^4 + 5x^2 + 2$. Difficulty: low.
+The quadratic is a special case of the polynomial, which is a special case of the rational (with denominator 1). Each generalization adds expressiveness at the cost of one more set of features to track. Polynomials require monitoring degree, leading coefficient, and zeros. Rationals require all of that plus domain, asymptotes, and holes.
 
-**Exercise 5.3.** Find the zeros and their multiplicities of $f(x) = x(x - 2)^2(x + 5)$. Difficulty: low.
-
-### Application
-
-**Exercise 5.4.** A ball is thrown upward from a height of 5 ft with initial velocity 64 ft/s. Its height is $h(t) = -16t^2 + 64t + 5$. (a) When does it reach maximum height? (b) What is that height? (c) When does it hit the ground? Difficulty: medium.
-
-**Exercise 5.5.** Find all zeros of $f(x) = 2x^3 - 3x^2 - 11x + 6$. Difficulty: medium.
-
-**Exercise 5.6.** Identify all asymptotes (vertical and horizontal) and intercepts of $f(x) = \frac{2x^2 - 8}{x^2 - 1}$. Difficulty: medium.
-
-### Synthesis
-
-**Exercise 5.7.** A rectangular pen is to be enclosed using 200 ft of fencing along three sides (a barn forms the fourth side). Find dimensions that maximize area. Difficulty: medium-high.
-
-**Exercise 5.8.** Sketch the graph of $f(x) = (x + 1)^2(x - 3)$. Indicate zeros, multiplicities, end behavior, and y-intercept. Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 5.9.** A 100 m × 60 m rectangular field has a uniform path of width $w$ around its border. The remaining (un-pathed) area is $5{,}000$ m². Find $w$. Difficulty: high.
-
----
-
-## 7. Chapter Summary
-
-You can do something now you may not have been able to do an hour ago. You can take any quadratic and find its vertex, max/min, zeros, and end behavior. You can sketch the graph of a polynomial of any degree by combining its end behavior, its zeros (with multiplicities), and its $y$-intercept. You can find zeros using factoring, the rational zero theorem, and synthetic division. You can identify the asymptotes of a rational function, sketch its graph, and recognize variation problems as special rational structures.
-
-The single idea that matters most: **the graph of a polynomial or rational function is determined by a small set of features — degree, leading coefficient, zeros and multiplicities, asymptotes, intercepts.** Once you know these, the graph follows. The rest of the chapter is technique for finding the features.
-
-The common mistake to watch for: confusing zeros with $y$-intercepts. The $x$-intercepts (zeros) are where $y = 0$. The $y$-intercept is where $x = 0$. They answer different questions.
-
----
-
-## 8. Connections Forward
-
-Chapter 6 introduces *exponential and logarithmic* functions — function families that polynomial functions cannot capture. Bacterial growth, radioactive decay, compound interest, and earthquake magnitudes all live in this family. The techniques developed for polynomials and rational functions transfer in spirit; the new family adds a fundamentally new shape to the function vocabulary.
-
----
-
-### Sources (from chapter source files)
-
-- *College Algebra* with Co-Requisite Skills, source modules m51273 through m51281 (OpenStax-derived).
+The through-line is the same idea from Chapter 2: an equation is a relationship written in symbols. A function is a rule for turning inputs into outputs. A graph is a picture of that rule. The polynomial and rational function chapters add new rules — more complicated, more expressive — but the translation between words, symbols, and pictures works the same way it always did. Set up the relationship. Identify the features. Draw the picture. Answer the question.
