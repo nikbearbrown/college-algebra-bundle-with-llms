@@ -1,340 +1,284 @@
 # Chapter 3 — Functions
-
-## 1. Chapter Opening
-
-A weather station in Anchorage records the outdoor temperature at noon every day in October. Day 1: $42°\text{F}$. Day 2: $38°\text{F}$. Day 3: $41°\text{F}$. Day 4: $35°\text{F}$. The pairing is rigid: each day produces *exactly one* temperature reading. Two days never share a reading. Two readings never share a day. *The pairing — day to temperature — is a function.*
-
-Most quantitative relationships in the world are functions. A car's odometer reading is a function of how long you've been driving. The price of a stock is a function of time. The brightness of a star is a function of how far away it is. In each case, an input produces a single output. Once you start looking, functions are everywhere.
-
-This chapter takes the idea seriously. It defines function precisely, develops the notation that makes functions easy to manipulate, and introduces the basic moves — analyzing behavior, combining, transforming, inverting — that the next ten chapters will use repeatedly. The goal is fluency, not novelty. By the end, $f(x)$ should read as naturally as $x + 5$.
-
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Determine** whether a given relation is a function (using the vertical-line test for graphs and the input-output rule for sets and equations).
-- **Find** the domain and range of a function from its formula, its graph, or its description.
-- **Compute** the average rate of change of a function over an interval and identify intervals where the function is increasing, decreasing, or constant.
-- **Combine** functions using arithmetic operations and composition, and decompose a composite function into its component functions.
-- **Transform** the graph of a function using shifts, reflections, stretches, and compressions, and **find** the inverse of a one-to-one function.
-
-### Prerequisites
-
-Chapters 1 and 2. The arithmetic of functions reuses Chapter 1's algebraic moves; the equation-solving from Chapter 2 returns when finding zeros, evaluating at specific inputs, and inverting.
-
-### Why this chapter matters
-
-After this chapter, every quantitative relationship in college algebra will be expressed as a function. Linear functions in chapter 4 are functions where $f(x) = mx + b$. Polynomial functions in chapter 5 are functions where $f(x)$ is a polynomial. Exponential functions in chapter 6, trigonometric functions in chapters 7–10 — all are particular kinds of functions. *The vocabulary you build here is the working language of every chapter that follows.*
+*One rule, one output — and why that constraint unlocks everything else.*
 
 ---
 
-## 2. Concept 1 — What a Function Is
+There is a weather station in Anchorage that records the outdoor temperature at noon every day. Day 1: 42°F. Day 2: 38°F. Day 3: 41°F. Day 4: 35°F.
 
-A vending machine offers ten products, each at its own button. Press B3 and a candy bar drops out. Press B3 again and the same candy bar (or its identical sibling) drops out. *Press B3 a hundred times and you never get an apple, never get nothing, always get the same candy bar.* That rigidity — same input always produces the same output — is what makes the machine useful. It is also what makes it a *function*.
+Notice what is rigid about that pairing. Each day produces exactly one temperature. Not two, not zero — one. You never look at the record and see "Day 3: 41°F and also 52°F." And you never look at a day and find it blank. Every input in the list pairs with exactly one output.
 
-A **function** is a rule that assigns to each input from a set called the *domain* exactly one output. The set of all possible outputs is called the *range*. Notation:
-
-$$f: A \to B, \quad f(x) = \text{some expression}$$
-
-Here $A$ is the domain, $B$ contains the range, and $f(x)$ is the rule for computing the output from input $x$.
-
-If a relation produces *two different outputs for the same input*, it is *not* a function. The relation that pairs each person with their phone numbers is not a function (a person can have several phone numbers); the relation that pairs each phone number with its primary subscriber is a function (a phone number has one primary subscriber).
-
-### Function notation
-
-The symbol $f(x)$ — read "f of x" — denotes the output that the function $f$ produces when given input $x$. So if $f(x) = 2x + 3$, then $f(4) = 11$, $f(0) = 3$, $f(-2) = -1$. The notation $f$ refers to the rule itself; $f(4)$ refers to the specific value the rule produces at input 4.
-
-Common shapes:
-
-| Shape | Form | Example |
-|---|---|---|
-| Constant | $f(x) = c$ | $f(x) = 7$ |
-| Identity | $f(x) = x$ | $f(x) = x$ |
-| Linear | $f(x) = mx + b$ | $f(x) = 3x + 2$ |
-| Quadratic | $f(x) = ax^2 + bx + c$ | $f(x) = x^2$ |
-| Cubic | $f(x) = ax^3 + \ldots$ | $f(x) = x^3$ |
-| Square root | $f(x) = \sqrt{x}$ | $f(x) = \sqrt{x}$ |
-| Reciprocal | $f(x) = 1/x$ | $f(x) = 1/x$ |
-| Absolute value | $f(x) = \|x\|$ | $f(x) = \|x\|$ |
-
-These are sometimes called the *toolkit functions*. They are the building blocks; most functions you will meet are combinations or transformations of them.
-
-### The vertical-line test
-
-A graph in the $xy$-plane represents a function if and only if every vertical line intersects the graph at most once.
-
-The reasoning: a vertical line $x = a$ asks "what is the output when the input is $a$?" If the line hits the graph at two different points, the input $a$ produces two different outputs — and the rule is not a function.
-
-The graph of $y = x^2$ passes the test: every vertical line hits the parabola at most once. The graph of $x = y^2$ (a sideways parabola) fails: a vertical line at $x = 4$ hits the graph at $y = 2$ and at $y = -2$.
-
-### Domain and range
-
-The *domain* is the set of allowed inputs. The *range* is the set of actual outputs.
-
-For most functions defined by formulas, the domain is "all real numbers except those that make the formula undefined." Two common constraints:
-
-- **Division by zero is undefined.** For $f(x) = \frac{1}{x - 2}$, the domain excludes $x = 2$.
-- **Even roots of negatives are not real.** For $f(x) = \sqrt{x - 5}$, the domain requires $x - 5 \geq 0$, so $x \geq 5$.
-
-The range is harder to find from a formula alone — you often need the graph. But for the toolkit functions:
-
-| Function | Domain | Range |
-|---|---|---|
-| $f(x) = c$ | $(-\infty, \infty)$ | $\{c\}$ |
-| $f(x) = x$ | $(-\infty, \infty)$ | $(-\infty, \infty)$ |
-| $f(x) = x^2$ | $(-\infty, \infty)$ | $[0, \infty)$ |
-| $f(x) = \sqrt{x}$ | $[0, \infty)$ | $[0, \infty)$ |
-| $f(x) = 1/x$ | $(-\infty, 0) \cup (0, \infty)$ | $(-\infty, 0) \cup (0, \infty)$ |
-| $f(x) = \|x\|$ | $(-\infty, \infty)$ | $[0, \infty)$ |
-
-### Worked example
-
-Determine whether each relation defines $y$ as a function of $x$.
-
-(a) $\{(1, 2), (3, 4), (5, 6), (3, 8)\}$.
-
-The input $x = 3$ pairs with both $y = 4$ and $y = 8$. *Not a function.*
-
-(b) $y = 2x + 3$.
-
-For each $x$, the formula produces exactly one $y$. Yes, function.
-
-(c) $x^2 + y^2 = 25$ (a circle of radius 5).
-
-For $x = 3$, both $y = 4$ and $y = -4$ satisfy. *Not a function.* (The vertical line $x = 3$ hits the circle twice.)
-
-### Trade-off
-
-The function definition is restrictive — it bans relations like the circle, which cannot be a single-valued function but is a perfectly good geometric object. The benefit is that *the operations of algebra and calculus are well-defined on functions*. You can solve $f(x) = 5$, find rates of change, take derivatives, integrate. The restrictions on what counts as a function pay back in the operations the restriction makes possible.
-
-### Common misconceptions
-
-**"$f(x+y) = f(x) + f(y)$."** False in general. $f(x) = x^2$ gives $f(2+3) = 25$ but $f(2) + f(3) = 4 + 9 = 13$. This identity holds only for *linear functions* (and even then, only when the constant term is zero).
-
-**"The domain is whatever I want it to be."** No. The domain is constrained by what makes the formula well-defined. You can sometimes *restrict* a formula's natural domain to model a specific situation, but you cannot extend it.
+That rigidity is not a quirk of weather stations. It is the central feature of an enormous class of relationships, and mathematicians gave it a name: a *function*. The goal of this chapter is to understand what that name means, why it matters, and what you can do with it.
 
 ---
 
-## 3. Concept 2 — How Functions Behave
+## What a function actually is
 
-A car accelerates from a stoplight. After 1 second it has traveled 5 ft; after 2 seconds, 20 ft; after 3 seconds, 45 ft. The position is a function of time. *How fast is it going?* The question asks not about position but about *rate of change* — the derivative idea, presented at the algebra level.
+The formal definition sounds tidy: a function is a rule that assigns to each input exactly one output. But definitions do not make things clear — examples do. So let us look at some.
 
-### Average rate of change
+A car's odometer reads 12,847 miles at 9 a.m. on a Tuesday. Every moment after that, it reads something. At each moment in time there is exactly one odometer value. Time is the input. Mileage is the output. That is a function.
 
-For a function $f$ on the interval $[a, b]$, the *average rate of change* is
+The price of a share of stock at any given second is a function of time. One price per second. (The price might change violently — that is fine. What matters is that at each second there is one price, not several.)
 
-$$\frac{f(b) - f(a)}{b - a}$$
+Now consider the reverse: given an odometer reading, what time does it correspond to? Here the relationship breaks down. If the car sat in a parking lot for six hours, the odometer read 12,847 from 9 a.m. until 3 p.m. That one value corresponds to many different times. Reverse it, and the rule is *not* a function.
 
-This is the slope of the line through $(a, f(a))$ and $(b, f(b))$.
+The distinction is exactly this: a function is a rule where each input produces one output. The *same* input always produces the *same* output. Two different inputs are allowed to produce the same output — that is fine. What is not allowed is one input producing two different outputs.
 
-For our car at $f(t) = 5t^2$: from $t = 1$ to $t = 3$, the average rate of change is
+<!-- → [IMAGE: side-by-side diagram contrasting a valid function (arrows from each input to exactly one output) with a non-function (one input with two arrows pointing to two different outputs) — student should immediately see why the odometer-in-reverse example fails] -->
 
-$$\frac{f(3) - f(1)}{3 - 1} = \frac{45 - 5}{2} = 20 \text{ ft/sec}$$
+### The notation
 
-The average speed over those two seconds is 20 ft/sec. Note this is *not* the speed at any specific moment — that would require calculus — but the average over the interval.
+Mathematicians write $f(x)$ to mean "the output that rule $f$ produces when given input $x$." This is read "f of x." The symbol $f$ names the rule. The symbol $f(4)$ names the specific value the rule produces at input 4.
 
-### Increasing, decreasing, constant
+If $f(x) = 2x + 3$, then:
 
-A function is *increasing* on an interval if its outputs grow as inputs grow:
+$$f(4) = 2(4) + 3 = 11$$
+$$f(0) = 2(0) + 3 = 3$$
+$$f(-2) = 2(-2) + 3 = -1$$
+
+The rule is a machine. You put a number in. A number comes out. The formula tells you how the machine transforms the input.
+
+One subtlety worth naming: $f$ and $f(x)$ are different things. $f$ is the rule itself — the machine. $f(x)$ is the output of the machine when it receives input $x$. Confusing the two causes trouble when we start composing and inverting functions, so notice the distinction now.
+
+### The domain and the range
+
+The *domain* is the set of all allowed inputs. The *range* is the set of all actual outputs — not the set of all possible outputs, the set of all outputs that actually occur.
+
+For most functions defined by formulas, the domain is "all real numbers except the ones that break the formula." Two things break formulas:
+
+**Division by zero.** The expression $\frac{1}{x-2}$ is undefined when $x = 2$. So the domain of $f(x) = \frac{1}{x-2}$ is all real numbers except $x = 2$.
+
+**Even roots of negative numbers.** The expression $\sqrt{x-5}$ requires $x - 5 \geq 0$, so $x \geq 5$. The domain is $[5, \infty)$.
+
+If neither constraint applies — no fractions, no even roots — the domain is all real numbers.
+
+The range is harder to pin down from a formula alone. It helps to know the basic shapes. Here are the toolkit functions, the building blocks from which most college-algebra functions are assembled:
+
+<!-- → [TABLE: toolkit functions with columns — name, rule, graph shape (described briefly), domain, range — the graph-shape column is what makes this table earn its place; a student who can picture each shape can derive the domain and range rather than memorizing them] -->
+
+| Function | Rule | Domain | Range |
+|---|---|---|---|
+| Constant | $f(x) = c$ | all reals | $\{c\}$ |
+| Identity | $f(x) = x$ | all reals | all reals |
+| Quadratic | $f(x) = x^2$ | all reals | $[0, \infty)$ |
+| Square root | $f(x) = \sqrt{x}$ | $[0, \infty)$ | $[0, \infty)$ |
+| Reciprocal | $f(x) = 1/x$ | all reals except 0 | all reals except 0 |
+| Absolute value | $f(x) = \|x\|$ | all reals | $[0, \infty)$ |
+
+These are worth memorizing, not as arbitrary facts, but because every function in the next several chapters is one of these, modified.
+
+<!-- → [IMAGE: a single figure showing all six toolkit function graphs on labeled axes, arranged in a 2×3 grid — student should see the family resemblance and be able to read domain and range directly from the shape of each curve] -->
+
+### Testing a graph
+
+If a relation is given as a graph rather than a formula, there is a simple visual test: does any vertical line cross the graph more than once?
+
+A vertical line at $x = a$ is asking: "What output does the input $a$ produce?" If the line hits the graph twice, the input $a$ has two outputs — which violates the function rule. One crossing or none: function. Two crossings: not a function.
+
+The parabola $y = x^2$ passes this test. Draw a vertical line anywhere; it hits the parabola once. The circle $x^2 + y^2 = 25$ fails. A vertical line at $x = 3$ hits the circle at $y = 4$ and at $y = -4$.
+
+<!-- → [IMAGE: two side-by-side graphs — left: parabola y = x² with a vertical line touching it once (labeled "function"); right: circle x² + y² = 25 with a vertical line at x = 3 crossing it at y = 4 and y = −4 (labeled "not a function") — student should see the test in action on both cases] -->
+
+---
+
+## How functions behave
+
+Knowing that a relationship is a function is the beginning. The next questions are more interesting: does the output grow as the input grows? Where does it peak? How fast does it change?
+
+### Increasing and decreasing
+
+A function is *increasing* on an interval if larger inputs produce larger outputs throughout that interval. Formally:
 
 $$x_1 < x_2 \implies f(x_1) < f(x_2) \quad \text{for all } x_1, x_2 \text{ in the interval}$$
 
-It is *decreasing* if the inequality reverses: $x_1 < x_2 \implies f(x_1) > f(x_2)$. *Constant* if $f(x_1) = f(x_2)$ for all $x_1, x_2$.
+It is *decreasing* on an interval if larger inputs produce smaller outputs. The direction reverses, the logic stays the same.
 
-For $f(x) = x^2$, the function is decreasing on $(-\infty, 0)$ (as $x$ goes from $-3$ to $-2$ to $-1$, $f(x)$ goes from $9$ to $4$ to $1$) and increasing on $(0, \infty)$.
+The function $f(x) = x^2$ is decreasing on $(-\infty, 0)$ — as $x$ goes from $-3$ to $-2$ to $-1$, the output drops from 9 to 4 to 1. On $(0, \infty)$ it is increasing — as $x$ goes from 1 to 2 to 3, the output climbs from 1 to 4 to 9. The point $x = 0$ is where the function turns around.
 
-### Maxima and minima
+That turning-around point — where the function stops decreasing and starts increasing, or vice versa — is a *local extremum*. A *local maximum* at $x = c$ means $f(c) \geq f(x)$ for all $x$ near $c$ (not necessarily everywhere, just nearby). A *local minimum* is the reverse.
 
-A point $(c, f(c))$ is an *absolute maximum* if $f(c) \geq f(x)$ for every $x$ in the domain. *Absolute minimum* with the inequality reversed.
+An *absolute maximum* is the highest value the function achieves over its entire domain. An absolute minimum is the lowest. The parabola $f(x) = x^2$ has an absolute minimum at $(0, 0)$ — no other input produces a smaller output. It has no absolute maximum; the outputs grow without bound as $x$ gets large.
 
-A *local* maximum at $c$ requires only that $f(c) \geq f(x)$ for $x$ in some open interval around $c$, not necessarily across the whole domain. Same idea, smaller scope.
+The distinction between local and absolute matters. A function might have several local maxima — several peaks — while only one of them is the highest point overall. Hiking: you can stand at the summit of a small hill (local maximum) while a taller mountain nearby is the absolute maximum of the terrain.
 
-The graph of $f(x) = -x^2 + 4$ has an absolute maximum at $(0, 4)$ — the highest point of the downward parabola. It has no minimum; the parabola goes to $-\infty$ on both sides.
+<!-- → [IMAGE: graph of a function with two local maxima and one local minimum marked, with the higher local maximum also labeled as the absolute maximum — the student should see that "local" and "absolute" are different concepts on the same curve] -->
 
-### Worked example
+### Average rate of change
 
-The number of bacteria in a culture (in thousands) after $t$ hours is $N(t) = 50 + 10t - t^2$ for $0 \leq t \leq 12$.
+Here is a question that sounds like physics but is pure algebra: how fast does the output change as the input changes?
 
-(a) What is the average rate of change of $N$ from $t = 0$ to $t = 5$?
+The answer at any particular moment requires calculus — that is the derivative. But over an interval, we can answer it now. The *average rate of change* of $f$ from $x = a$ to $x = b$ is:
 
-$$\frac{N(5) - N(0)}{5 - 0} = \frac{(50 + 50 - 25) - 50}{5} = \frac{25}{5} = 5 \text{ thousand per hour}$$
+$$\frac{f(b) - f(a)}{b - a}$$
 
-(b) When is the population maximum?
+This is the slope of the line connecting the two points $(a, f(a))$ and $(b, f(b))$ on the graph. It measures the net change in output divided by the net change in input.
 
-$N(t) = -t^2 + 10t + 50 = -(t - 5)^2 + 75$ (completing the square). Maximum at $t = 5$ hours, where $N = 75$ thousand.
+An example. The number of bacteria in a culture (in thousands) after $t$ hours is $N(t) = 50 + 10t - t^2$ for $0 \leq t \leq 12$. The average rate of change from $t = 0$ to $t = 5$:
 
-(c) When is the population increasing, decreasing?
+$$\frac{N(5) - N(0)}{5 - 0} = \frac{(50 + 50 - 25) - 50}{5} = \frac{25}{5} = 5 \text{ thousand bacteria per hour}$$
 
-Increasing on $[0, 5)$, decreasing on $(5, 12]$.
+The culture is growing at an average rate of 5,000 bacteria per hour over the first five hours.
 
-### Trade-off
+Now completing the square: $N(t) = -(t-5)^2 + 75$. The maximum occurs at $t = 5$, where $N = 75$ thousand. After that, the population decreases — the culture is overcrowded, resources are depleted, the model says the count falls.
 
-The average rate of change is a coarse approximation. It tells you the *net* change over an interval, not what happened inside the interval — the function might have shot up, then come back down, with an average that misses the peak. This coarseness is the cost; the benefit is that average rates are easy to compute from two function values, with no calculus required. Calculus refines the idea by taking limits as the interval shrinks to zero, giving the *instantaneous* rate. That refinement is the topic of a later course.
+The average rate of change from $t = 5$ to $t = 10$:
 
-### Common misconceptions
+$$\frac{N(10) - N(5)}{10 - 5} = \frac{(50 + 100 - 100) - 75}{5} = \frac{50 - 75}{5} = -5 \text{ thousand per hour}$$
 
-**"A function with a positive average rate of change must be increasing throughout the interval."** No. The average is only the *net* change; the function might decrease, then increase, with a positive net.
+Same magnitude, opposite sign. Symmetric around the peak, as the parabolic model demands.
 
-**"A maximum is wherever the graph turns around."** The graph might turn around at a *local* maximum without that point being the *absolute* maximum. The distinction is between local and global behavior.
+One warning about averages: a positive average rate of change over an interval does not mean the function increased throughout the interval. The function might have risen sharply, then dipped, with an overall net increase. The average captures the net; it hides what happened in between. This is the cost of algebra. Calculus refines the picture.
+
+<!-- → [IMAGE: graph of N(t) = −(t−5)² + 75 on [0, 12] with two secant lines drawn — one from (0, 50) to (5, 75) with positive slope labeled "+5 thousand/hr", one from (5, 75) to (10, 50) with negative slope labeled "−5 thousand/hr" — student should see that the secant slope is average rate of change and that it changes sign at the peak] -->
 
 ---
 
-## 4. Concept 3 — Building Functions from Other Functions
+## Building functions from other functions
 
-You have $f(x) = x^2$ and $g(x) = x + 3$. From these, you can build:
+Once you have two functions, you can combine them. The combinations are simple; the one that requires attention is the last one.
 
-- **Sum:** $(f + g)(x) = f(x) + g(x) = x^2 + x + 3$.
-- **Product:** $(fg)(x) = f(x) \cdot g(x) = x^2(x + 3) = x^3 + 3x^2$.
-- **Composition:** $(f \circ g)(x) = f(g(x)) = (x + 3)^2 = x^2 + 6x + 9$.
+**Arithmetic combinations.** Given $f(x) = x^2$ and $g(x) = x + 3$:
 
-The arithmetic operations are straightforward. *Composition* is the new move — apply $g$ first, then apply $f$ to the result. The order matters: $(f \circ g)(x) \neq (g \circ f)(x)$ in general.
+$$(f + g)(x) = x^2 + x + 3$$
+$$(f - g)(x) = x^2 - x - 3$$
+$$(fg)(x) = x^2(x + 3) = x^3 + 3x^2$$
+$$(f/g)(x) = \frac{x^2}{x+3}, \quad x \neq -3$$
 
-For $f(x) = x^2$ and $g(x) = x + 3$:
-$$(g \circ f)(x) = g(f(x)) = x^2 + 3$$
-which is different from $(f \circ g)(x) = (x + 3)^2 = x^2 + 6x + 9$.
+Nothing surprising here. The domain of each combination is the intersection of the domains of $f$ and $g$, with any new constraints (like division by zero) added on.
 
-### Domain of a composition
+**Composition.** This is the genuinely new operation. The composition $(f \circ g)(x)$ means: apply $g$ first, then apply $f$ to the result.
 
-$(f \circ g)(x)$ requires that $x$ is in the domain of $g$ *and* that $g(x)$ is in the domain of $f$. Both constraints must hold.
+$$(f \circ g)(x) = f(g(x)) = f(x + 3) = (x + 3)^2$$
 
-If $f(x) = \sqrt{x}$ and $g(x) = x - 4$, then $(f \circ g)(x) = \sqrt{x - 4}$, which requires $x - 4 \geq 0$, i.e. $x \geq 4$. The domain of the composition is $[4, \infty)$.
+Read right to left: $x$ enters, $g$ adds 3, $f$ squares the result.
 
-### Decomposing a composite function
+The order matters. The composition $(g \circ f)(x)$ is different:
 
-Sometimes you need the reverse — given a function, identify its inner and outer parts.
+$$(g \circ f)(x) = g(f(x)) = g(x^2) = x^2 + 3$$
 
-For $h(x) = \sqrt{2x + 1}$, an outer-then-inner decomposition: outer $f(u) = \sqrt{u}$, inner $g(x) = 2x + 1$. Then $h(x) = f(g(x))$.
+Apply $f$ first (squaring), then $g$ (adding 3). You get $x^2 + 3$, not $(x+3)^2$. These are the same only by accident — try another pair of functions and they will be different.
 
-This decomposition is essential for differentiation in calculus (the chain rule) and useful in algebra for graphing transformed functions.
+The domain of $(f \circ g)(x)$ has two constraints: $x$ must be in the domain of $g$, and $g(x)$ must be in the domain of $f$. Both must hold simultaneously.
 
-### Transformations of graphs
+Decomposing a composition — working backwards from the combined function to its pieces — is an important skill. For $h(x) = \sqrt{2x + 1}$, notice the structure: something is being square-rooted. The inner function is $g(x) = 2x + 1$ (it goes in first); the outer function is $f(u) = \sqrt{u}$ (it acts on the result). So $h = f \circ g$. There is often more than one valid decomposition; what matters is finding one that reveals structure.
 
-Once you know the graph of one function, you can deduce the graphs of related functions through *transformations*. Five basic moves:
+<!-- → [INFOGRAPHIC: pipeline diagram showing composition — a value x enters a box labeled g, the output g(x) travels along an arrow into a box labeled f, the final output f(g(x)) exits — a second pipeline below shows the reverse order (f first, then g) producing a different result — student should see why order is not interchangeable] -->
 
-**Vertical shift.** $f(x) + c$ shifts the graph up by $c$ units (or down if $c < 0$).
-**Horizontal shift.** $f(x - c)$ shifts the graph right by $c$ units (counterintuitively — *minus* in the formula means *right* on the graph).
-**Vertical reflection.** $-f(x)$ reflects across the $x$-axis.
-**Horizontal reflection.** $f(-x)$ reflects across the $y$-axis.
-**Vertical stretch/compression.** $cf(x)$ for $c > 1$ stretches vertically; $0 < c < 1$ compresses.
-**Horizontal stretch/compression.** $f(cx)$ for $c > 1$ compresses horizontally; $0 < c < 1$ stretches.
+### Transforming a graph
 
-These transformations compose. The graph of $g(x) = -2(x - 3)^2 + 5$, for instance, is the parabola $y = x^2$:
-1. Shifted right 3 units (the $x - 3$).
-2. Stretched vertically by factor 2 (the leading coefficient).
-3. Reflected across the $x$-axis (the negative sign).
-4. Shifted up 5 units (the $+ 5$).
+Now comes an elegant result: once you know the graph of one function, you can deduce the graphs of many related functions without plotting any new points.
 
-The order matters: do horizontal shifts first, then any stretches or reflections, then vertical shifts.
+Start with a function $f$ and its graph. Five operations:
+
+**Vertical shift.** $f(x) + c$ lifts the entire graph up by $c$ units (or down if $c < 0$). Every point $(x, y)$ becomes $(x, y + c)$.
+
+**Horizontal shift.** $f(x - c)$ shifts the graph *right* by $c$ units. This confuses students because the shift is in the direction opposite to the sign: $f(x - 3)$ is $f$ shifted *right* by 3, and $f(x + 3)$ is $f$ shifted *left* by 3.
+
+Here is why: $f(x - 3) = f(0)$ when $x = 3$. The output that $f$ used to produce at input 0 is now produced at input 3. The whole graph slid right by 3.
+
+**Reflection across the $x$-axis.** $-f(x)$ flips every output to its negative. Every point $(x, y)$ becomes $(x, -y)$.
+
+**Reflection across the $y$-axis.** $f(-x)$ replaces every input $x$ with $-x$. The graph folds in half along the $y$-axis.
+
+**Vertical stretch and compression.** $cf(x)$ for $c > 1$ stretches the graph vertically — every output is multiplied by $c$. For $0 < c < 1$, it compresses. The graph retains its shape but grows taller or shorter.
+
+These transformations compose. The graph of $g(x) = -2(x - 3)^2 + 5$ is the parabola $y = x^2$ after four operations: shift right by 3, stretch vertically by 2, reflect across the $x$-axis (the negative sign), shift up by 5. Understanding this does not require re-plotting; it requires reading the formula.
+
+<!-- → [IMAGE: sequence of four small graphs showing the parabola y = x² being transformed step by step into g(x) = −2(x−3)² + 5 — each panel labeled with the operation applied — student should be able to read any transformation sequence from a formula by recognizing this pattern] -->
 
 ### Even and odd functions
 
-A function is *even* if $f(-x) = f(x)$ for all $x$ in the domain. The graph is symmetric about the $y$-axis. $f(x) = x^2$ and $f(x) = \cos x$ are even.
+Two symmetries worth knowing:
 
-A function is *odd* if $f(-x) = -f(x)$. The graph is symmetric about the origin. $f(x) = x^3$ and $f(x) = \sin x$ are odd.
+A function is *even* if $f(-x) = f(x)$ for every $x$ in the domain. The graph is symmetric about the $y$-axis — the left half mirrors the right half. $f(x) = x^2$ is even: $f(-3) = 9 = f(3)$.
 
-Most functions are neither.
+A function is *odd* if $f(-x) = -f(x)$. The graph is symmetric about the origin — rotate it 180° and it looks the same. $f(x) = x^3$ is odd: $f(-2) = -8 = -f(2)$.
 
-### Inverse functions
-
-If $f$ takes input $x$ to output $y$, the *inverse* $f^{-1}$ takes input $y$ back to $x$. Not every function has an inverse — only those that are *one-to-one* (each output is produced by exactly one input). This is checked by the *horizontal-line test*: a horizontal line should intersect the graph at most once.
-
-To find the inverse algebraically:
-
-1. Start with $y = f(x)$.
-2. Swap $x$ and $y$.
-3. Solve for $y$.
-4. The result is $f^{-1}(x)$.
-
-**Example.** Find the inverse of $f(x) = 2x + 3$.
-
-Swap: $x = 2y + 3$. Solve: $y = \frac{x - 3}{2}$. So $f^{-1}(x) = \frac{x - 3}{2}$.
-
-Verify: $f(f^{-1}(x)) = 2 \cdot \frac{x - 3}{2} + 3 = x - 3 + 3 = x$. ✓
-
-### Trade-off
-
-Composition and transformations let you build complex functions from simple ones, but at the cost of careful tracking — domains, order of operations, sign conventions all matter. The horizontal-shift convention ($f(x - c)$ shifts right) trips up many students. The benefit, once you internalize the rules, is that you can recognize the structure of any function in terms of toolkit pieces and transformations.
-
-### Common misconceptions
-
-**"$f(x + 3)$ shifts the graph up."** No. $f(x + 3)$ shifts the graph *left* by 3. To shift *up*, add to the *output*: $f(x) + 3$.
-
-**"$f^{-1}(x) = \frac{1}{f(x)}$."** No. The notation $f^{-1}$ means *inverse function*, not *reciprocal*. The reciprocal would be $\frac{1}{f(x)}$.
-
-**"Every function has an inverse."** No. Only one-to-one functions do. $f(x) = x^2$ has no inverse over its full domain because both $x$ and $-x$ produce the same output.
+Most functions are neither. But knowing a function is even or odd halves the work of graphing it.
 
 ---
 
-## 5. Integration — One Function, Multiple Lenses
+## Inverting a function
 
-Consider a delivery van whose distance from a depot, in miles, after $t$ hours of driving is $d(t) = 60t - 5t^2$ for $0 \leq t \leq 12$. (After 12 hours, the van returns to the depot.)
+Suppose $f$ takes input $x$ to output $y$. The *inverse function* $f^{-1}$ takes input $y$ back to $x$. The machine runs in reverse.
 
-**Concept 1 (function basics).** $d(t)$ is a function — each $t$ produces exactly one distance. Domain: $[0, 12]$. Range: by completing the square, $d(t) = -5(t-6)^2 + 180$, so the maximum is 180 miles at $t = 6$. Range: $[0, 180]$.
+Not every machine can run in reverse. If $f(2) = 4$ and also $f(-2) = 4$, then a reversed machine receiving input 4 does not know whether to output 2 or $-2$. The reversed rule would not be a function.
 
-**Concept 2 (behavior).** $d$ is increasing on $[0, 6)$ (the van is moving outward) and decreasing on $(6, 12]$ (returning). Average speed on $[0, 3]$:
+The requirement for an invertible function: each output must come from exactly one input. This is called *one-to-one*. You test it on a graph with the *horizontal-line test*: every horizontal line must cross the graph at most once.
 
-$$\frac{d(3) - d(0)}{3 - 0} = \frac{(180 - 45) - 0}{3} = 45 \text{ mph}$$
+The parabola $f(x) = x^2$ over all real numbers fails this test — a horizontal line at $y = 4$ crosses at $x = 2$ and at $x = -2$. The function is not one-to-one, and it has no inverse over its full domain. (Restrict the domain to $x \geq 0$, and it passes. On that restricted domain, the inverse is $f^{-1}(x) = \sqrt{x}$.)
 
-Average speed on $[3, 6]$:
+The linear function $f(x) = 2x + 3$ passes — every horizontal line crosses a non-horizontal line at most once. It has an inverse. To find it:
 
-$$\frac{d(6) - d(3)}{6 - 3} = \frac{180 - 135}{3} = 15 \text{ mph}$$
+1. Write $y = 2x + 3$.
+2. Swap $x$ and $y$: $x = 2y + 3$.
+3. Solve for $y$: $y = \frac{x - 3}{2}$.
 
-The van slows as it approaches the turnaround.
+So $f^{-1}(x) = \frac{x - 3}{2}$.
 
-**Concept 3 (transformation).** Suppose the van starts an hour later. The new distance function is $d_{\text{new}}(t) = d(t - 1) = 60(t - 1) - 5(t - 1)^2$. The graph is the original shifted right by 1. The maximum still equals 180, now reached at $t = 7$.
+Verify by composition: $f(f^{-1}(x)) = 2 \cdot \frac{x-3}{2} + 3 = (x - 3) + 3 = x$. ✓
 
-The same function, examined through three concepts, yielded a domain, a maximum, two average speeds, and a transformed version that adapts to a delayed start. *That is functions in college algebra in miniature: a single object, looked at from multiple angles, each angle answering a different question.*
+The composition $f(f^{-1}(x)) = x$ is the defining property of an inverse. Applying $f$ after $f^{-1}$ (or $f^{-1}$ after $f$) returns you to where you started. This is not magic — it is the definition of reversal.
 
-[FIGURE: A graph of $d(t) = 60t - 5t^2$ for $0 \leq t \leq 12$. Downward parabola with vertex at $(6, 180)$ and zeros at $t = 0$ and $t = 12$. Two secant lines drawn: one from $(0, 0)$ to $(3, 135)$, slope 45; another from $(3, 135)$ to $(6, 180)$, slope 15. The student should notice that the slope of the secant line is the average rate of change.]
+One notation warning: $f^{-1}(x)$ does *not* mean $\frac{1}{f(x)}$. The superscript $-1$ means inverse function, not reciprocal. The reciprocal is written $[f(x)]^{-1}$ or $\frac{1}{f(x)}$ to distinguish it.
 
----
-
-## 6. Exercises
-
-### Warm-up
-
-**Exercise 3.1.** *Tests Learning Objective 1.* Determine whether each relation is a function. (a) $\{(1, 2), (2, 3), (3, 4)\}$. (b) $\{(1, 2), (2, 3), (1, 4)\}$. (c) $y = 3x - 7$. (d) $x = y^2$. Difficulty: low.
-
-**Exercise 3.2.** *Tests Learning Objective 2.* For $f(x) = \frac{x + 2}{x - 5}$, find the domain. Difficulty: low.
-
-**Exercise 3.3.** *Tests Learning Objective 3.* Find the average rate of change of $f(x) = x^2 - 3x$ on the interval $[1, 4]$. Difficulty: low.
-
-### Application
-
-**Exercise 3.4.** *Tests Learning Objective 4.* Let $f(x) = 2x + 1$ and $g(x) = x^2$. Find $(f \circ g)(x)$, $(g \circ f)(x)$, and evaluate each at $x = 2$. Difficulty: medium.
-
-**Exercise 3.5.** *Tests Learning Objective 5.* Describe the graph of $g(x) = 2(x + 1)^2 - 3$ as a transformation of $y = x^2$. Difficulty: medium.
-
-**Exercise 3.6.** *Tests Learning Objective 5.* Find the inverse of $f(x) = \frac{x + 3}{2}$. Verify by composition. Difficulty: medium.
-
-### Synthesis
-
-**Exercise 3.7.** *Tests Learning Objectives 2 and 3.* The temperature in a city, in $°F$, $t$ hours after midnight is modeled by $T(t) = -0.4(t - 14)^2 + 75$ for $0 \leq t \leq 24$. (a) What is the maximum temperature, and when does it occur? (b) On what intervals is the temperature increasing? (c) What is the average rate of change from $t = 6$ to $t = 14$? Difficulty: medium-high.
-
-**Exercise 3.8.** *Tests Learning Objective 5.* Decompose $h(x) = \sqrt{(2x + 1)^3}$ into three functions: $h = f \circ g \circ k$. Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 3.9.** *Tests Learning Objectives 4 and 5.* Find $f^{-1}$ for $f(x) = \frac{2x + 3}{x - 1}$, and state the domain and range of both $f$ and $f^{-1}$. Difficulty: high.
+<!-- → [IMAGE: two graphs on the same axes — f(x) = 2x + 3 and its inverse f⁻¹(x) = (x−3)/2 — with the line y = x drawn as a dashed reference — student should see that the two graphs are reflections of each other across y = x, which is the geometric meaning of "swap x and y"] -->
 
 ---
 
-## 7. Chapter Summary
+## One object, many questions
 
-You can do something now you may not have been able to do an hour ago. You can read $f(x)$ as the output a function produces given input $x$, and you can determine whether a relation is a function by checking if any input has more than one output. You can find domain and range from a formula. You can compute average rate of change between two points and identify intervals where a function is increasing or decreasing. You can compose two functions, decompose a composite, transform a graph using shifts and reflections and stretches, and find the inverse of a one-to-one function.
+A delivery van's distance from its depot, in miles, after $t$ hours of driving is:
 
-The single idea that matters most: **a function is a single-valued rule, and most operations of algebra and calculus are defined precisely so they preserve that single-valuedness.** Composition produces a function. Inversion produces a function (when the original is one-to-one). Transformation produces a function. The whole edifice of mathematical analysis is built on the function concept.
+$$d(t) = 60t - 5t^2, \quad 0 \leq t \leq 12$$
 
-The common mistake to watch for: confusing $f$ with $f(x)$. The former is the rule; the latter is the value of the rule at input $x$. The distinction matters when you are composing, transforming, or inverting — operations on rules, not on values.
+At $t = 12$, $d(12) = 720 - 720 = 0$ — the van is back at the depot. This is one function, and it answers several different questions depending on which lens you use.
+
+**The function question.** Is $d$ a function of $t$? Yes — each time produces exactly one distance. Domain: $[0, 12]$. Range: completing the square gives $d(t) = -5(t - 6)^2 + 180$, so the maximum distance is 180 miles. Range: $[0, 180]$.
+
+**The behavior question.** When is the van moving away from the depot, and when is it returning? $d$ is increasing on $[0, 6)$ (outbound) and decreasing on $(6, 12]$ (returning). The van is farthest from the depot at $t = 6$ hours.
+
+Average speed in the first three hours: $\frac{d(3) - d(0)}{3} = \frac{135}{3} = 45$ mph. Average speed from $t = 3$ to $t = 6$: $\frac{d(6) - d(3)}{3} = \frac{180 - 135}{3} = 15$ mph. The van is decelerating as it approaches the turnaround.
+
+**The transformation question.** Suppose the van departs an hour late. The new distance function is $d_{\text{new}}(t) = d(t - 1)$ — the graph of $d$ shifted one unit to the right. The van still travels 180 miles from the depot; it just reaches the maximum at $t = 7$ instead of $t = 6$. The shape of the trip is unchanged; only its timing shifts.
+
+Three concepts, one function, completely different questions. That is what the function framework does: it takes a relationship and makes it available to analysis from multiple angles.
+
+<!-- → [IMAGE: graph of d(t) = 60t − 5t² on [0, 12] — downward parabola with vertex labeled (6, 180), two secant lines drawn from (0, 0) to (3, 135) and from (3, 135) to (6, 180) with slopes 45 and 15 labeled, and a second dashed curve showing d(t−1) shifted one unit right — student should see all three lenses (domain/range, average rate of change, transformation) operating on the same graph] -->
 
 ---
 
-## 8. Connections Forward
+## The design decision the mathematicians made
 
-Chapter 4 introduces *linear functions* — the simplest nontrivial family — and develops slope, intercepts, and the equation forms (slope-intercept, point-slope) that make linear functions tractable. Chapter 5 generalizes to polynomial and rational functions. Chapter 6 introduces exponentials and logarithms. Each chapter is, in effect, a deep study of one family of functions, using the framework you just built.
+Why define functions so restrictively — requiring each input to produce exactly one output? It excludes perfectly reasonable geometric objects. A circle is a fine shape, but it is not a function.
+
+The answer is that the definition is what makes the operations well-defined.
+
+If you compose two functions, you get a function. The proof uses the one-output rule at each step. If you invert a one-to-one function, you get a function. The operations of calculus — derivatives, integrals — are defined on functions, and they work precisely because the one-output rule holds throughout.
+
+The circle is excluded because it cannot be operated on in these ways without first breaking it into pieces (the upper semicircle is a function; the lower semicircle is a function; the whole circle is not). The restriction is the cost. The operations you gain are the benefit.
+
+This is the kind of trade-off that appears everywhere in mathematics: you accept a constraint, and in exchange you get a rich set of tools. Reject the constraint, and you have to give back the tools. The function definition is the most important such trade-off in college algebra, because every chapter after this one is about what you can do with those tools.
 
 ---
 
-### Sources (from chapter source files)
+## What you can do now
 
-- *College Algebra* with Co-Requisite Skills, source modules m51260 through m51268 (OpenStax-derived).
+You can determine whether a relation is a function — from a set of ordered pairs, from a formula, from a graph. You can find the domain and range. You can identify intervals where a function increases or decreases, locate its maxima and minima, and compute its average rate of change over any interval.
+
+You can compose two functions and decompose a composite back into pieces. You can transform the graph of a function by shifting, reflecting, stretching, and compressing, and you can read those transformations from the formula without re-plotting. You can find the inverse of a one-to-one function and verify it by composition.
+
+The single idea underneath all of this: **a function is a single-valued rule, and almost every operation of algebra is defined so as to preserve that single-valuedness.** The concept is not decorative. It is structural. Every chapter after this one builds on it.
+
+---
+
+## LLM Exercises
+
+**Exercise 3-L1.** Ask an AI to explain the vertical-line test to you in a completely different way than your textbook. Then evaluate the explanation: does it correctly capture *why* the test works (the connection to the one-output rule), or does it describe the test without explaining the underlying idea? Write one paragraph identifying what the explanation got right and, if anything, what it missed or oversimplified.
+
+**Exercise 3-L2.** Give an AI this prompt: "A function's average rate of change over [1, 5] is positive. Does that mean the function is increasing on [1, 5]? Explain." Evaluate the response carefully. If the AI says yes, identify the specific error. If it says no, check whether the counterexample it provides is valid. Write a short paragraph assessing the quality of the reasoning.
+
+**Exercise 3-L3.** Ask an AI to find the inverse of $f(x) = \frac{2x + 3}{x - 1}$. Have it show every step. Then verify the answer yourself by checking that $f(f^{-1}(x)) = x$. If the AI made an error, identify where and why. If it was correct, identify which step was most likely to go wrong and explain what a student would have to understand to catch that error.
+
+**Exercise 3-L4.** Describe to an AI a function that is odd but not one-to-one, and ask whether its inverse exists. Then ask the same about a function that is one-to-one but neither even nor odd. Evaluate whether the AI correctly applies the one-to-one requirement (not the even/odd symmetry) as the criterion for invertibility. Write a paragraph summarizing what the AI got right and where it conflated the two ideas, if it did.
+
+**Exercise 3-L5.** Ask an AI to give you a real-world situation that is *not* a function, explain why it is not, and then show how you could modify the situation so it becomes a function. Evaluate the response: does the modification genuinely restore the one-output-per-input property, or does it just restate the original situation with different words?
