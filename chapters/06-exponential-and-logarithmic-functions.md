@@ -1,264 +1,265 @@
 # Chapter 6 — Exponential and Logarithmic Functions
 
-## 1. Chapter Opening
+*The chapter where multiplication becomes addition, and time becomes the unknown.*
 
-A radioactive sample is placed in a Geiger counter at noon. The counter reads $1{,}000$ counts per second. At 1 PM, $750$. At 2 PM, $562$. At 3 PM, $422$. The numbers do not decrease by a fixed amount each hour — they decrease by a fixed *fraction*, about 25%, each hour. This is *exponential decay*. Plot the data; the curve is not a line. The relationship is
+---
+
+A radioactive sample sits in a Geiger counter at noon. The counter reads 1,000 counts per second. At 1 PM it reads 750. At 2 PM, 562. At 3 PM, 422.
+
+Look at those numbers for a moment before we name anything. The drop from noon to 1 PM is 250. From 1 PM to 2 PM, it's 188. From 2 PM to 3 PM, 140. The decreases are shrinking. Whatever is happening here, it is not the kind of decay where a fixed amount disappears each hour. The amount disappearing each hour depends on how much is still there.
+
+That is the key. The rate of change is proportional to the current value. When there is more, more decays. When there is less, less decays. This is a fundamentally different relationship from anything in the previous chapters, and it produces a fundamentally different kind of function.
+
+---
+
+## The function that grows by multiplying
+
+Go back to the data. From noon to 1 PM, the count was multiplied by $0.75$ — it kept 75% of itself. From 1 PM to 2 PM, multiplied by $0.75$ again. From 2 PM to 3 PM, again. Each hour, the same *ratio*.
+
+After $t$ hours:
 
 $$N(t) = 1000 \cdot (0.75)^t$$
 
-where $t$ is hours after noon. Exponential functions describe processes where the rate of change is *proportional to the current amount* — radioactive decay, bacterial growth, compound interest, viral spread, atmospheric pressure with altitude.
+This is an *exponential function*. The general form is $f(x) = a \cdot b^x$, where $a$ is the starting value and $b$ is the base — the multiplier applied once per unit of input.
 
-Logarithms are the inverse — given an exponential output, find the input. *How many years will it take an investment to double?* That question requires inverting an exponential, which is what a logarithm does.
+If $b > 1$, the function grows: each step multiplies by something bigger than 1. If $0 < b < 1$, it decays: each step multiplies by a fraction. The condition $b > 0$ and $b \neq 1$ is not arbitrary restriction — a negative base produces oscillations that break the smooth curve, and $b = 1$ gives $f(x) = a$ always, which is constant, not exponential.
 
-This chapter develops both families together because they are inverses. By the end, you should be able to read $\log_2 8 = 3$ as fluently as $2^3 = 8$ — and recognize that they say the same thing.
+The critical feature: this function is not a line, not a polynomial, not anything from the previous chapters. Plot it. From $t = 0$ to $t = 10$, the count drops from 1,000 to about 56. From $t = 10$ to $t = 20$, it drops from 56 to about 3. The curve flattens but never reaches zero — it approaches zero asymptotically, always positive, always decreasing, never arriving.
 
-### Learning objectives
+For growth, the picture reverses. Bacteria doubling every hour: $P(t) = 500 \cdot 2^t$. Start with 500. After 10 hours, 512,000. After 20 hours, 524 million. The function accelerates. A straight line grows by a fixed amount per step; an exponential grows by a fixed *factor* per step. Over long enough time, any exponential growth overtakes any polynomial growth. This is not an approximation — it is exact.
 
-By the end of this chapter, you should be able to:
+<!-- → [IMAGE: two side-by-side graphs on the same axes — left: N(t) = 1000·(0.75)^t showing decay curving toward the horizontal asymptote y = 0; right: P(t) = 500·2^t showing growth accelerating away from the x-axis — student should see that both curves approach an asymptote, just on opposite ends, and neither is a line] -->
 
-- **Evaluate** and graph exponential functions $f(x) = ab^x$ and the natural exponential $f(x) = e^x$.
-- **Apply** the compound-interest formula and the continuous-compounding formula $A = Pe^{rt}$.
-- **Convert** between exponential and logarithmic form, evaluate logarithms with various bases, and use common ($\log_{10}$) and natural ($\ln$) logarithms.
-- **Apply** the product, quotient, power, and change-of-base rules for logarithms to expand, condense, and rewrite logarithmic expressions.
-- **Solve** exponential and logarithmic equations and apply them to real-world growth, decay, and modeling problems.
+### The base that keeps appearing
 
-### Prerequisites
+There is a particular base that shows up constantly in mathematics, science, and finance. It is called $e$, and it is approximately $2.71828$.
 
-Chapter 1's exponent rules. Chapter 3's function notation, especially inverses. Chapter 5's rational functions (asymptotes — exponentials approach $0$ asymptotically, logarithms have vertical asymptotes at $x = 0$).
+Where does it come from? Ask what happens when you compound interest more and more frequently. Start with a dollar at 100% annual interest. Compound once per year: you end with \$2. Compound twice per year at 50% each: $\$(1.5)^2 = \$2.25$. Compound twelve times: about \$2.613. Compound continuously — in the limit as compounding frequency goes to infinity:
 
----
+$$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \approx 2.71828$$
 
-## 2. Concept 1 — Exponential Functions
+The number $e$ is what continuous compounding converges to. But its significance goes deeper than finance. The function $f(x) = e^x$ has a property that no other exponential function has: its rate of change at every point equals its value there. The slope of the curve at any $x$ is exactly $e^x$. This is why calculus is dramatically cleaner with base $e$ — when you differentiate $e^x$, you get $e^x$ back. Any other base introduces a correction factor. We will not prove this here, but it is the reason $e$ is the natural base.
 
-An *exponential function* has the form
+<!-- → [TABLE: three-column table showing compounding frequency (annually, quarterly, monthly, daily, continuously), the formula applied, and the resulting value after 1 year starting from $1 at 100% — the final row shows e ≈ 2.71828; student should see the sequence converging and understand where the limit comes from] -->
 
-$$f(x) = a \cdot b^x$$
+### What compound interest is actually doing
 
-where $a$ is the *initial value* (the value at $x = 0$, since $b^0 = 1$), and $b$ is the *base* (positive, $b \neq 1$).
-
-If $b > 1$, the function is *exponential growth*. If $0 < b < 1$, *exponential decay*.
-
-For our radioactive sample: $f(t) = 1000 \cdot (0.75)^t$. Initial value $1000$. Base $0.75 < 1$, so it's decay.
-
-### The natural base $e$
-
-A particular base — $e \approx 2.71828$ — appears so often in mathematics, science, and finance that it has its own name. It arises naturally as the limit
-
-$$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$$
-
-The natural exponential function is $f(x) = e^x$. Its graph passes through $(0, 1)$ and has the special property that *its rate of change at any point equals its value there* — a property that makes calculus dramatically cleaner with $e$ than with any other base.
-
-### Compound interest
-
-A bank pays interest at annual rate $r$, compounded $n$ times per year. The value of an initial deposit $P$ after $t$ years is
+A deposit of $P$ dollars at annual rate $r$, compounded $n$ times per year, grows to
 
 $$A = P\left(1 + \frac{r}{n}\right)^{nt}$$
 
-If interest is compounded *continuously* (the limit as $n \to \infty$):
+after $t$ years. As $n \to \infty$ — continuous compounding — this becomes
 
 $$A = Pe^{rt}$$
 
-**Example.** Deposit $\$1{,}000$ at 5% annual interest, compounded monthly, for 10 years.
+Deposit \$1,000 at 5% compounded monthly for 10 years: $A = 1000(1 + 0.05/12)^{120} \approx \$1,647$. Compounded continuously: $A = 1000 e^{0.5} \approx \$1,649$. The difference is small. The formula is cleaner. And the continuous version connects to the natural exponential in a way that pays dividends later.
 
-$$A = 1000\left(1 + \frac{0.05}{12}\right)^{120} \approx 1000(1.00417)^{120} \approx \$1{,}647.01$$
-
-If compounded continuously instead: $A = 1000 e^{0.5} \approx \$1{,}648.72$. Slight difference; same order of magnitude.
-
-### Graphing exponential functions
-
-The graph of $f(x) = b^x$ for $b > 1$:
-- Passes through $(0, 1)$.
-- Increases for all $x$.
-- Horizontal asymptote $y = 0$ as $x \to -\infty$.
-
-For $0 < b < 1$:
-- Passes through $(0, 1)$.
-- Decreases for all $x$.
-- Horizontal asymptote $y = 0$ as $x \to +\infty$.
-
-Transformations work as in Chapter 3: $f(x) = a \cdot b^{x - h} + k$ shifts the basic graph.
-
-### Trade-off
-
-Exponential functions are extraordinarily flexible — they capture growth and decay processes from cells to compound interest to civilizations. The cost is that they grow *or shrink very fast*, which makes long-term predictions sensitive to the parameters. Small changes in the base $b$ produce huge changes after many time steps.
+The question that compound interest makes urgent: how long to double? If you set $2P = Pe^{rt}$, the $P$ cancels, and you get $2 = e^{rt}$. To solve that equation, you need to invert the exponential. That is precisely what logarithms do.
 
 ---
 
-## 3. Concept 2 — Logarithmic Functions
+## The inverse: given the output, find the exponent
 
-A *logarithm* answers the inverse question: $\log_b(y)$ is the exponent you need to put on $b$ to get $y$. By definition:
+You know $2^3 = 8$. The logarithm asks the reverse: given that $2$ to some power equals $8$, what is that power? The answer is $3$. Written in logarithm notation: $\log_2(8) = 3$.
+
+The definition is just this:
 
 $$\log_b(y) = x \iff b^x = y$$
 
-So $\log_2(8) = 3$ because $2^3 = 8$. And $\log_{10}(1000) = 3$ because $10^3 = 1000$.
+The logarithm and the exponential are inverses of each other. $\log_b(b^x) = x$ for any $x$. $b^{\log_b(y)} = y$ for any $y > 0$. They undo each other exactly.
 
-### Common and natural logarithms
+Two bases appear so often that they have their own notation. The common logarithm, $\log(x)$, means base 10 — the base of our number system, useful for orders of magnitude. The natural logarithm, $\ln(x)$, means base $e$ — the base of continuous growth and decay.
 
-Two bases appear so often that they have shorthand:
+Some values to internalize:
 
-- *Common logarithm:* $\log(x)$ means $\log_{10}(x)$ (base 10).
-- *Natural logarithm:* $\ln(x)$ means $\log_e(x)$ (base $e$).
+- $\log_{10}(10) = 1$, $\log_{10}(100) = 2$, $\log_{10}(1000) = 3$. Each additional digit in a number adds 1 to its base-10 logarithm.
+- $\log_{10}(1) = 0$ (because $10^0 = 1$).
+- $\ln(e) = 1$, $\ln(e^2) = 2$, $\ln(1) = 0$.
 
-These are the bases of nearly all real-world applications. Chemistry's pH uses base 10. Physics uses base $e$ for almost everything.
+The logarithm is undefined for inputs $\leq 0$. There is no exponent you can put on a positive base to get zero or a negative number. This is not a technicality to memorize — it follows directly from the behavior of $b^x$, which is always positive.
 
-### Properties of logarithms
+### The graph
 
-The exponent rules from Chapter 1 translate into logarithm rules.
+The graph of $y = \log_b(x)$ for $b > 1$ is the graph of $y = b^x$ reflected across the line $y = x$ — the geometric meaning of "inverse function." It passes through $(1, 0)$, increases slowly, has a vertical asymptote at $x = 0$, and has domain $(0, \infty)$.
 
-**Product rule.** $\log_b(MN) = \log_b(M) + \log_b(N)$. (Multiplication becomes addition.)
+How slowly? $\log_{10}(1{,}000{,}000) = 6$. $\log_{10}(1{,}000{,}000{,}000) = 9$. The output grows by 3 when the input multiplies by $1{,}000$. This is logarithmic growth — the opposite extreme from exponential. Exponential functions grow shockingly fast; logarithms grow shockingly slowly. Together, they bound the behavior of everything in between.
 
-**Quotient rule.** $\log_b(M/N) = \log_b(M) - \log_b(N)$.
-
-**Power rule.** $\log_b(M^p) = p \log_b(M)$.
-
-**Change of base.** $\log_b(M) = \frac{\log_a(M)}{\log_a(b)}$. (Lets you compute any logarithm using any base — useful with calculators.)
-
-**Special values.** $\log_b(1) = 0$ (because $b^0 = 1$). $\log_b(b) = 1$ (because $b^1 = b$).
-
-### Graphing logarithms
-
-The graph of $f(x) = \log_b(x)$ for $b > 1$:
-- Domain: $x > 0$ (you can't take the log of zero or a negative).
-- Passes through $(1, 0)$ (since $\log_b(1) = 0$).
-- Vertical asymptote $x = 0$.
-- Slowly increasing.
-
-The logarithm grows very slowly. $\log_{10}(1000) = 3$, $\log_{10}(1{,}000{,}000) = 6$, $\log_{10}(1{,}000{,}000{,}000) = 9$. The output gains 1 each time the input multiplies by 10.
-
-### Worked example
-
-Solve $\log_2(x) + \log_2(x - 2) = 3$.
-
-Combine using the product rule:
-$$\log_2(x(x-2)) = 3$$
-
-Convert to exponential form:
-$$x(x-2) = 2^3 = 8$$
-$$x^2 - 2x - 8 = 0$$
-$$(x - 4)(x + 2) = 0$$
-
-So $x = 4$ or $x = -2$. Check both in the original. $x = -2$ makes $\log_2(-2)$ undefined (logs of negatives don't exist), so it's extraneous. Only $x = 4$ is valid.
+<!-- → [IMAGE: graph of y = 2^x and y = log₂(x) on the same axes, with the line y = x drawn as a dashed reference — the two curves are mirror images across y = x, intersecting at (1,1) and (2,2); student should see the reflection relationship that defines inverse functions geometrically and notice the contrasting rates: one accelerates away, the other barely climbs] -->
 
 ---
 
-## 4. Concept 3 — Solving Equations and Modeling
+## The rules, and where they come from
 
-Most real exponential and logarithmic problems reduce to *solving an equation*.
+There are four rules for manipulating logarithms. They are not arbitrary — they are the exponent rules in disguise.
 
-### Solving exponential equations
+**Product rule.** $\log_b(MN) = \log_b(M) + \log_b(N)$.
 
-Two strategies:
+Here is why. Let $\log_b(M) = p$ and $\log_b(N) = q$. Then $M = b^p$ and $N = b^q$, so $MN = b^p \cdot b^q = b^{p+q}$. Taking the log of both sides: $\log_b(MN) = p + q = \log_b(M) + \log_b(N)$.
 
-**Like bases.** If you can rewrite both sides with the same base, equate the exponents.
+Multiplication becomes addition. This is why logarithms transformed science before calculators existed — multiplying large numbers is hard, adding their logarithms is easy, and converting back is straightforward.
 
-$$2^{3x} = 16 \implies 2^{3x} = 2^4 \implies 3x = 4 \implies x = \tfrac{4}{3}$$
+**Quotient rule.** $\log_b(M/N) = \log_b(M) - \log_b(N)$. Same reasoning: division becomes subtraction.
 
-**Take a logarithm.** When like bases don't work, take $\log$ or $\ln$ of both sides and use the power rule.
+**Power rule.** $\log_b(M^p) = p \cdot \log_b(M)$. Because $M^p = (b^{\log_b(M)})^p = b^{p \cdot \log_b(M)}$, and taking the log gives $p \cdot \log_b(M)$.
 
-$$5^x = 12 \implies \ln(5^x) = \ln(12) \implies x \ln(5) = \ln(12) \implies x = \tfrac{\ln(12)}{\ln(5)} \approx 1.544$$
+This is the rule that unlocks exponential equations. When the unknown is an exponent, the power rule brings it down to the level of multiplication.
 
-### Solving logarithmic equations
+**Change of base.** $\log_b(M) = \frac{\ln(M)}{\ln(b)}$.
 
-If a single logarithm equals a constant, convert to exponential form. If multiple logs appear, combine them using the product/quotient/power rules first, then convert.
+Calculators have buttons for $\ln$ and $\log_{10}$. They do not have a button for $\log_7$. The change-of-base formula converts any logarithm to one your calculator can evaluate.
 
-Always check candidates against the original — extraneous solutions are common when logs are involved.
+One warning worth stating explicitly: $\log(a + b) \neq \log(a) + \log(b)$. The product rule says $\log(ab) = \log(a) + \log(b)$ — multiplication inside becomes addition outside. Addition inside has no simplification. Confusing these is the most common error in this chapter.
 
-### Exponential growth and decay
-
-The general model: $A(t) = A_0 e^{kt}$, where $A_0$ is the initial amount and $k$ is the *growth rate* ($k > 0$ for growth, $k < 0$ for decay).
-
-**Example — radioactive decay.** Carbon-14 has half-life $5{,}730$ years. A sample initially containing $A_0$ atoms will have $A(t) = A_0 e^{kt}$ atoms after $t$ years, where $k$ satisfies $\frac{1}{2}A_0 = A_0 e^{5730k}$. Solving: $k = \frac{\ln(1/2)}{5730} \approx -0.000121$.
-
-A bone fragment is found with 30% of the original carbon-14 still present. How old is it?
-
-$$0.3 = e^{-0.000121 t} \implies t = \frac{\ln(0.3)}{-0.000121} \approx 9{,}953 \text{ years old}$$
-
-### Newton's law of cooling
-
-An object at temperature $T_0$ in an environment at temperature $T_a$ cools (or warms) according to
-
-$$T(t) = T_a + (T_0 - T_a)e^{-kt}$$
-
-The temperature approaches the ambient $T_a$ exponentially.
-
-### Logistic growth
-
-For populations with carrying-capacity limits:
-
-$$P(t) = \frac{c}{1 + ae^{-bt}}$$
-
-The graph rises rapidly at first, then levels off at $c$ (the carrying capacity). Used for populations under resource constraints.
-
-### Worked example — compound interest doubling time
-
-How long does it take an investment at 6% annual interest, compounded continuously, to double?
-
-$$2P = Pe^{0.06 t} \implies 2 = e^{0.06t} \implies \ln 2 = 0.06t \implies t = \frac{\ln 2}{0.06} \approx 11.55 \text{ years}$$
-
-This is the *Rule of 72* approximation: doubling time $\approx 72/r$ where $r$ is the percentage rate. $72/6 = 12$, close to the exact $11.55$.
+<!-- → [TABLE: two-column table mapping each exponent rule to its logarithm counterpart — left column: b^m · b^n = b^(m+n), b^m / b^n = b^(m−n), (b^m)^p = b^(mp); right column: log(MN) = log M + log N, log(M/N) = log M − log N, log(M^p) = p·log M — student should see that the log rules are not new facts but the same facts read from the other direction] -->
 
 ---
 
-## 5. Integration — One Worked Problem
+## Solving equations
 
-A petri dish initially contains $500$ bacteria. After $4$ hours, the count is $1{,}500$. (a) Build an exponential growth model. (b) When will the count reach $10{,}000$?
+With the rules established, two types of equations become tractable.
 
-**(a) Build the model.** $P(t) = 500 e^{kt}$. Use the data point: $P(4) = 1500$, so $1500 = 500 e^{4k}$, giving $e^{4k} = 3$, so $k = \frac{\ln 3}{4} \approx 0.275$.
+### Exponential equations
 
-Model: $P(t) = 500 e^{0.275t}$.
+The unknown is in the exponent. Two strategies.
 
-**(b) Time to reach 10,000.** $10000 = 500 e^{0.275 t}$, so $e^{0.275 t} = 20$, giving $t = \frac{\ln 20}{0.275} \approx 10.9$ hours.
+**When both sides can share a base**, equate the exponents directly.
 
-The example uses Concept 1 (exponential function), Concept 2 (logarithm to invert), and Concept 3 (modeling and solving). All three concepts collaborate to answer one specific question.
+$2^{3x} = 16$. Rewrite: $2^{3x} = 2^4$. Same base on both sides, so $3x = 4$, giving $x = 4/3$.
 
-[FIGURE: Graph of $P(t) = 500e^{0.275t}$ from $t = 0$ to $t = 12$. Curve passes through $(0, 500)$, $(4, 1500)$, and $(10.9, 10000)$ marked. The student should notice the rapid acceleration of exponential growth.]
+**When they cannot**, take the natural log of both sides and apply the power rule.
+
+$5^x = 12$. Take $\ln$: $\ln(5^x) = \ln(12)$. Power rule: $x \ln(5) = \ln(12)$. Divide: $x = \ln(12)/\ln(5) \approx 1.544$.
+
+The second strategy always works. The first strategy works only when you can recognize a common base, but when it works, it is faster.
+
+### Logarithmic equations
+
+The unknown is inside a logarithm. Combine any multiple logarithms using the product, quotient, or power rules until one logarithm remains, then convert to exponential form.
+
+$\log_2(x) + \log_2(x - 2) = 3$. Product rule: $\log_2(x(x-2)) = 3$. Convert: $x(x-2) = 2^3 = 8$. Expand: $x^2 - 2x - 8 = 0$. Factor: $(x-4)(x+2) = 0$.
+
+Two candidates: $x = 4$ and $x = -2$. Check both in the original. $\log_2(-2)$ is undefined — you cannot take the logarithm of a negative number. So $x = -2$ is *extraneous*, introduced by the algebra but not valid in the original equation. Only $x = 4$ works.
+
+Extraneous solutions are routine in logarithmic equations, not exceptional. Always check every candidate.
+
+### The doubling time question
+
+How long does it take \$1,000 at 6% continuous compounding to double?
+
+$$2000 = 1000 \, e^{0.06t}$$
+$$2 = e^{0.06t}$$
+$$\ln 2 = 0.06t$$
+$$t = \frac{\ln 2}{0.06} \approx 11.55 \text{ years}$$
+
+Notice that the initial amount $P$ cancelled immediately. The doubling time depends only on the rate, not the principal. This is a feature of exponential growth: the time to multiply by any fixed factor is constant.
+
+The *Rule of 72* is a practical approximation: doubling time $\approx 72/r$, where $r$ is the percentage rate. At 6%, that gives $72/6 = 12$ years — close enough for mental arithmetic.
 
 ---
 
-## 6. Exercises
+## Building models from data
+
+The most important application is often this: you observe a process, take measurements, and need to find the model that fits.
+
+A petri dish starts with 500 bacteria. After 4 hours, there are 1,500. Build a model.
+
+The form is $P(t) = 500 \, e^{kt}$ — we know the starting value, but not $k$. Plug in the known data point:
+
+$$1500 = 500 \, e^{4k}$$
+$$3 = e^{4k}$$
+$$\ln 3 = 4k$$
+$$k = \frac{\ln 3}{4} \approx 0.275$$
+
+Model: $P(t) = 500 \, e^{0.275t}$.
+
+Now we can answer forward-looking questions. When does the count reach 10,000?
+
+$$10000 = 500 \, e^{0.275t}$$
+$$20 = e^{0.275t}$$
+$$\ln 20 = 0.275 t$$
+$$t = \frac{\ln 20}{0.275} \approx 10.9 \text{ hours}$$
+
+The same model also lets us look backward: when did the culture have only 100 bacteria? Set $100 = 500 e^{0.275t}$, get $t = \ln(0.2)/0.275 \approx -5.8$ hours. The negative sign says 5.8 hours before the measurement, which makes sense — the culture was smaller then.
+
+<!-- → [IMAGE: graph of P(t) = 500·e^(0.275t) from t = −6 to t = 12, with three points labeled: (−5.8, 100), (0, 500), (4, 1500), and (10.9, 10000) — student should see that the same curve answers backward-looking and forward-looking questions equally, and that finding k from one data point pins the entire curve] -->
+
+### Radioactive decay
+
+Carbon-14 has a half-life of 5,730 years — after that many years, half the original remains. From this single fact, we can find $k$.
+
+$$\frac{1}{2} A_0 = A_0 \, e^{5730k}$$
+$$\frac{1}{2} = e^{5730k}$$
+$$\ln\!\left(\tfrac{1}{2}\right) = 5730k$$
+$$k = \frac{-\ln 2}{5730} \approx -0.000121$$
+
+A bone fragment retains 30% of its original carbon-14. How old?
+
+$$0.3 = e^{-0.000121 \, t}$$
+$$\ln(0.3) = -0.000121 \, t$$
+$$t = \frac{\ln(0.3)}{-0.000121} \approx 9{,}953 \text{ years}$$
+
+The mathematics is the same structure each time: identify the exponential model, substitute a known condition to find the rate constant, then solve the resulting equation for whatever you want. The only variation is in the numbers and what question is being asked.
+
+### When exponential growth stops
+
+Exponential growth cannot continue forever — resources run out, space fills up, something intervenes. When a population grows toward a ceiling, the logistic model applies:
+
+$$P(t) = \frac{c}{1 + a e^{-bt}}$$
+
+Here $c$ is the *carrying capacity* — the ceiling the population approaches. Initially, when $t$ is small and $ae^{-bt}$ is large, $P$ is small and growing fast. As $t$ grows, $e^{-bt} \to 0$ and $P \to c$. The graph is S-shaped: slow growth, then rapid growth, then leveling off.
+
+The logistic model describes real populations more accurately than pure exponential growth. A bacterial culture in a flask, a species colonizing an island, a technology spreading through a market — all follow logistic curves when the underlying resource is finite. The exponential is what you get when you look at the early part of the S-curve, before the ceiling becomes visible.
+
+<!-- → [IMAGE: S-shaped logistic curve P(t) = c/(1 + ae^(−bt)) with the carrying capacity c marked as a horizontal dashed asymptote at the top and the inflection point (where growth is fastest) marked — overlaid on the left portion, a dashed exponential curve showing how pure exponential growth matches the logistic curve early but diverges wildly as t grows; student should see that the exponential is an approximation that breaks when the ceiling comes into view] -->
+
+---
+
+## What the two functions are actually doing
+
+Exponential and logarithmic functions are inverses, but it is worth understanding what each one captures conceptually.
+
+An exponential function $f(x) = b^x$ encodes *repeated multiplication*. The input is a count of steps; the output is the result of multiplying by $b$ that many times. The function scales up (or down) geometrically. Every equal increment of input corresponds to the same proportional change in output.
+
+A logarithm inverts this: given the result, find the count of steps. This is why logarithms compress large ranges. The numbers $1$, $10$, $100$, $1{,}000$, $10{,}000$ span five orders of magnitude — they differ by factors of 10. Their base-10 logarithms are $0$, $1$, $2$, $3$, $4$ — equally spaced. The logarithm converts multiplicative structure into additive structure. This is useful not just computationally but perceptually: earthquake magnitudes, sound intensities, star brightnesses, and pH all use logarithmic scales because human perception is roughly logarithmic. A sound twice as loud does not sound twice as loud; a sound ten times as intense sounds about twice as loud.
+
+The rules of logarithms are not tricks to memorize. They are consequences of one fact: logarithms and exponentials are inverses, and the exponent rules drive everything. If you understand why $b^m \cdot b^n = b^{m+n}$, you understand why $\log_b(MN) = \log_b(M) + \log_b(N)$. The second statement is the first statement read from the other direction.
+
+---
+
+## What you can do now
+
+You can evaluate exponential functions and sketch their graphs — recognizing growth when $b > 1$, decay when $0 < b < 1$, and the horizontal asymptote at $y = 0$. You can apply the compound-interest formulas, both periodic and continuous. You can convert freely between exponential and logarithmic form. You can expand, condense, and rewrite logarithmic expressions using the product, quotient, and power rules. You can solve both exponential equations (by taking logarithms) and logarithmic equations (by converting to exponential form), and you know to check for extraneous solutions.
+
+Most importantly: you can build a model from two data points, find the rate constant, and use the model to answer questions about the future, the past, or intermediate states.
+
+The single idea connecting all of this: **exponential functions describe processes where the rate of change is proportional to the current amount, and logarithms are the tool for inverting them.** Everything else — the rules, the formulas, the equation-solving strategies — follows from those two facts.
+
+---
+
+## Exercises
 
 ### Warm-up
 
-**Exercise 6.1.** Evaluate. (a) $3^4$. (b) $\log_3(81)$. (c) $\ln(e^5)$. Difficulty: low.
+**Exercise 6.1.** *Tests conversion between forms.* Evaluate each without a calculator. (a) $\log_3(81)$. (b) $\log_2(1/8)$. (c) $\ln(e^4)$. (d) $10^{\log(5)}$. For each, write the equivalent exponential or logarithmic statement that makes the answer immediate. Difficulty: low.
 
-**Exercise 6.2.** Convert. (a) $2^5 = 32$ to log form. (b) $\log_5(125) = 3$ to exponential form. Difficulty: low.
+**Exercise 6.2.** *Tests reading the exponential model.* A population follows $P(t) = 200 \cdot (1.06)^t$, where $t$ is years. (a) What is the initial population? (b) Is this growth or decay, and by what percentage per year? (c) What is the population after 5 years? Difficulty: low.
+
+**Exercise 6.3.** *Tests the logarithm rules.* Expand each expression into a sum or difference of logarithms with no exponents inside. (a) $\log_2(8x^3)$. (b) $\ln\!\left(\frac{\sqrt{x}}{y^2}\right)$. Difficulty: low.
 
 ### Application
 
-**Exercise 6.3.** $\$2{,}000$ at 4% annual interest, compounded continuously. Value after 10 years? Difficulty: medium.
+**Exercise 6.4.** *Tests solving exponential equations.* Solve for $x$. (a) $3^{2x} = 27$. (b) $4^x = 11$. Give exact answers and decimal approximations. Difficulty: medium.
 
-**Exercise 6.4.** Solve. (a) $4^x = 64$. (b) $7^{x+1} = 50$. (c) $\log_2(x) + \log_2(x+6) = 4$. Difficulty: medium.
+**Exercise 6.5.** *Tests solving logarithmic equations with extraneous-solution check.* Solve $\log_3(x + 6) + \log_3(x) = 3$. Show all steps and verify that no candidate is extraneous. Difficulty: medium.
 
-**Exercise 6.5.** A population doubles every 7 years. How long to triple? Difficulty: medium.
+**Exercise 6.6.** *Tests the compound-interest formula.* \$5,000 is deposited at 3.5% annual interest. (a) Value after 8 years compounded quarterly. (b) Value after 8 years compounded continuously. (c) How much more does continuous compounding earn? Difficulty: medium.
 
 ### Synthesis
 
-**Exercise 6.6.** Carbon-14 (half-life 5,730 years). A sample has 60% of original. Age? Difficulty: medium-high.
+**Exercise 6.7.** *Tests building and using an exponential model.* A sample of a radioactive isotope has 800 grams at time zero. After 12 hours, 300 grams remain. (a) Find the exponential decay model $A(t) = A_0 e^{kt}$. (b) What is the half-life of this isotope? (c) When will less than 10 grams remain? Difficulty: medium-high.
 
-**Exercise 6.7.** A coffee at $200°F$ cools in a $70°F$ room. After 5 minutes, it's $150°F$. (a) Newton's law constant $k$. (b) When will it reach $90°F$? Difficulty: medium-high.
+**Exercise 6.8.** *Tests the connection between doubling time, the Rule of 72, and exact calculation.* An investment grows at 4% compounded continuously. (a) Find the exact doubling time. (b) Find the Rule-of-72 approximation. (c) Find the time for the investment to grow to five times its original value. For (c), note whether the Rule of 72 still applies and explain why or why not. Difficulty: medium-high.
 
 ### Challenge
 
-**Exercise 6.8.** A logistic model fits a city's population over 50 years: $P(t) = \frac{500{,}000}{1 + 9e^{-0.05t}}$. (a) Initial population. (b) Carrying capacity. (c) When does it reach 250,000? Difficulty: high.
-
----
-
-## 7. Chapter Summary
-
-You can read $\log_b(y) = x$ and $b^x = y$ as the same statement. You can solve any exponential equation by either equating exponents (when bases match) or taking logarithms (when they don't). You can apply the compound-interest formulas, both periodic and continuous. You can build exponential models from data and solve for unknown times.
-
-The single idea that matters most: **exponential functions describe processes where the rate of change is proportional to the current amount.** Logarithms invert them. Together, they handle a vast class of natural and financial phenomena that polynomial functions cannot.
-
-The common mistake to watch for: treating $\log(a + b)$ as $\log(a) + \log(b)$. Logarithms turn *multiplication* into addition, not *addition* into addition. $\log(ab) = \log(a) + \log(b)$, but $\log(a + b)$ has no simplification.
-
----
-
-## 8. Connections Forward
-
-Chapter 7 introduces *trigonometric functions* — another nonlinear family with periodic behavior, capturing rotation, oscillation, and waves. The tools developed for exponential and logarithmic functions (transformations, identities, equation-solving) transfer in spirit; the new family adds a periodic dimension.
-
----
-
-### Sources (from chapter source files)
-
-- *College Algebra*, source modules m49356 through m49368 (OpenStax-derived).
+**Exercise 6.9.** *Tests logistic model interpretation and equation-solving.* A city's population (in thousands) is modeled by $P(t) = \frac{400}{1 + 15e^{-0.08t}}$, where $t$ is years after 2000. (a) What was the population in 2000? (b) What is the carrying capacity, and what does it mean in context? (c) In what year does the population reach 200,000? (d) Is the population growing faster in year 10 or year 30? Explain without computing derivatives — use the shape of the logistic curve and the relationship between the current value and the carrying capacity. Difficulty: high.
