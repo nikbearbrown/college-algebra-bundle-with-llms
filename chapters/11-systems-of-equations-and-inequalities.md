@@ -1,237 +1,273 @@
 # Chapter 11 — Systems of Equations and Inequalities
 
-## 1. Chapter Opening
-
-A market vendor sells two products: bread loaves and bagels. Bread sells for $\$4$ per loaf and bagels for $\$1$ each. On a given Saturday, the vendor sells 100 items total and brings in $\$220$. *How many of each did she sell?* The question requires not one equation but *two*: $L + B = 100$ (total items) and $4L + B = 220$ (total revenue). Solving them together is the work of this chapter.
-
-Systems of equations appear wherever multiple constraints must be satisfied at once. Two ingredients, two recipes. Two roads, one intersection. Two species competing for resources. The technique is to combine the equations until the unknowns are isolated. This chapter develops the major methods — substitution, elimination, matrices — and extends the idea to nonlinear systems and inequalities.
-
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Solve** systems of two linear equations using substitution, elimination, or graphing; **classify** systems as consistent, inconsistent, or dependent.
-- **Solve** systems of three linear equations in three variables.
-- **Solve** systems of nonlinear equations using substitution and elimination, and **graph** nonlinear inequalities.
-- **Use** matrices and Gaussian elimination to solve linear systems.
-- **Apply** matrix operations (sum, scalar multiple, product, inverse, determinant) and **use** Cramer's Rule.
-
-### Prerequisites
-
-Chapters 1–6 (algebra, equations, functions). Chapter 5's polynomial work returns when systems are nonlinear.
+*What happens when one equation isn't enough.*
 
 ---
 
-## 2. Concept 1 — Systems of Linear Equations
+## Two constraints, one Saturday morning
 
-A *system* of two linear equations in two unknowns:
+A market vendor sells bread and bagels. Bread goes for $\$4$ a loaf, bagels for $\$1$ each. At the end of the day she counts her sales: 100 items sold, $\$220$ collected. How many of each did she sell?
 
-$$\begin{cases} a_1 x + b_1 y = c_1 \\ a_2 x + b_2 y = c_2 \end{cases}$$
+One equation isn't enough. If all you knew was the total count — $L + B = 100$ — the answer could be anything from 100 loaves and 0 bagels to 0 loaves and 100 bagels. If all you knew was the total revenue — $4L + B = 220$ — same problem. But together, the two equations pin down a unique answer.
 
-A *solution* is a pair $(x, y)$ that satisfies both equations simultaneously. Geometrically: each equation is a line; the solution is their point of intersection.
+This is a *system of equations*. Two constraints, two unknowns, one solution. The constraint is that both equations must be satisfied simultaneously — not one or the other, but both at once.
 
-Three possibilities:
-- **One solution** (consistent, independent): the lines cross at one point.
-- **No solution** (inconsistent): the lines are parallel.
-- **Infinitely many solutions** (dependent): the lines coincide.
+Systems appear wherever multiple conditions must hold at the same time. Two substances mixed to hit a target concentration. Two routes that must arrive at the same intersection. Two species competing for the same resource pool. The problem, in every case, is the same: combine the equations in some clever way until each unknown stands alone. The chapter is an exploration of how to do that cleverly — and what it means when you can't.
 
-### Three solution methods
+---
 
-**Substitution.** Solve one equation for one variable; substitute into the other.
+## Part 1 — Linear systems: the geometry of intersection
 
-For the bread/bagel example:
-$$L + B = 100 \implies B = 100 - L$$
-Substitute into $4L + B = 220$: $4L + (100 - L) = 220$, so $3L = 120$, $L = 40$. Then $B = 60$.
+Two linear equations in two unknowns each describe a line in the plane. A solution to the system is a point that lies on *both* lines simultaneously. Geometrically, that's the intersection.
 
-**Elimination.** Add multiples of the equations to eliminate one variable.
+Three things can happen.
+
+The lines cross at exactly one point. One solution. The system is *consistent and independent* — the equations give genuinely different information, and together they narrow the answer to a single point.
+
+The lines are parallel and never meet. No solution. The system is *inconsistent* — the equations make contradictory demands. No pair $(x, y)$ can satisfy both.
+
+The lines coincide — they are the same line. Infinitely many solutions. The system is *dependent* — one equation is a scalar multiple of the other. They're not two constraints; they're the same constraint written twice.
+
+Knowing which case you're in before you start solving saves a lot of computation. If the slopes of the two lines are equal but the intercepts differ, you already know there's no solution. If the equations are proportional, you already know there are infinitely many.
+
+<!-- → [IMAGE: three side-by-side coordinate plane sketches — left: two lines crossing at a single labeled point (consistent/independent, "one solution"); center: two parallel lines that never meet (inconsistent, "no solution"); right: two lines drawn as one, coincident (dependent, "infinitely many solutions"); each panel labeled with the case name and what happens algebraically during elimination — student should identify which case they're in before starting computation] -->
+
+### Substitution
+
+The bread/bagel system:
 
 $$\begin{cases} L + B = 100 \\ 4L + B = 220 \end{cases}$$
 
-Subtract the first from the second: $3L = 120$, $L = 40$. Then $B = 60$.
+The first equation gives $B = 100 - L$ directly. Substitute into the second:
 
-**Graphing.** Plot both lines; read the intersection.
+$$4L + (100 - L) = 220 \implies 3L = 120 \implies L = 40$$
 
-For two equations in two unknowns, all three methods work. Substitution is fastest when one variable has coefficient 1; elimination is fastest when coefficients align. Graphing is the most intuitive but least precise.
+Then $B = 100 - 40 = 60$. She sold 40 loaves and 60 bagels.
 
-### Three equations, three unknowns
+Substitution works best when one variable already has coefficient 1 in some equation — the isolation is free, and you avoid fractions. The technique is just what it says: solve for one variable in terms of the other, then replace.
 
-Same idea, more bookkeeping. Eliminate one variable across two pairs of equations, then solve the resulting two-variable system.
+### Elimination
 
-**Example.**
-$$\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 5 \end{cases}$$
+The same system, different approach. Subtract the first equation from the second:
 
-Add equations 1 and 3 to eliminate $z$: $2x + 3y = 11$. Add equations 1 and 2: $3x + 2z = 9$, no — that's not eliminating $y$ cleanly. Better: subtract equation 1 from equation 2: $x - 2y = -3$. Now we have $2x + 3y = 11$ and $x - 2y = -3$. From the second, $x = -3 + 2y$. Sub into the first: $2(-3 + 2y) + 3y = 11$, so $7y = 17$, $y = 17/7$. Hmm — let me check with cleaner numbers.
+$$(4L + B) - (L + B) = 220 - 100 \implies 3L = 120 \implies L = 40$$
 
-Actually with the system $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 5$: let's add eq 1 + eq 3: $2x + 3y = 11$. Subtract eq 1 from eq 2: $x - 2y = -3$. From this, $x = 2y - 3$. Sub: $2(2y - 3) + 3y = 11$, $7y = 17$. So $y = 17/7$.
+The $B$ terms vanished. Elimination works by engineering a cancellation — multiply one equation by a constant chosen to make the coefficients of one variable equal and opposite, then add. The variable disappears, leaving one equation in one unknown.
 
-(The example shows the technique even when the numbers aren't clean; for textbook practice, expect cleaner numbers.)
+The two methods are algebraically equivalent. Which you use is a matter of convenience. Substitution is often faster for a $2 \times 2$ system; elimination scales better to larger systems, which is why it underlies the matrix methods in Part 3.
 
-### Inconsistent and dependent systems
+<!-- → [IMAGE: coordinate plane showing both lines $L + B = 100$ (slope $-1$, intercepts at $(0,100)$ and $(100,0)$) and $4L + B = 220$ (slope $-4$, intercepts at $(0,220)$ and $(55,0)$) with the intersection point $(40, 60)$ marked and labeled; the two lines should be visually distinct colors; student should see that the algebraic solution corresponds to the geometric intersection before moving to three-variable systems where the geometry is harder to draw] -->
 
-Inconsistent: in elimination, you get a contradiction like $0 = 5$. The lines (or planes) are parallel; no solution.
+### Three unknowns
 
-Dependent: in elimination, you get a tautology like $0 = 0$. The equations are scalar multiples of each other; infinitely many solutions, parameterized by one free variable.
+With three equations and three unknowns, the geometry changes: each equation is a plane in three-dimensional space. A solution is a point where all three planes meet.
 
----
+<!-- → [IMAGE: three-panel 3D diagram showing the three possible outcomes for three planes — left: three planes meeting at a single point (unique solution); center: three planes arranged so no common point exists — two parallel planes and one crossing them (no solution); right: three planes sharing a common line (infinitely many solutions along a line); each labeled with the outcome and what appears in elimination — "unique point," "contradiction $0=5$," "tautology $0=0$"; this is abstract geometry that most students have not visualized before] -->
 
-## 3. Concept 2 — Nonlinear Systems and Inequalities
+The technique extends naturally. Pick a pair of equations and eliminate one variable. Pick a different pair and eliminate the same variable. Now you have two equations in two unknowns — a system you already know how to solve. Back-substitute to get the third.
 
-When at least one equation in a system is nonlinear, the techniques of substitution and elimination still apply — but the algebra gets harder, and there can be multiple solutions.
+**Example.** Solve:
 
-**Example.** Solve $\begin{cases} y = x^2 - 3 \\ y = 2x \end{cases}$.
+$$\begin{cases} x + y + z = 6 \\ 2x + y + 3z = 14 \\ x + 2y + z = 9 \end{cases}$$
 
-Substitute $2x$ for $y$: $2x = x^2 - 3$, so $x^2 - 2x - 3 = 0$, $(x-3)(x+1) = 0$. So $x = 3$ or $x = -1$. Corresponding $y$: $6$ or $-2$. Two solutions: $(3, 6)$ and $(-1, -2)$.
+Subtract equation 1 from equation 2: $x + 2z = 8$. Subtract equation 1 from equation 3: $y = 3$.
 
-Geometrically: a parabola intersects a line in 0, 1, or 2 points. The system found both intersections.
+Now substitute $y = 3$ back into equation 1: $x + 3 + z = 6$, so $x + z = 3$. Combine with $x + 2z = 8$: subtract to get $z = 5$, then $x = -2$.
 
-### Nonlinear inequalities
+Check in all three equations: $-2 + 3 + 5 = 6$ ✓; $-4 + 3 + 15 = 14$ ✓; $-2 + 6 + 5 = 9$ ✓.
 
-To graph $y \geq x^2$: graph the parabola; shade the region above (where $y$ exceeds $x^2$).
-
-Systems of inequalities: graph each inequality; the solution region is the *intersection* of the shaded regions.
+The same three outcomes are possible: a unique solution (three planes meet at a point), no solution (planes don't share a common point), or infinitely many solutions (the planes share a line or coincide). In elimination, inconsistency shows up as a contradiction — $0 = 5$ — and dependence shows up as a tautology — $0 = 0$. When either appears, you know which case you're in.
 
 ---
 
-## 4. Concept 3 — Matrices and Linear Algebra
+## Part 2 — Nonlinear systems: more intersections, harder algebra
 
-A *matrix* is a rectangular array of numbers. For a system of $n$ linear equations in $n$ unknowns, we can write the system in compact form using matrices.
+A linear equation is a line. A nonlinear equation is a curve — a parabola, a circle, a hyperbola. A system of nonlinear equations asks where two curves intersect.
 
-For $\begin{cases} a_1 x + b_1 y = c_1 \\ a_2 x + b_2 y = c_2 \end{cases}$:
+The same techniques apply: substitution and elimination still work. The difference is that nonlinear systems can have more than one solution, and the algebra to find them involves solving a polynomial rather than a linear equation.
 
-$$\begin{pmatrix} a_1 & b_1 \\ a_2 & b_2 \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} c_1 \\ c_2 \end{pmatrix}$$
+**Example.** Where does the line $y = 2x$ intersect the parabola $y = x^2 - 3$?
 
-The first matrix is the *coefficient matrix*, the column vector $\begin{pmatrix} x \\ y \end{pmatrix}$ is the *variable vector*, and $\begin{pmatrix} c_1 \\ c_2 \end{pmatrix}$ is the *constants*. Or in shorthand: $A\mathbf{x} = \mathbf{b}$.
+Set the two expressions for $y$ equal:
 
-### Matrix operations
+$$2x = x^2 - 3 \implies x^2 - 2x - 3 = 0 \implies (x - 3)(x + 1) = 0$$
 
-**Addition:** add corresponding entries (matrices must have same dimensions).
+Two solutions: $x = 3$ (giving $y = 6$) and $x = -1$ (giving $y = -2$). The line crosses the parabola at $(3, 6)$ and $(-1, -2)$.
 
-**Scalar multiplication:** multiply every entry by a scalar.
+Geometrically: a line can intersect a parabola in 0, 1, or 2 points. We found 2. A circle and a parabola can intersect in up to 4 points. The number of solutions is bounded by the degrees of the equations — a consequence of Bézout's theorem, which says that two curves of degrees $m$ and $n$ intersect in at most $mn$ points (counting complex and repeated intersections).
 
-**Matrix multiplication:** for $A$ ($m \times n$) and $B$ ($n \times p$), the product $AB$ is $m \times p$. The $(i,j)$ entry is the dot product of row $i$ of $A$ with column $j$ of $B$.
+<!-- → [IMAGE: coordinate plane showing the parabola $y = x^2 - 3$ and the line $y = 2x$, with the two intersection points $(3,6)$ and $(-1,-2)$ marked and labeled; small inset panels below show the same parabola with (a) a tangent line touching at exactly one point and (b) a horizontal line below the vertex touching zero points — all three intersection cases labeled "2 solutions," "1 solution," "0 solutions"; student should see the geometry behind "how many solutions does a nonlinear system have?"] -->
 
-Matrix multiplication is *not* commutative: $AB \neq BA$ in general.
+### Systems of inequalities
 
-### Augmented matrices and Gaussian elimination
+A linear inequality like $2x + y \leq 6$ doesn't describe a point or a line — it describes a half-plane. The solution to the inequality is every point on one side of the line $2x + y = 6$ (including the line itself, because the inequality is $\leq$ rather than $<$).
 
-The *augmented matrix* of a system stacks the coefficients with the constants:
+A system of inequalities asks: which points satisfy *all* the inequalities at once? The answer is the intersection of the half-planes — a *feasible region*, typically a polygon when the inequalities are linear.
+
+To graph a system of inequalities: graph each boundary line, determine which side satisfies each inequality (test a convenient point), and shade the intersection. The feasible region is where all the shading overlaps.
+
+This is not just a graphing exercise. The feasible region is the geometry of constrained optimization — the set of all feasible solutions in a linear programming problem. Every vertex of the feasible region is a candidate for the optimum.
+
+**Example.** Graph the system:
+
+$$\begin{cases} x + y \leq 8 \\ 2x + y \leq 12 \\ x \geq 0 \\ y \geq 0 \end{cases}$$
+
+The boundary lines are $x + y = 8$, $2x + y = 12$, and the coordinate axes. The feasible region is the quadrilateral with vertices at $(0, 0)$, $(6, 0)$, $(4, 4)$, and $(0, 8)$. (Find the intersection of the first two boundaries: $x + y = 8$ and $2x + y = 12$ give $x = 4$, $y = 4$.)
+
+If you wanted to maximize profit $P = 3x + 2y$ subject to these constraints, you'd evaluate $P$ at each vertex: $P(0,0) = 0$, $P(6,0) = 18$, $P(4,4) = 20$, $P(0,8) = 16$. Maximum is at $(4, 4)$.
+
+The geometry made that optimization tractable. Without the feasible region, you'd have infinitely many candidates. With it, you have four.
+
+<!-- → [IMAGE: coordinate plane showing the feasible region for the four-inequality system — shaded quadrilateral with vertices $(0,0)$, $(6,0)$, $(4,4)$, $(0,8)$ marked and labeled; the two boundary lines $x+y=8$ and $2x+y=12$ drawn with distinct colors; the profit function $P=3x+2y$ shown as a dashed family of parallel lines increasing from lower-left to upper-right, with the line through $(4,4)$ highlighted as the maximum; student should see that the optimum always occurs at a vertex of the feasible region — the fundamental theorem of linear programming in one picture] -->
+
+---
+
+## Part 3 — Matrices: systematic elimination at scale
+
+Substitution and elimination work well for two or three equations. What about ten? Or a hundred? The bookkeeping becomes prohibitive — unless you systematize it.
+
+A *matrix* is a rectangular array of numbers. The coefficient matrix of a linear system organizes the equations so that elimination can be applied mechanically, one step at a time.
+
+For the bread/bagel system:
+
+$$\begin{cases} L + B = 100 \\ 4L + B = 220 \end{cases} \quad \longrightarrow \quad \left[\begin{array}{rr|r} 1 & 1 & 100 \\ 4 & 1 & 220 \end{array}\right]$$
+
+The *augmented matrix* appends the constants to the right of a vertical bar. Each row represents one equation; each column (before the bar) represents one variable.
+
+### Row operations and Gaussian elimination
+
+Three operations on rows preserve the solution set:
+
+1. Swap two rows.
+2. Multiply a row by a nonzero constant.
+3. Add a multiple of one row to another.
+
+These are exactly the moves you make when doing elimination by hand — just organized. *Gaussian elimination* applies these operations systematically to reduce the matrix to *row-echelon form*: zeros below the main diagonal, with a leading nonzero entry (called a *pivot*) in each row.
+
+**Example.** Reduce the bread/bagel augmented matrix.
 
 $$\left[\begin{array}{rr|r} 1 & 1 & 100 \\ 4 & 1 & 220 \end{array}\right]$$
 
-*Row operations* — swapping rows, multiplying a row by a nonzero constant, adding a multiple of one row to another — preserve the solution. Apply them to reduce the matrix to *row-echelon form* (zeros below the diagonal) or *reduced row-echelon form* (zeros above the diagonal too, leading 1s).
+Row 2 $\leftarrow$ Row 2 $- 4 \cdot$ Row 1:
 
-The reduced form gives the solution by inspection.
+$$\left[\begin{array}{rr|r} 1 & 1 & 100 \\ 0 & -3 & -180 \end{array}\right]$$
 
-**Example.** From the bread/bagel matrix above, multiply row 1 by $-4$ and add to row 2: gives $\left[\begin{array}{rr|r} 1 & 1 & 100 \\ 0 & -3 & -180 \end{array}\right]$. Divide row 2 by $-3$: $\left[\begin{array}{rr|r} 1 & 1 & 100 \\ 0 & 1 & 60 \end{array}\right]$. Subtract row 2 from row 1: $\left[\begin{array}{rr|r} 1 & 0 & 40 \\ 0 & 1 & 60 \end{array}\right]$. Reads as $x = 40$, $y = 60$. ✓
+Row 2 $\leftarrow$ Row 2 $\div (-3)$:
 
-### Inverse matrices
+$$\left[\begin{array}{rr|r} 1 & 1 & 100 \\ 0 & 1 & 60 \end{array}\right]$$
 
-For a square matrix $A$, the *inverse* $A^{-1}$ (if it exists) satisfies $AA^{-1} = A^{-1}A = I$ where $I$ is the identity matrix.
+Row 1 $\leftarrow$ Row 1 $-$ Row 2:
 
-If $A^{-1}$ exists, the system $A\mathbf{x} = \mathbf{b}$ has solution $\mathbf{x} = A^{-1}\mathbf{b}$.
+$$\left[\begin{array}{rr|r} 1 & 0 & 40 \\ 0 & 1 & 60 \end{array}\right]$$
 
-For a $2 \times 2$ matrix:
-$$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \implies A^{-1} = \frac{1}{ad - bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+This is *reduced row-echelon form* — identity matrix on the left, solution on the right. Read off: $L = 40$, $B = 60$.
 
-provided $ad - bc \neq 0$. The quantity $ad - bc$ is the *determinant*.
+The matrix method is the same elimination we did before, but the notation strips away the variable names and focuses purely on the numbers. For large systems, this is what makes computation tractable (and eventually, programmable).
+
+<!-- → [INFOGRAPHIC: side-by-side comparison showing the same bread/bagel elimination done two ways — left column: traditional algebraic notation with variable names ($L$ and $B$), each step labeled; right column: the identical operations shown as row operations on the augmented matrix, each step labeled with the row operation notation (e.g., "R2 ← R2 − 4·R1"); arrows connect corresponding steps; student should see they are the same computation — the matrix is just a bookkeeping system that strips the variable names and keeps the numbers] -->
+
+### Matrix arithmetic
+
+Matrices can be added, scaled, and multiplied. Addition and scalar multiplication work entry-by-entry. Matrix multiplication is more subtle: the $(i, j)$ entry of $AB$ is the dot product of row $i$ of $A$ with column $j$ of $B$.
+
+A key consequence: matrix multiplication is *not* commutative. $AB$ and $BA$ may both be defined but give different results — or one may not be defined while the other is.
+
+The identity matrix $I$ (ones on the diagonal, zeros elsewhere) plays the role of 1: $AI = IA = A$ for any appropriately sized $A$.
+
+### The inverse and what it means for solving systems
+
+If $A$ is a square matrix and there exists a matrix $A^{-1}$ such that $AA^{-1} = A^{-1}A = I$, then $A$ is *invertible* and $A^{-1}$ is its *inverse*.
+
+Why does this matter for systems? The system $A\mathbf{x} = \mathbf{b}$ can be solved by multiplying both sides by $A^{-1}$:
+
+$$A^{-1}(A\mathbf{x}) = A^{-1}\mathbf{b} \implies \mathbf{x} = A^{-1}\mathbf{b}$$
+
+This is exact — no approximation. When $A^{-1}$ exists, the system has a unique solution.
+
+For a $2 \times 2$ matrix $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:
+
+$$A^{-1} = \frac{1}{ad - bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+
+The quantity $ad - bc$ is the *determinant* of $A$, written $\det(A)$. If $\det(A) = 0$, the inverse doesn't exist — the system is either inconsistent or dependent. The determinant is the algebraic signal of which case you're in.
 
 ### Determinants and Cramer's Rule
 
-For a 2×2:
-$$\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$$
+For a $2 \times 2$ matrix, $\det(A) = ad - bc$. For a $3 \times 3$, expand along the first row:
 
-For a 3×3, expand along the first row:
 $$\det\begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{pmatrix} = a_1(b_2 c_3 - c_2 b_3) - b_1(a_2 c_3 - c_2 a_3) + c_1(a_2 b_3 - b_2 a_3)$$
 
-**Cramer's Rule.** For $A\mathbf{x} = \mathbf{b}$ with $\det(A) \neq 0$:
+*Cramer's Rule* gives a formula for each unknown directly in terms of determinants. For $A\mathbf{x} = \mathbf{b}$ with $\det(A) \neq 0$:
 
 $$x_i = \frac{\det(A_i)}{\det(A)}$$
 
-where $A_i$ is $A$ with the $i$th column replaced by $\mathbf{b}$.
+where $A_i$ is the matrix $A$ with its $i$th column replaced by $\mathbf{b}$.
 
-For our $2\times 2$ system: $\det(A) = 1 \cdot 1 - 1 \cdot 4 = -3$. $\det(A_x) = \det\begin{pmatrix} 100 & 1 \\ 220 & 1\end{pmatrix} = 100 - 220 = -120$. So $x = -120/-3 = 40$. ✓
+<!-- → [INFOGRAPHIC: two-panel diagram illustrating Cramer's Rule for the $2\times 2$ bread/bagel system — left panel shows $A_L$: the coefficient matrix with its first column crossed out and replaced by the constants vector $\mathbf{b}$, with the resulting $2\times 2$ matrix written out; right panel shows $A_B$: same with the second column replaced; both panels label the determinant being computed and the resulting variable value; student should see the mechanical rule before working through the arithmetic] -->
+
+**Example.** Solve the bread/bagel system using Cramer's Rule.
+
+The coefficient matrix is $A = \begin{pmatrix} 1 & 1 \\ 4 & 1 \end{pmatrix}$, constants $\mathbf{b} = \begin{pmatrix} 100 \\ 220 \end{pmatrix}$.
+
+$\det(A) = 1 \cdot 1 - 1 \cdot 4 = -3$.
+
+For $L$: replace the first column with $\mathbf{b}$: $A_L = \begin{pmatrix} 100 & 1 \\ 220 & 1 \end{pmatrix}$, $\det(A_L) = 100 - 220 = -120$.
+
+$L = \frac{-120}{-3} = 40$.
+
+For $B$: replace the second column: $A_B = \begin{pmatrix} 1 & 100 \\ 4 & 220 \end{pmatrix}$, $\det(A_B) = 220 - 400 = -180$.
+
+$B = \frac{-180}{-3} = 60$.
+
+Cramer's Rule is elegant and gives each variable its own determinant formula. It's not the most computationally efficient method for large systems — Gaussian elimination beats it — but it is useful when you need a formula for one variable in terms of the parameters of the system, and it connects the solvability of the system ($\det(A) \neq 0$) to a single numerical check.
 
 ---
 
-## 5. Integration — One Worked Problem
+## Putting it together: the factory problem
 
-A small factory makes three products $A$, $B$, $C$, each requiring different amounts of three resources (labor, machine, materials). Find the production amounts that exactly use the available resources.
+A small factory makes three products $A$, $B$, $C$. Each requires different amounts of three resources: labor, machine time, and materials. Here are the requirements per unit and the available totals:
 
-| Resource | Per A | Per B | Per C | Available |
+| Resource | Per $A$ | Per $B$ | Per $C$ | Available |
 |---|---|---|---|---|
 | Labor (hr) | 1 | 2 | 1 | 100 |
 | Machine (hr) | 2 | 1 | 3 | 130 |
 | Materials (lb) | 3 | 4 | 2 | 200 |
 
-System:
+The question: find production quantities $a$, $b$, $c$ that use resources exactly. This is a system of three equations in three unknowns:
+
 $$\begin{cases} a + 2b + c = 100 \\ 2a + b + 3c = 130 \\ 3a + 4b + 2c = 200 \end{cases}$$
 
-Augmented matrix and row-reduce:
+Write the augmented matrix and row-reduce.
 
 $$\left[\begin{array}{rrr|r} 1 & 2 & 1 & 100 \\ 2 & 1 & 3 & 130 \\ 3 & 4 & 2 & 200 \end{array}\right]$$
 
-Row 2 ← R2 − 2R1: $\begin{pmatrix} 0 & -3 & 1 & -70\end{pmatrix}$. Row 3 ← R3 − 3R1: $\begin{pmatrix} 0 & -2 & -1 & -100\end{pmatrix}$.
+R2 $\leftarrow$ R2 $- 2 \cdot$ R1: gives row $(0, -3, 1 \mid -70)$.
+
+R3 $\leftarrow$ R3 $- 3 \cdot$ R1: gives row $(0, -2, -1 \mid -100)$.
 
 $$\left[\begin{array}{rrr|r} 1 & 2 & 1 & 100 \\ 0 & -3 & 1 & -70 \\ 0 & -2 & -1 & -100 \end{array}\right]$$
 
-R3 ← R3 − $(2/3)$R2: $\begin{pmatrix} 0 & 0 & -1-2/3 & -100+140/3\end{pmatrix} = \begin{pmatrix} 0 & 0 & -5/3 & -160/3\end{pmatrix}$.
+R3 $\leftarrow$ R3 $- \frac{2}{3} \cdot$ R2: gives row $(0, 0, -5/3 \mid -160/3)$.
 
-So $-5c/3 = -160/3$, giving $c = 32$.
+From the third row: $-\frac{5}{3}c = -\frac{160}{3}$, so $c = 32$.
 
-Back-substitute: $-3b + 32 = -70$, so $b = 34$.
+Back-substitute into row 2: $-3b + 32 = -70$, so $b = 34$.
 
-Then $a + 68 + 32 = 100$, so $a = 0$.
+Back-substitute into row 1: $a + 68 + 32 = 100$, so $a = 0$.
 
-The factory should make 0 units of A, 34 of B, 32 of C. (The result that A = 0 says product A is not optimal; in a real LP, this would emerge as a constraint.)
+The solution is $a = 0$, $b = 34$, $c = 32$. The factory should produce 34 units of $B$ and 32 of $C$, and none of $A$. The fact that $a = 0$ isn't a failure of the method — it's a genuine finding. Given the resource constraints, product $A$ is squeezed out entirely. A real factory manager would want to know this.
 
-The example uses Concept 1 (3-variable elimination) and Concept 3 (matrix row reduction).
+<!-- → [TABLE: the three augmented matrices shown sequentially — initial matrix, after eliminating the first column, after eliminating the second column — with each row operation annotated beside the arrow between stages; the final matrix and back-substitution steps shown below; the solution $a=0$, $b=34$, $c=32$ circled; student should be able to follow each row operation and verify the arithmetic before attempting their own $3\times 3$ reduction] -->
 
-[FIGURE: Factory production diagram with three products and three resources; the system of three equations and the augmented-matrix reduction shown step by step.]
-
----
-
-## 6. Exercises
-
-### Warm-up
-
-**Exercise 11.1.** Solve $\begin{cases} 2x + y = 10 \\ x - y = 2 \end{cases}$ by substitution. Difficulty: low.
-
-**Exercise 11.2.** Compute $\det\begin{pmatrix} 3 & 2 \\ 1 & 4 \end{pmatrix}$. Difficulty: low.
-
-### Application
-
-**Exercise 11.3.** Solve $\begin{cases} y = x^2 \\ y = 4 - x \end{cases}$. Difficulty: medium.
-
-**Exercise 11.4.** Use Cramer's Rule to solve $\begin{cases} 3x - 2y = 8 \\ x + 4y = 5 \end{cases}$. Difficulty: medium.
-
-**Exercise 11.5.** A nut mix sells for $\$6$/lb. The vendor wants 20 lb of mix using cashews ($\$8$/lb) and peanuts ($\$3$/lb). How much of each? Difficulty: medium.
-
-### Synthesis
-
-**Exercise 11.6.** Solve the system using row reduction:
-$$\begin{cases} x + y + z = 6 \\ 2x + y + 3z = 14 \\ x + 2y + z = 9 \end{cases}$$
-Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 11.7.** Solve $\begin{cases} x^2 + y^2 = 25 \\ x + y = 5 \end{cases}$. (Find both solutions.) Difficulty: high.
+The row reduction did what elimination always does: combined equations to cancel variables one at a time, until each unknown was isolated. The matrix notation made the bookkeeping manageable. The result is the same as if you'd done substitution with three equations — but faster to track and easier to debug when something goes wrong.
 
 ---
 
-## 7. Chapter Summary
+## The organizing idea
 
-You can solve systems of two or three linear equations using substitution, elimination, and matrix methods. You can classify systems as consistent, inconsistent, or dependent. You can solve nonlinear systems and graph systems of inequalities. You can perform matrix operations, find inverses and determinants, and use Cramer's Rule.
+Every method in this chapter — substitution, elimination, row reduction, Cramer's Rule, matrix inversion — is a different implementation of one idea: **add a multiple of one equation to another to cancel a variable, and repeat until each unknown stands alone.**
 
-The single idea that matters most: **a system of equations is solved by combining the equations until each unknown is isolated.** Substitution, elimination, and matrix row-reduction are different administrative arrangements of the same underlying technique.
+Substitution does it by explicit replacement. Elimination does it by adding rows. Gaussian elimination does it systematically in matrix notation, keeping track of which operations were applied and in what order. Cramer's Rule does it by encoding the result of elimination in determinant formulas.
 
----
+The choice of method is a question of scale and convenience. For a $2 \times 2$ system by hand, substitution is fastest. For a $3 \times 3$ with messy coefficients, elimination or row reduction is safer. For a $100 \times 100$ system on a computer, Gaussian elimination is the standard. For a $2 \times 2$ where you need a formula for one variable in terms of the others, Cramer's Rule gives it directly.
 
-## 8. Connections Forward
-
-Chapter 12 returns to coordinate geometry with the conic sections — geometric curves defined by quadratic equations in two variables. The systems methods of this chapter recur as tools for finding intersections of conics. Chapter 13 takes up sequences and probability.
-
----
-
-### Sources (from chapter source files)
-
-- *College Algebra*, source modules m49418 through m49436 (OpenStax-derived).
+What none of these methods can do is solve a system that has no solution, or produce a unique solution from a system with infinitely many. The algebra faithfully reflects the geometry: parallel lines never intersect; coincident lines intersect everywhere. When the determinant is zero, or when elimination produces a row of zeros or a contradiction, the method is not failing — it's telling you the truth about the system.
