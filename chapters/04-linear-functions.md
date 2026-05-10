@@ -1,210 +1,152 @@
 # Chapter 4 — Linear Functions
+*A Fixed Part, a Rate Part, and Everything Else Follows.*
 
-## 1. Chapter Opening
+In January, a homeowner in Vermont opens a heating bill. It reads: $\$45$ base service charge, plus $\$1.20$ per gallon of oil delivered. She ordered 80 gallons. The bill is $45 + 1.20 \times 80 = \$141$.
 
-A heating bill in Vermont in January reads: $\$45$ base service charge plus $\$1.20$ per gallon of oil delivered. The homeowner who orders $80$ gallons pays $45 + 1.20 \cdot 80 = \$141$. The homeowner who orders $120$ gallons pays $\$189$. The relationship between gallons and bill is *linear*: a constant base, plus a constant rate per unit. The graph of the bill against gallons is a straight line.
+That's it. That's the whole chapter.
 
-Linear relationships are everywhere. Cell-phone plans (base + per-minute charge). Wages (hourly rate × hours, possibly with overtime). Driving distance (speed × time, when speed is constant). Anytime a relationship has the form *fixed amount + constant rate × variable*, it is linear. This chapter develops the technique for working with such relationships — recognizing them, writing them down, graphing them, and using them to model data.
+Everything we are about to do — slope, intercept, point-slope form, parallel lines, lines of best fit, linear models from words — is a consequence of what just happened in that billing formula. The $\$45$ is fixed regardless of how much oil she buys. The $\$1.20$ changes the bill at a constant rate per gallon. Put those two things together — a fixed part and a rate part — and you have a linear function.
 
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Identify** a linear function from a formula, a table, or a graph, and determine whether it is increasing, decreasing, or constant.
-- **Compute** the slope of a line from two points and **write** the equation of a line in slope-intercept, point-slope, and standard forms.
-- **Build** a linear model from a verbal description of a real-world situation.
-- **Identify** parallel and perpendicular lines from their slopes.
-- **Recognize** when data is approximately linear, draw a line of best fit, and interpret slope and intercept in context.
-
-### Prerequisites
-
-Chapters 1–3. Linear functions are a special case of the function concept from Chapter 3, with formula $f(x) = mx + b$.
-
-### Why this chapter matters
-
-Linear models are the workhorse of applied mathematics, science, and engineering. They are not the most accurate for every situation, but they are the most tractable, the most interpretable, and the most teachable. Most more-sophisticated models start from a linear approximation and build complexity from there. Master the linear case here, and the rest of college algebra has a baseline to compare against.
+The reason linear functions deserve an entire chapter is not that they are complicated. It is that they are *everywhere*, and the world rewards people who can read them fluently. Cell-phone plans. Taxi fares. Wages. Depreciation. Drug dosages. Temperature conversion. Every relationship of the form *fixed amount plus constant rate times variable* is a linear function, and the techniques for working with one are the techniques for working with all of them.
 
 ---
 
-## 2. Concept 1 — Linear Functions: Form, Slope, and Intercept
+## The Anatomy of a Line
 
-A linear function is one whose graph is a straight line. Algebraically:
+A linear function has the form
 
 $$f(x) = mx + b$$
 
-The constant $m$ is the *slope*: the rate at which the function changes per unit of input. The constant $b$ is the *$y$-intercept*: the value of the function when $x = 0$, i.e. where the line crosses the $y$-axis.
+Two numbers. That is the whole specification. Every other property of the line — its slope, its intercepts, its direction, its position in the plane — follows from $m$ and $b$.
 
-For the heating bill example: $f(g) = 1.20g + 45$. Slope $1.20$ (dollars per gallon — the rate of change). Intercept $45$ (the bill if no oil is delivered — the base service charge).
+The number $b$ is the *$y$-intercept*: the value of $f$ when $x = 0$. In the heating bill, $b = 45$: the bill when no oil is delivered. It is where the line crosses the vertical axis.
 
-### Slope
+The number $m$ is the *slope*: the rate at which $f$ changes per unit of $x$. In the heating bill, $m = 1.20$: every additional gallon adds exactly $\$1.20$ to the bill. The key word is *exactly* — the rate never changes. That constancy is what makes the function linear. If the rate changed — if the first 50 gallons cost $\$1.20$ each and the next 50 cost $\$0.90$ each — the function would not be linear.
 
-For two points $(x_1, y_1)$ and $(x_2, y_2)$ on a line, the slope is
+Given any two points $(x_1, y_1)$ and $(x_2, y_2)$ on a line, the slope is
 
 $$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\Delta y}{\Delta x}$$
 
-This is *rise over run* — the vertical change divided by the horizontal change.
+<!-- → [IMAGE: Coordinate plane showing a single line with two labeled points (x₁,y₁) and (x₂,y₂); vertical segment labeled Δy (rise) and horizontal segment labeled Δx (run) forming a right triangle under the line; slope ratio written beside the triangle; a second pair of points shown on the same line with a different triangle demonstrating that the ratio is identical regardless of which points are chosen — student should see why "same ratio, any two points" is what makes the line straight] -->
 
-A positive slope means the function is *increasing*: as $x$ grows, $y$ grows. Negative slope: *decreasing*. Zero slope: *constant* (a horizontal line).
+*Rise over run.* The vertical change divided by the horizontal change. This ratio is the same no matter which two points on the line you choose — that constancy is precisely what makes the line straight.
 
-For the heating bill, $m = 1.20$: every additional gallon adds $\$1.20$ to the bill.
-
-### Three forms of a linear equation
-
-Linear equations can be written in several forms; each is convenient for different purposes.
-
-**Slope-intercept form:** $y = mx + b$. Best when you know the slope and the $y$-intercept.
-
-**Point-slope form:** $y - y_1 = m(x - x_1)$. Best when you know the slope and one point on the line.
-
-**Standard form:** $Ax + By = C$ where $A, B, C$ are integers and $A \geq 0$. Best for finding intercepts and for systems of equations (chapter 11).
-
-All three forms describe the *same line*; you can convert among them.
-
-**Example.** Find the equation of the line through $(2, 5)$ with slope $3$.
-
-Point-slope: $y - 5 = 3(x - 2)$. Distribute and solve for $y$: $y = 3x - 6 + 5 = 3x - 1$. Slope-intercept: $y = 3x - 1$. Standard: $3x - y = 1$.
-
-### Parallel and perpendicular lines
-
-Two lines are *parallel* if they have the same slope: $m_1 = m_2$.
-
-Two lines are *perpendicular* if their slopes are *negative reciprocals*: $m_1 \cdot m_2 = -1$.
-
-So the line $y = 3x - 1$ is parallel to $y = 3x + 7$ and perpendicular to $y = -\frac{1}{3}x + 4$.
-
-The perpendicular condition follows from geometry: rotating a line of slope $m$ by $90°$ produces a line of slope $-\frac{1}{m}$.
-
-### Worked example
-
-A car rental costs $\$30$ per day plus $\$0.20$ per mile. Express the daily cost $C$ as a linear function of miles $m$. Find the cost for 150 miles. Find the number of miles that produces a $\$60$ daily cost.
-
-**Setup.** $C(m) = 0.20m + 30$. Slope: $\$0.20$/mile. Intercept: $\$30$ base.
-
-**Cost for 150 miles.** $C(150) = 0.20(150) + 30 = 30 + 30 = \$60$.
-
-**Miles for $\$60$.** Set $0.20m + 30 = 60$. $0.20m = 30$. $m = 150$ miles.
-
-The same setup answered both questions — *evaluate at* $m = 150$ for one, *solve for* $m$ when $C = 60$ for the other.
-
-### Trade-off
-
-Linear functions are easy to work with — two parameters describe them completely; one rule fits them all. The cost is that they cannot represent any relationship that *changes its rate*. A bacterial population that doubles every 20 minutes is not linear; the speed of a falling object is not linear with time; the price of a stock is not linear over a year. Linear models are first approximations; they are useful precisely because they are simple, and they are useful only when the simplicity matches the data.
-
-### Common misconceptions
-
-**"Slope is the difference $y_2 - y_1$."** No. Slope is the difference $y_2 - y_1$ *divided by* $x_2 - x_1$. The denominator matters.
-
-**"Parallel lines never meet, so they have no slope in common."** Backwards. Parallel lines *do* have a slope in common — that is what makes them parallel.
-
-**"$y = 5$ has slope 5."** No. $y = 5$ is a horizontal line with slope 0. The "5" is the $y$-intercept (and the constant value).
+A positive slope means the function is increasing: as $x$ grows, $y$ grows. A negative slope means it is decreasing. A slope of zero means it is constant — a horizontal line $y = b$. A *vertical* line has undefined slope: the denominator $\Delta x$ is zero. A vertical line is not a function; it fails the vertical line test.
 
 ---
 
-## 3. Concept 2 — Building Linear Models from Words
+## Three Ways to Write the Same Line
 
-Most real-world problems arrive as descriptions, not equations. The work is *translation*: turn the description into a formula, then use Chapter 2's techniques to solve.
+Any line can be expressed in several forms. Each form reveals the same object from a different angle; the skill is knowing which form to reach for.
 
-The recipe (from source m51271):
+**Slope-intercept form**: $y = mx + b$. Reach for this when you know the slope and where the line crosses the $y$-axis. It reads directly: slope is the coefficient of $x$, intercept is the constant.
 
-**(1) Identify what's varying and what's fixed.** The variable is what you don't know yet. The constants are the per-unit rates and the base amounts.
+**Point-slope form**: $y - y_1 = m(x - x_1)$. Reach for this when you know the slope and *one point* on the line, and that point is not necessarily the $y$-intercept. You don't need to find $b$ first; you can work directly with what you have.
 
-**(2) Identify the rate of change.** This is the slope. It is usually a phrase like "per hour" or "per dollar" or "per item."
+**Standard form**: $Ax + By = C$, where $A$, $B$, $C$ are integers and $A \geq 0$. Reach for this when you need to find both intercepts quickly (set $x = 0$ for the $y$-intercept; set $y = 0$ for the $x$-intercept) or when working with systems of equations.
 
-**(3) Identify the starting value.** This is the $y$-intercept — the value when the input is zero.
+All three forms describe the same line. Converting between them is a matter of distributing and solving for $y$, or multiplying through to clear fractions.
 
-**(4) Write the function.** $f(x) = mx + b$, with $m$ the rate and $b$ the starting value.
+Here is a worked conversion. Find the equation of the line through $(2, 5)$ with slope $3$.
 
-**(5) Use the function to answer the specific question.**
+Start with point-slope, since we have a point and a slope:
+$$y - 5 = 3(x - 2)$$
 
-### Worked examples
+Distribute:
+$$y - 5 = 3x - 6$$
 
-**Example A — Saving money.** Anya has $\$200$ saved. She saves an additional $\$50$ each week. Express her savings $S$ as a function of weeks $w$. When will she have $\$1{,}000$?
+Solve for $y$ to get slope-intercept:
+$$y = 3x - 1$$
 
-*Rate of change:* $\$50$ per week. *Starting value:* $\$200$.
+Rearrange to get standard form:
+$$3x - y = 1$$
 
-$$S(w) = 50w + 200$$
+One line. Three names. The algebra is just moving terms around.
 
-To reach $\$1{,}000$: $50w + 200 = 1000$, so $w = 16$ weeks.
+<!-- → [TABLE: Side-by-side comparison of the three linear equation forms — columns: Form Name, General Template, When to Reach For It, Example (the y=3x−1 line in each); rows: slope-intercept, point-slope, standard; student should be able to scan this and immediately know which form fits the information they have been given] -->
 
-**Example B — Cell-phone plan.** A plan charges $\$25$ per month plus $\$0.10$ per text. If a user sends $T$ texts, what is the monthly bill $B$? At what number of texts does the bill reach $\$50$?
+---
 
-$B(T) = 0.10T + 25$. Setting $B = 50$: $0.10T = 25$, so $T = 250$ texts.
+## What Slope Really Means
 
-**Example C — Truck depreciation.** A delivery truck costs $\$45{,}000$ new and loses value at $\$3{,}500$ per year. Express the truck's value $V$ as a function of years $t$. When is the truck worth $\$10{,}000$?
+Slope is not just a number to calculate. It is a *unit rate* — it carries units from the problem, and those units are the interpretation.
 
-*Rate:* $-3{,}500$ per year (negative — losing value). *Starting:* $\$45{,}000$.
+In the heating bill: slope is $1.20$ dollars per gallon. In the savings account: slope is $50$ dollars per week. In the depreciation model: slope is $-3{,}500$ dollars per year. In the temperature conversion $F = \frac{9}{5}C + 32$: slope is $\frac{9}{5}$ degrees Fahrenheit per degree Celsius.
 
-$V(t) = -3500t + 45000$. Setting $V = 10{,}000$: $-3500t = -35{,}000$, so $t = 10$ years.
+The sign of the slope is not incidental. A positive slope means the output increases with the input; a negative slope means it decreases. Depreciation has negative slope. Cooling has negative slope. The stock market, on any given day, has a slope that could be either. The sign is part of the physical interpretation.
 
-### Modeling intersecting situations
+The magnitude of the slope measures sensitivity: how much the output changes per unit of input. A slope of $1.20$ means the bill is moderately sensitive to gallons purchased. A slope of $0.001$ means the output barely responds to the input — nearly flat. A slope of $1{,}000$ means the output explodes with small changes in input — nearly vertical.
 
-Some problems involve two linear functions and ask when one equals the other. *Set them equal and solve.*
+This is why two linear functions can be parallel: they have the same sensitivity — the same rate of change — but different starting points. And this is why two linear functions are perpendicular: their slopes are *negative reciprocals*,
 
-**Example.** Plan A charges $\$30$/month plus $\$0.10$ per text. Plan B charges $\$20$/month plus $\$0.20$ per text. At what number of texts do the two plans cost the same?
+$$m_1 \cdot m_2 = -1$$
 
-$$30 + 0.10T = 20 + 0.20T$$
+The perpendicular condition comes from geometry. If you rotate a line of slope $m$ by exactly $90°$, the new slope is $-\frac{1}{m}$. So the line $y = 3x - 1$ is parallel to $y = 3x + 7$ (same slope, different intercept) and perpendicular to $y = -\frac{1}{3}x + 4$ (slopes multiply to $3 \cdot (-\frac{1}{3}) = -1$).
+
+<!-- → [IMAGE: Coordinate plane showing three lines: y=3x−1 (solid), y=3x+7 (dashed, parallel), and y=−(1/3)x+4 (dotted, perpendicular); small square symbol marking the right angle at the intersection of the solid and dotted lines; slope labels annotated on each line; student should see at a glance that parallel lines are visual translations of each other and perpendicular lines form a genuine right angle, not just a steep crossing] -->
+
+---
+
+## From Words to Equations
+
+The world does not arrive pre-algebraized. Heating bills come as descriptions. So does almost every real-world linear relationship. The work is translation.
+
+The translation has a structure, and it is always the same:
+
+First, identify the *variable* — what you don't know, what changes, what the problem is asking about. Give it a name and a unit.
+
+Second, find the *rate of change*. It is almost always signaled by a phrase: "per hour," "per gallon," "per mile," "each additional." This rate is the slope.
+
+Third, find the *starting value* — what the output is when the input is zero. This is the intercept.
+
+Fourth, write the function: $f(x) = mx + b$.
+
+Fifth, use the function to answer the specific question — either evaluate it at a given input, or solve for the input that produces a given output.
+
+Let me run this recipe three times, on problems that look different on the surface but have identical structure underneath.
+
+**Savings.** Anya has $\$200$ saved and adds $\$50$ each week. How many weeks until she has $\$1{,}000$?
+
+Rate: $\$50$/week. Starting value: $\$200$. Function: $S(w) = 50w + 200$.
+
+Set equal to $1{,}000$: $50w + 200 = 1000$, so $50w = 800$, so $w = 16$ weeks.
+
+**Truck depreciation.** A delivery truck costs $\$45{,}000$ new and loses $\$3{,}500$ of value per year. When is it worth $\$10{,}000$?
+
+Rate: $-\$3{,}500$/year (negative — the value decreases). Starting value: $\$45{,}000$. Function: $V(t) = -3500t + 45000$.
+
+Set equal to $10{,}000$: $-3500t + 45000 = 10000$, so $-3500t = -35000$, so $t = 10$ years.
+
+**Phone plans.** Plan A charges $\$30$/month plus $\$0.10$ per text. Plan B charges $\$20$/month plus $\$0.20$ per text. At how many texts are they the same price?
+
+Two functions, both linear: $A(T) = 0.10T + 30$ and $B(T) = 0.20T + 20$. Set equal:
+$$0.10T + 30 = 0.20T + 20$$
 $$10 = 0.10T$$
 $$T = 100 \text{ texts}$$
 
-At 100 texts, both plans cost $\$40$. Below that, Plan B is cheaper. Above that, Plan A is cheaper.
+At 100 texts, both plans cost $\$40$. Below 100, Plan B is cheaper. Above 100, Plan A is.
 
-### Trade-off
+<!-- → [CHART: Line graph with texts on the x-axis (0–300) and monthly cost in dollars on the y-axis; two lines plotted — Plan A (y=0.10T+30, shallower slope, higher intercept) and Plan B (y=0.20T+20, steeper slope, lower intercept); intersection point labeled (100, $40); regions shaded or annotated to show which plan is cheaper on each side; student should see that the question "at what number of texts do they cost the same?" is literally the x-coordinate of the intersection] -->
 
-Linear modeling forces you to identify a single rate of change. Real situations sometimes have rates that change — a phone plan with the first 100 texts free, then $\$0.05$ each, then $\$0.10$ after 500. Such situations require *piecewise* linear functions, which are linear within each piece. The simplification is real; the technique adapts.
+Three different stories. One structure. The algebra was identical each time.
 
-### Common misconceptions
-
-**"The starting value is whatever value comes first in the problem."** No. The starting value is what the function equals when the input is *zero*. Read carefully.
-
-**"You can't have a linear function with a negative slope."** You can. Depreciation, cooling, sales decline — all have negative slope.
+The only move that varies is the final step: sometimes you evaluate the function (plug in $x$, get $y$); sometimes you solve the function (know $y$, find $x$). These are inverse operations. One asks "what does the function produce at this input?" The other asks "what input produces this output?" Both are legitimate; the setup is the same.
 
 ---
 
-## 4. Concept 3 — Fitting Lines to Real Data
+## When the Data Is Messy
 
-The car rental, the heating bill, the cell-phone plan — these are *exact* linear relationships, given by contract. Most data in nature is messier. Plot a scatter of points and you usually see *approximately* linear behavior, with deviations.
+The heating bill is a clean linear relationship — exact by contract. Most real data is not. You plot a scatter of points and they cluster *near* a line, with deviations.
 
-A *scatter plot* shows the data points $(x_1, y_1), (x_2, y_2), \ldots$ as dots in the plane. The eye can usually tell when the dots cluster around a line — *correlation* — and when they don't.
+A *scatter plot* shows data as dots in the coordinate plane. When the dots cluster near a line, the relationship is approximately linear. The question is: which line?
 
-### Line of best fit
+The standard answer is *linear regression*: find the line that minimizes the sum of squared vertical distances between the data points and the line. This is called the *line of best fit* or *least-squares regression line*. The formulas exist:
 
-When data is approximately linear, we look for the *best-fit line* — the line that minimizes the total deviation between predicted and actual values. The standard method, *linear regression*, computes the slope and intercept that minimize the sum of squared deviations. Most calculators and statistical software compute it directly; the formula is
+$$m = \frac{n \sum x_i y_i - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2}, \qquad b = \frac{\sum y_i - m \sum x_i}{n}$$
 
-$$m = \frac{n \sum x_i y_i - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2}, \quad b = \frac{\sum y_i - m \sum x_i}{n}$$
+In practice, you let a calculator or computer compute this. What you must be able to do is interpret the result.
 
-You don't have to compute by hand; technology does it. What matters is interpreting the result.
-
-**Example.** A study finds that for $n = 10$ cities, the relationship between average daily temperature and ice-cream sales (per capita) is approximately
-
-$$S = 1.8T - 25$$
-
-where $T$ is temperature in $°F$ and $S$ is sales per capita in dollars.
-
-Slope $1.8$: every additional degree Fahrenheit corresponds to $\$1.80$ more in ice-cream sales per capita. Intercept $-25$: at $T = 0$, predicted sales are $-\$25$, which is meaningless physically. The intercept is mathematically correct but extrapolates far outside the data range; we don't trust it as a real prediction.
-
-This is a key cautionary point. *Linear models are reliable within the range of the data. Outside that range, they are extrapolations and can produce nonsense.* The ice-cream model says nothing useful about sales at $T = 0°F$ — there were probably no cities in the data with that temperature.
-
-### Distinguishing linear from non-linear
-
-Not all data is linear. A quick test: compute the differences $y_2 - y_1, y_3 - y_2, y_4 - y_3, \ldots$ at equally spaced $x$ values. If the differences are *constant*, the relationship is linear. If they grow or shrink in a pattern, it's not.
-
-**Example.** $y$ values at $x = 0, 1, 2, 3, 4$: $5, 7, 11, 17, 25$. Differences: $2, 4, 6, 8$. The differences are themselves linear (growing by 2). The original relationship is *quadratic*, not linear.
-
-### Trade-off
-
-Fitting a linear model to data sacrifices fidelity for tractability. A more flexible model (quadratic, exponential, etc.) might fit better but is harder to interpret and easier to overfit. The discipline is to *use the simplest model that captures the essential pattern*. Linear is often that.
-
-### Common misconceptions
-
-**"The line of best fit passes through every data point."** No — it passes through the *average* trend; individual points sit above and below.
-
-**"Correlation implies causation."** No. Two variables can be correlated for many reasons (common cause, coincidence, reverse causation). The line of best fit is a description, not a causal claim.
-
----
-
-## 5. Integration — One Worked Problem
-
-Suppose you are given the following data on a hardware store's monthly nail sales (in pounds) versus the average daily temperature (°F):
+Consider a hardware store that tracks monthly nail sales (in pounds) against average daily temperature:
 
 | Temperature ($T$, °F) | Sales ($S$, lbs) |
 |---|---|
@@ -213,78 +155,62 @@ Suppose you are given the following data on a hardware store's monthly nail sale
 | 60 | 175 |
 | 75 | 210 |
 
-(a) Plot the data and decide whether a linear model fits.
+First question before fitting any line: is this actually linear? Check the differences in $S$ at equally spaced $T$ values. The gap in $T$ is constant at 15 degrees. The differences in $S$ are: $35$, $30$, $35$. Close to constant — not perfectly, but close enough. A linear model is defensible.
 
-The data points are approximately on a line; differences in $S$ are 35, 30, 35 — close to constant. A linear model is reasonable.
+The slope between the extreme points is $\frac{210 - 110}{75 - 30} = \frac{100}{45} \approx 2.22$ pounds per degree. Using the first point $(30, 110)$ in point-slope form:
 
-(b) Find a linear model.
+$$S = 2.22(T - 30) + 110 = 2.22T + 43.4$$
 
-The slope between the first and last points is $\frac{210 - 110}{75 - 30} = \frac{100}{45} \approx 2.22$. With slope $2.22$ and the first point $(30, 110)$:
+<!-- → [CHART: Scatter plot of the four nail-sales data points (30,110), (45,145), (60,175), (75,210) with the best-fit line S=2.22T+43.4 drawn through them; the line extended slightly beyond the data range on both ends with dashed segments marking the extrapolation zones; vertical residual segments from each data point to the line showing the small deviations; student should see that "best fit" means the line passes close to all points but through none of them exactly, and that the dashed extensions signal where trust in the model should fade] -->
 
-$$S = 2.22(T - 30) + 110 = 2.22T + 43.3$$
+Now interpret it. The slope $2.22$ means: each additional degree of average daily temperature corresponds to about $2.22$ more pounds of nails sold per month. Why would that be? Warmer weather → more construction activity → more nails. The model captures a real phenomenon.
 
-(c) Predict sales at $T = 50°F$.
+The intercept is $43.4$ pounds, which would be the predicted sales at $T = 0°F$. That is well outside the data range. We should not trust it as a physical prediction — there are no data points near $0°F$ — but mathematically the line has to cross the vertical axis somewhere.
 
-$S(50) = 2.22(50) + 43.3 = 111 + 43.3 = 154.3$ pounds.
-
-(d) Interpret the slope.
-
-For every additional degree of average daily temperature, monthly nail sales increase by about $2.22$ pounds.
-
-(e) Should we predict sales at $T = 100°F$?
-
-Caution. $T = 100$ is outside the data range. The linear trend may not continue; the prediction is an extrapolation.
-
-The example illustrates the full arc of linear modeling: collect data, judge whether linear fits, find the model, use the model within its valid range, and resist extrapolation. *That arc is the same whether the data is nail sales, climate measurements, or financial returns.*
-
-[FIGURE: A scatter plot of the four data points with a best-fit line $S = 2.22T + 43.3$. The line extends from about $T = 25$ to $T = 80$; dashed segments show the extrapolation regions where the model is less reliable. The student should notice that the data points lie close to but not exactly on the line.]
+This brings up the most important limitation of linear models.
 
 ---
 
-## 6. Exercises
+## The Limits of Linearity
 
-### Warm-up
+A linear model is reliable *within* the range of the data that produced it. Outside that range, it is an *extrapolation*, and extrapolations can fail dramatically.
 
-**Exercise 4.1.** Find the slope of the line through $(2, 5)$ and $(7, 20)$. Difficulty: low.
+The nail-sales line predicts $S = 2.22(100) + 43.4 = 265.4$ pounds of sales at $T = 100°F$. Maybe. Or maybe sales plateau in extreme heat because construction slows down. The model has no way of knowing; it was built on data from $30°F$ to $75°F$. Beyond that, it is a guess dressed up as a formula.
 
-**Exercise 4.2.** Write the equation of a line with slope $-2$ and $y$-intercept $5$. Difficulty: low.
+The same applies at the other extreme. The model predicts negative sales below about $T = -20°F$. Negative pounds of nails. The formula produces a number; the number is physically nonsensical. The model has been pushed past its domain of applicability.
 
-### Application
+This is not a flaw in linear modeling; it is a fact about all models. A model is a simplified description of a phenomenon over a specific range of conditions. It captures what it captures. The discipline is to *know the range*, to be honest about what the model can and cannot predict.
 
-**Exercise 4.3.** A taxi charges $\$3$ flag drop plus $\$2$ per mile. Express the fare $F$ as a linear function of miles $m$. Find the fare for 8 miles. Find the miles for a $\$25$ fare. Difficulty: medium.
-
-**Exercise 4.4.** Find the equation of the line passing through $(1, 3)$ that is perpendicular to $y = 2x - 5$. Difficulty: medium.
-
-**Exercise 4.5.** Two cell-phone plans cost the same when you send 200 texts. Plan A is $\$30$/month + $\$0.10$ per text. Find Plan B's per-text rate if its base is $\$25$/month. Difficulty: medium.
-
-### Synthesis
-
-**Exercise 4.6.** Data for an experiment: $(1, 4), (2, 7), (3, 10), (4, 13), (5, 16)$. (a) Is the relationship linear? (b) Find the equation. (c) Predict the value at $x = 8$. Difficulty: medium-high.
-
-**Exercise 4.7.** A car depreciates from $\$30{,}000$ when new to $\$15{,}000$ after 5 years. Assuming linear depreciation, when is the car worth $\$5{,}000$? Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 4.8.** A water tank is being drained. After 2 minutes, it contains 80 gallons; after 5 minutes, 50 gallons. (a) Find the linear model for water $W$ as a function of time $t$. (b) When is the tank empty? (c) What was the initial volume? Difficulty: high.
+There is also the deeper issue of correlation and causation. The nail-sales model shows that temperature and sales are *correlated* — they move together. It does not show that temperature *causes* increased sales. Both could be driven by a common factor: construction season, perhaps, which correlates with both warmth and nail purchases. The line of best fit is a description of the data, not a causal mechanism.
 
 ---
 
-## 7. Chapter Summary
+## Why Linearity Matters
 
-You can do something now you may not have been able to do an hour ago. You can recognize a linear function from its formula, table, or graph; compute its slope from any two points; write its equation in three different forms and convert among them. You can take a verbal description of a real-world situation and translate it into a linear model. You can recognize when two lines are parallel or perpendicular from their slopes. You can distinguish linear data from non-linear data and find a line of best fit when linear is appropriate.
+There is a reason this chapter appears in every algebra textbook and every statistics course and every engineering curriculum. Linear functions are not the most realistic models — almost nothing in nature is perfectly linear. But they are the most tractable.
 
-The single idea that matters most: **a linear function is fully specified by its slope and one point.** Two pieces of information — that's it. Once you have those, every other property of the function follows: equation in any form, value at any input, point on the graph at any horizontal position. Linear functions are the simplest functions in college algebra, and that simplicity is what makes them ubiquitous.
+Two parameters describe the function completely. The graph is a straight line that a student can draw with a ruler. The equation can be solved for any variable in one or two steps. The rate of change is the same everywhere — there is no complicated behavior to track across different regions of the domain.
 
-The common mistake to watch for: extrapolating linear models beyond the data range. The model captures a trend; that trend may not continue.
+This tractability is why more sophisticated models are almost always understood by comparison to the linear case. A quadratic function is what you get when the rate of change is itself changing at a constant rate. An exponential function is what you get when the *percentage* rate of change is constant rather than the absolute rate. Every model in the rest of this book is, in some sense, asking: "what's the simplest departure from linearity that captures this phenomenon?"
+
+And in practice, for small enough changes in any variable, almost every smooth function *looks* linear. The tangent line to a curve is a linear approximation to that curve near a point. This is why linear models are useful even for nonlinear phenomena: over a short enough range, the linear approximation is often good enough. The heating bill is linear by contract; most real things are linear only locally. But locally is often where the question lives.
+
+The Vermont homeowner orders oil every few months. The range of gallons she considers — between 50 and 150 — is the range where her bill formula is valid. Within that range, $f(g) = 1.20g + 45$ answers every question she has. She doesn't need to know whether the oil company's underlying cost structure is nonlinear at 10,000 gallons; she's not buying 10,000 gallons. The model she has is sufficient for the decisions she faces.
+
+That is the real lesson of linear functions: *sufficiency within range*. Find the rate, find the starting value, write the function, use it where it applies. Everything else in this chapter is technique in service of that loop.
 
 ---
 
-## 8. Connections Forward
+## LLM Exercises
 
-Chapter 5 generalizes: instead of $f(x) = mx + b$, allow polynomials of any degree — $f(x) = a_n x^n + \ldots + a_1 x + a_0$. Polynomial functions can have multiple zeros, multiple turning points, and behaviors much richer than the straight line. The graphical understanding from Chapter 3, the equation-solving from Chapter 2, and the modeling logic from Chapter 4 all return as analytical tools applied to polynomials.
+These exercises are designed to be explored conversationally with a language model. Rather than computing a single answer, each one asks you to probe a concept — to find where the reasoning holds, where it breaks, and why.
 
----
+**LLM Exercise 4.1 — Slope as rate.** Tell an LLM: "The slope of a line is 3. What does that mean?" Ask it to give you three different real-world scenarios where a slope of 3 would have completely different physical interpretations. Then ask: "Could a slope of 3 ever be bad news?" What does it say?
 
-### Sources (from chapter source files)
+**LLM Exercise 4.2 — Parallel vs. perpendicular.** Ask an LLM to explain, without using the formula $m_1 \cdot m_2 = -1$, *why* perpendicular lines have slopes that are negative reciprocals. Push it to explain the geometry. If it uses the formula without explaining it, ask again: "But why does rotating a line by 90° produce a negative reciprocal slope?"
 
-- *College Algebra* with Co-Requisite Skills, source modules m51269 through m51272 (OpenStax-derived).
+**LLM Exercise 4.3 — The limits of a model.** Give an LLM the nail-sales model $S = 2.22T + 43.4$ and ask it to predict sales at $T = -10°F$ and $T = 120°F$. Then ask: "Are these predictions trustworthy?" Ask it to explain what *extrapolation* means and what kinds of things could make the linear trend fail outside the observed range.
+
+**LLM Exercise 4.4 — Correlation vs. causation.** Tell an LLM: "A study finds that ice cream sales and drowning rates are strongly correlated — when ice cream sales go up, drowning rates go up. Does eating ice cream cause drowning?" Ask it to explain the concept of a *confounding variable* and give two other examples of correlations that are not causal. Then ask: "Can a line of best fit ever prove causation?"
+
+**LLM Exercise 4.5 — When is a relationship linear?** Give an LLM this table of $(x, y)$ values: $(0, 1), (1, 2), (2, 4), (3, 8), (4, 16)$. Ask whether the relationship is linear and how it can tell. Then ask it to construct a table that *looks* linear from the first two points but isn't. What does that reveal about the risk of fitting a line to limited data?
