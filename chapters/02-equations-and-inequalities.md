@@ -1,65 +1,30 @@
 # Chapter 2 — Equations and Inequalities
 
-## 1. Chapter Opening
-
-A driver pulls up to a toll plaza on the New Jersey Turnpike. The display reads $\$8.50$. The driver punches a $\$10$ bill into the machine, and the change tray spits out $\$1.50$. None of this took a calculator. The driver paid a quantity (the toll), the machine subtracted that from a quantity (the bill), and the difference came back. *Without anyone announcing it, the driver and the machine just solved a linear equation*: $x + 8.50 = 10$, where $x = 1.50$ is the change owed.
-
-Most algebra is this — situations described in words become *equations* in symbols, and *solving* the equation produces the number we wanted to know. The toll-plaza version is trivial; the algebraic moves are the same. Take a relationship you can describe in words ("the change plus the toll equals the bill"), translate it into symbols ($x + 8.50 = 10$), apply rules to isolate the unknown, get the answer ($x = 1.50$). When the relationship is harder — quadratic in the unknown, or inside a square root, or part of an inequality — the rules change but the structure does not. *Set it up, isolate, solve, check.*
-
-This chapter teaches three families of equations and inequalities. Linear equations, where the unknown appears to the first power. Quadratic equations, where the unknown is squared, and which require a small set of named techniques. And inequalities, which substitute "$<$" or "$\geq$" for "$=$" and answer not "what value?" but "which range of values?". Each family has its own moves; the moves rest on the algebraic foundation chapter 1 built.
-
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Plot** points on the Cartesian plane and use the distance and midpoint formulas to measure between them.
-- **Solve** linear equations in one variable, including rational equations and equations from real-world setups.
-- **Solve** quadratic equations using factoring, the square-root property, completing the square, and the quadratic formula, and use the discriminant to predict the number and type of solutions.
-- **Recognize** complex numbers as the natural extension when the discriminant is negative, and perform basic operations on them.
-- **Solve** linear, compound, and absolute-value inequalities, and express solutions in interval notation.
-
-### Prerequisites
-
-Chapter 1. The properties of real numbers, exponent rules, factoring techniques, and rational-expression simplification all return here as the moves used to solve equations.
-
-### Why this chapter matters
-
-Solving equations is the central activity of college algebra. Almost every quantitative problem you will encounter for the rest of this book — finding zeros of functions, intersecting curves, modeling growth, matching trigonometric identities — collapses, eventually, to an equation that has to be solved. The four quadratic methods you meet here will be applied in every later chapter that involves a polynomial. The inequality techniques will resurface in optimization, in domain analysis, and in any context where the answer is a range rather than a number.
+*What it means to find the number that makes a sentence true.*
 
 ---
 
-## 2. Concept 1 — The Cartesian Plane and Linear Equations
+## The tollbooth problem
 
-A nautical chart of New York Harbor, c. 1840. Two perpendicular axes are drawn — one running east-west, one running north-south — with the Battery at their intersection. A buoy sits at coordinates *(2.3 mi east, 1.7 mi south)*. Another at *(0.6 mi west, 0.4 mi north)*. The captain who reads the chart can compute, in seconds, the distance between the two buoys: about $3.5$ miles. The chart is not a metaphor. It is *coordinate geometry*, a system invented by René Descartes in the seventeenth century, and the same system underlies everything we will plot in this book [source m51252].
+Here is something that happens every day on the New Jersey Turnpike. A driver pulls up to the booth, the display reads $\$8.50$, they hand over a ten-dollar bill, and $\$1.50$ slides back. Nobody solves an equation consciously. But that's exactly what happened. There was a number nobody knew yet — the change — and a relationship that pinned it down: *the change plus the toll equals the bill*. In symbols:
 
-A *Cartesian coordinate system* assigns each point in the plane an ordered pair $(x, y)$ where $x$ is the horizontal distance from a chosen origin and $y$ is the vertical distance. The two axes meet at the *origin*, $(0, 0)$. Positive $x$ runs right, positive $y$ runs up. The two axes divide the plane into four *quadrants*, numbered I (upper-right) through IV (lower-right) counterclockwise.
+$$x + 8.50 = 10$$
 
-### Distance and midpoint formulas
+<!-- → [IMAGE: photograph or line illustration of a toll booth display showing $8.50 and a hand extending a $10 bill — anchors the abstract equation to the physical situation the reader just read about] -->
 
-Given two points $(x_1, y_1)$ and $(x_2, y_2)$, the *distance* between them is
+The answer is $x = 1.50$. Done.
 
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+I want to spend this chapter on that move — taking a relationship you can describe in words, writing it in symbols, and finding the number (or numbers, or range of numbers) that make it true. That's all solving an equation is. The drama you may have heard about — completing the square, the quadratic formula, interval notation — is just the same idea applied to relationships that are harder to describe than a toll booth.
 
-This is the Pythagorean theorem in coordinate dress. The horizontal leg of the right triangle has length $|x_2 - x_1|$; the vertical leg has length $|y_2 - y_1|$; the hypotenuse — the straight-line distance — is the formula above.
+Three families of equations. Three families of techniques. One organizing question throughout: *what value of the unknown makes this sentence true?*
 
-The *midpoint* of the segment between $(x_1, y_1)$ and $(x_2, y_2)$ is
+---
 
-$$M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
+## Part 1 — Linear equations: one unknown, one power
 
-This is just the average of the coordinates: average of the $x$'s, average of the $y$'s.
+A *linear equation* has the form $ax + b = c$, where the unknown appears once, to the first power, multiplied by something, and set equal to something. The unknown might be change owed, or miles driven, or years since 1990. The form is the same.
 
-For our two buoys at $(2.3, -1.7)$ and $(-0.6, 0.4)$:
-$$d = \sqrt{(2.3 - (-0.6))^2 + (-1.7 - 0.4)^2} = \sqrt{2.9^2 + (-2.1)^2} = \sqrt{8.41 + 4.41} = \sqrt{12.82} \approx 3.58 \text{ mi}$$
-
-The captain's quick estimate matches.
-
-### Solving linear equations in one variable
-
-A *linear equation* in one variable has the general form $ax + b = c$, where $a, b, c$ are real numbers and $a \neq 0$. The variable appears to the first power, multiplied by a number, possibly added to other numbers, and set equal to something. Solving means finding the value of $x$ that makes the statement true.
-
-The technique is one continuous move: *isolate $x$ on one side*. To do that, undo each operation in reverse. If $x$ is multiplied by $5$, divide both sides by $5$. If $7$ has been added to $x$, subtract $7$ from both sides. The legitimacy of these moves comes from the *equality* — whatever you do to one side, do to the other, and the equation remains true.
-
-**Example.** Solve $3x + 7 = 22$.
+Solving means undoing. If $3x + 7 = 22$, then something was done to $x$ — it was multiplied by 3, then 7 was added. Undo those operations in reverse:
 
 $$\begin{aligned}
 3x + 7 &= 22 \\
@@ -67,366 +32,304 @@ $$\begin{aligned}
 x &= 5 && \text{divide both sides by 3}
 \end{aligned}$$
 
-Check: $3(5) + 7 = 22$. ✓
+The legitimacy of each step is one idea: *equality is preserved when you do the same thing to both sides*. Not "almost preserved." Not "preserved if you're careful." Preserved, exactly, every time, as long as you do the same operation to both sides.
 
-**Equations with the variable on both sides.** Bring the variable terms to one side first.
+<!-- → [INFOGRAPHIC: two-column "balance scale" diagram showing $3x + 7 = 22$ as a balanced scale, then each operation (subtract 7, divide by 3) applied to both pans simultaneously — the scale stays balanced at each step; student should see why doing the same thing to both sides is the only valid move] -->
+
+Check: $3(5) + 7 = 22$. Yes. Checking is not optional ceremony — it's the only way to know you didn't make an arithmetic slip somewhere in the middle.
+
+### The variable on both sides
+
+When the unknown appears on both sides, move the variable terms to one side first, then proceed.
 
 $$\begin{aligned}
 4x - 3 &= 7x + 9 \\
--3 - 9 &= 7x - 4x && \text{subtract } 4x \text{ and } 9 \\
--12 &= 3x \\
+-12 &= 3x && \text{subtract } 4x \text{ and } 9 \text{ from both sides} \\
 x &= -4
 \end{aligned}$$
 
-**Rational equations** — equations with variables in denominators — are linear equations in disguise once you clear the fractions. Multiply both sides by the *least common denominator (LCD)* and the fractions disappear.
+Nothing here is new. The structure is the same: undo operations, isolate $x$.
 
-$$\begin{aligned}
-\frac{x}{2} + \frac{x-1}{3} &= 4 \\
-6 \cdot \frac{x}{2} + 6 \cdot \frac{x-1}{3} &= 6 \cdot 4 && \text{multiply by LCD} = 6 \\
-3x + 2(x - 1) &= 24 \\
-3x + 2x - 2 &= 24 \\
-5x &= 26 \\
-x &= \frac{26}{5}
-\end{aligned}$$
+### Rational equations
 
-**Watch for extraneous solutions.** When you multiply by a denominator that contains the variable, you may introduce solutions that do not satisfy the original equation. After solving, *check* every candidate by substituting back. Any value that makes a denominator zero in the original is *extraneous* — it must be discarded.
+Sometimes the unknown is in a denominator:
 
-### Setting up a linear equation from a word problem
+$$\frac{x}{2} + \frac{x-1}{3} = 4$$
 
-Translation is the hard part. Source m51254 emphasizes a four-step recipe.
+The fractions look like a complication. They aren't — they're an invitation to multiply. Multiply every term by the least common denominator, which here is 6, and the fractions disappear:
 
-**(1) Read carefully and identify the unknown.** Assign it a variable.
-**(2) Identify the relationship in plain English.** *Twice the number plus seven is thirty-five.*
-**(3) Translate into symbols.** $2x + 7 = 35$.
-**(4) Solve, check, and report the answer in the original units.**
+$$3x + 2(x - 1) = 24 \implies 5x = 26 \implies x = \frac{26}{5}$$
 
-**Example.** A car rental costs $\$30$ per day plus $\$0.20$ per mile. If a renter has $\$120$ to spend on a one-day rental, how many miles can they drive?
+One warning worth memorizing: when the denominator contains the unknown, multiplying by it can introduce *extraneous solutions* — values of $x$ that satisfy the transformed equation but make a denominator zero in the original. After solving any rational equation, substitute back and check. Any candidate that makes a denominator zero is not a solution.
 
-Let $m$ = miles driven. The total cost is $30 + 0.20m$. Set equal to the budget:
-$$30 + 0.20m = 120$$
-$$0.20m = 90$$
-$$m = 450 \text{ miles}$$
+### The word problem is really a translation problem
 
-The math is trivial. The setup — converting the rental contract into the expression $30 + 0.20m$ — is the work.
+Here is a car rental contract: $\$30$ flat fee per day, plus $\$0.20$ per mile. Budget: $\$120$ for one day. How far can the driver go?
 
-### Trade-off
+Let $m$ = miles. The cost is $30 + 0.20m$. Set it equal to the budget:
 
-Linear equations are the simplest kind. The trade-off is that they capture only relationships where the unknown enters once, to the first power, with no products or powers of itself. Most real-world relationships are linear *over short ranges* (small price changes, small distances, short times) and become non-linear over longer ones. Linear models are often used as first approximations because they are easy to solve; the chapters that follow introduce the non-linear families that handle the rest.
+$$30 + 0.20m = 120 \implies 0.20m = 90 \implies m = 450 \text{ miles}$$
 
-### Common misconceptions
+The arithmetic is trivial. The work — reading "thirty dollars flat plus twenty cents a mile" and writing $30 + 0.20m$ — is where most mistakes happen. Translation is the skill. Once you have the equation, the mechanics are just undoing operations.
 
-**"Multiplying both sides by zero is fine."** Don't. $5 = 5$ is true, but multiplying both sides by 0 gives $0 = 0$, which loses the original. More importantly, in a rational equation, multiplying by a denominator that *equals zero for some value of $x$* introduces extraneous solutions.
+### What linear models can and can't do
 
-**"Adding the same thing to both sides changes the equation."** It doesn't. Equality is preserved under addition, subtraction, multiplication by a nonzero constant, and division by a nonzero constant. These four moves are what isolating $x$ uses.
+A linear equation captures relationships where the unknown enters once, to the first power, with no products of itself. Most real relationships are linear *over small ranges* and nonlinear over larger ones. The dollar-per-mile rate on a rental car is constant; real fuel costs aren't. Linear equations are first approximations — they're the simplest thing that might work, and often they do. When they don't, the next section introduces what's needed.
 
 ---
 
-## 3. Concept 2 — Quadratic Equations and Complex Numbers
+## Part 2 — Quadratic equations: when the unknown is squared
 
-A baseball leaves a bat at 100 mph at an angle of 30°. How long is it in the air? *That's a quadratic equation.* The height $h$ as a function of time $t$ has the form
+A baseball leaves a bat at some angle. You want to know when it hits the ground. The height as a function of time is
 
 $$h(t) = -16t^2 + v_0 t + h_0$$
 
-where $v_0$ is the initial vertical velocity in feet per second, $h_0$ is the initial height, and $-16$ is half the acceleration due to gravity in ft/s² (with sign reversed because positive is up). Setting $h = 0$ asks: when does the ball hit the ground? The answer requires solving a quadratic equation. This kind of equation appears in projectile motion, in orbit calculations, in the geometry of conic sections, in optimization problems — anywhere a relationship involves a squared quantity.
+where $v_0$ is the initial vertical velocity and $h_0$ is the starting height. Setting $h = 0$ asks: *when does the ball hit the ground?* The answer is a quadratic equation. The same form appears in orbit calculations, in the geometry of parabolas, in any situation where the thing you're studying is proportional to the square of something.
 
-A *quadratic equation* in standard form is
+A *quadratic equation* in standard form:
+
 $$ax^2 + bx + c = 0, \quad a \neq 0$$
 
-The four methods for solving it are not interchangeable; each has a context where it is the best choice [source m51256].
+There are four methods for solving it. They are not equally useful in all situations.
 
-### Method 1: Factoring
+<!-- → [TABLE: decision guide for quadratic method selection — columns: method name, when to use it, when NOT to use it, example equation type; rows: factoring, square-root property, completing the square, quadratic formula — student should use this as a quick-reference flowchart before solving any quadratic] -->
 
-If you can write $ax^2 + bx + c = (px + q)(rx + s)$, then the *zero-product property* says: a product of factors is zero if and only if at least one factor is zero. So set each factor to zero and solve.
+### Factoring
 
-**Example.** Solve $x^2 - 5x + 6 = 0$.
+If you can write $ax^2 + bx + c$ as a product of two linear factors — say, $(x - r)(x - s)$ — then the *zero-product property* finishes the job: a product is zero if and only if at least one factor is zero.
 
-Factor: $(x - 2)(x - 3) = 0$. By the zero-product property, $x - 2 = 0$ or $x - 3 = 0$. So $x = 2$ or $x = 3$.
+$$x^2 - 5x + 6 = 0 \implies (x - 2)(x - 3) = 0 \implies x = 2 \text{ or } x = 3$$
 
-Factoring is the *fastest* method when the polynomial factors over the integers. Most textbook quadratics are designed to factor; most quadratics in nature are not.
+Factoring is fast when it works. The catch: most quadratics you encounter outside a textbook don't have integer roots, and trial-and-error factoring is slow or impossible. Use factoring first; when it doesn't yield quickly, move to a more powerful method.
 
-### Method 2: The square-root property
+### The square-root property
 
-If $x^2 = k$ for some constant $k \geq 0$, then $x = \pm\sqrt{k}$. Both signs are solutions because $(\sqrt{k})^2 = k$ and $(-\sqrt{k})^2 = k$.
+If the equation is already a perfect square equal to a constant — $(x - h)^2 = k$ — take the square root of both sides. Both $+\sqrt{k}$ and $-\sqrt{k}$ are solutions.
 
-**Example.** Solve $(x - 3)^2 = 16$.
+$$(x - 3)^2 = 16 \implies x - 3 = \pm 4 \implies x = 7 \text{ or } x = -1$$
 
-By the square-root property, $x - 3 = \pm 4$. So $x = 3 + 4 = 7$ or $x = 3 - 4 = -1$.
+This method is fast but requires the equation to already be in the right shape. When it isn't, completing the square can put it there.
 
-The square-root property works when the quadratic is already in the form $(x - h)^2 = k$ — a perfect square equals a constant. When it isn't, you can sometimes *make* it that form, by *completing the square*.
+### Completing the square
 
-### Method 3: Completing the square
+Take $x^2 + bx$ and add $\left(\frac{b}{2}\right)^2$ to it. Why? Because
 
-Take a quadratic $x^2 + bx + c = 0$ and rewrite the left side as a perfect square plus a constant.
+$$x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2$$
 
-The trick: $x^2 + bx$ becomes a perfect square when you add $\left(\frac{b}{2}\right)^2$. That is, $x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2$.
-
-**Example.** Solve $x^2 + 6x - 7 = 0$ by completing the square.
+You've made a perfect square — deliberately, by adding a specific number. The price is that you must add the same number to the other side to preserve equality.
 
 $$\begin{aligned}
-x^2 + 6x &= 7 && \text{move constant} \\
-x^2 + 6x + 9 &= 7 + 9 && \text{add } (6/2)^2 = 9 \text{ to both sides} \\
-(x + 3)^2 &= 16 && \text{factor left side} \\
-x + 3 &= \pm 4 && \text{square-root property} \\
-x &= -3 \pm 4 \\
+x^2 + 6x - 7 &= 0 \\
+x^2 + 6x &= 7 \\
+x^2 + 6x + 9 &= 16 && \text{add } (6/2)^2 = 9 \text{ to both sides} \\
+(x + 3)^2 &= 16 \\
+x + 3 &= \pm 4 \\
 x &= 1 \text{ or } x = -7
 \end{aligned}$$
 
-Completing the square always works. It is also the *derivation* of the next method, the quadratic formula.
+Completing the square always works — not just when the roots are integers. It's also the proof behind the quadratic formula: apply the same steps to the general case $ax^2 + bx + c = 0$, and the formula falls out.
 
-### Method 4: The quadratic formula
+### The quadratic formula
 
-For any quadratic $ax^2 + bx + c = 0$ with $a \neq 0$, the solutions are
+For any quadratic $ax^2 + bx + c = 0$:
 
 $$\boxed{x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}}$$
 
-This formula is *completing the square once and for all*, with the answer expressed in terms of $a$, $b$, $c$. Memorize it. Every quadratic yields its solutions through this formula, regardless of whether it factors over the integers.
+This is completing the square, done once, in symbols, so you don't have to do it again. Memorize it. Not because memorizing things is virtuous, but because you'll use it often enough that having to derive it every time is genuinely slow.
 
-**Example.** Solve $2x^2 - 7x + 3 = 0$.
+$$2x^2 - 7x + 3 = 0 \quad (a = 2, b = -7, c = 3)$$
 
-Here $a = 2$, $b = -7$, $c = 3$. Substituting:
-$$x = \frac{-(-7) \pm \sqrt{(-7)^2 - 4(2)(3)}}{2(2)} = \frac{7 \pm \sqrt{49 - 24}}{4} = \frac{7 \pm \sqrt{25}}{4} = \frac{7 \pm 5}{4}$$
+$$x = \frac{7 \pm \sqrt{49 - 24}}{4} = \frac{7 \pm 5}{4} \implies x = 3 \text{ or } x = \frac{1}{2}$$
 
-So $x = \frac{12}{4} = 3$ or $x = \frac{2}{4} = \frac{1}{2}$.
+### The discriminant tells you what to expect
 
-### The discriminant
+The expression under the square root, $b^2 - 4ac$, is called the *discriminant*. Before finishing a computation, compute this first:
 
-The expression under the square root, $b^2 - 4ac$, is called the *discriminant*. It tells you how many real solutions the quadratic has, before you finish solving.
+- $b^2 - 4ac > 0$: two distinct real solutions
+- $b^2 - 4ac = 0$: one repeated solution
+- $b^2 - 4ac < 0$: no real solutions — but two complex ones
 
-- If $b^2 - 4ac > 0$: two distinct real solutions.
-- If $b^2 - 4ac = 0$: one repeated real solution.
-- If $b^2 - 4ac < 0$: no real solutions; two complex solutions.
+<!-- → [IMAGE: three side-by-side parabolas (all opening upward) — left parabola crosses x-axis at two points (discriminant > 0), center parabola touches x-axis at exactly one point (discriminant = 0), right parabola floats entirely above x-axis (discriminant < 0); each labeled with its discriminant case; student should see the geometric meaning of each case before reading the complex-numbers section] -->
 
-The discriminant is a quick check before committing to a full computation. If you see $b^2 - 4ac = -7$, you know the equation has no real roots, and you can either stop or proceed into complex numbers.
+The third case deserves its own treatment.
 
-### Complex numbers — the extension when the discriminant is negative
+### When the discriminant is negative: complex numbers
 
-When $b^2 - 4ac < 0$, the square root in the quadratic formula is the square root of a negative number. Real numbers don't include such values; mathematicians extended the system to handle them.
+Apply the formula to $x^2 + 2x + 5 = 0$:
 
-Define $i = \sqrt{-1}$. Then $i^2 = -1$. A *complex number* is any expression of the form $a + bi$ where $a$ and $b$ are real. The real number $a$ is the *real part*; the real number $b$ is the *imaginary part* [source m51255].
+$$x = \frac{-2 \pm \sqrt{4 - 20}}{2} = \frac{-2 \pm \sqrt{-16}}{2}$$
 
-**Operations on complex numbers** mirror polynomial arithmetic in $i$, with the substitution $i^2 = -1$ when it appears.
+The square root of a negative number. Real numbers don't include this. So mathematicians extended the system.
 
-*Add/subtract:* $(a + bi) + (c + di) = (a + c) + (b + d)i$.
+Define $i = \sqrt{-1}$, so $i^2 = -1$. A *complex number* is any expression $a + bi$ where $a$ and $b$ are real. The arithmetic of complex numbers mirrors polynomial arithmetic, with one substitution rule: wherever $i^2$ appears, replace it with $-1$.
 
-*Multiply:* $(a + bi)(c + di) = ac + adi + bci + bdi^2 = (ac - bd) + (ad + bc)i$.
+**Addition:** $(a + bi) + (c + di) = (a + c) + (b + d)i$.
 
-*Divide:* multiply numerator and denominator by the *conjugate* $\bar z = a - bi$ of the denominator, then simplify:
-$$\frac{a + bi}{c + di} \cdot \frac{c - di}{c - di} = \frac{(ac + bd) + (bc - ad)i}{c^2 + d^2}$$
+**Multiplication:** $(a + bi)(c + di) = ac + adi + bci + bdi^2 = (ac - bd) + (ad + bc)i$.
 
-**Example using complex numbers.** Solve $x^2 + 2x + 5 = 0$.
+**Division:** multiply numerator and denominator by the *conjugate* of the denominator — if the denominator is $c + di$, its conjugate is $c - di$. The product of a complex number and its conjugate is always real: $(c + di)(c - di) = c^2 + d^2$.
 
-Discriminant: $b^2 - 4ac = 4 - 20 = -16 < 0$. Two complex solutions. Apply the formula:
-$$x = \frac{-2 \pm \sqrt{-16}}{2} = \frac{-2 \pm 4i}{2} = -1 \pm 2i$$
+Returning to the equation: $\sqrt{-16} = 4i$, so
 
-The two solutions are $-1 + 2i$ and $-1 - 2i$. Note they are *complex conjugates* of each other — when a real-coefficient quadratic has complex roots, they always come in conjugate pairs.
+$$x = \frac{-2 \pm 4i}{2} = -1 \pm 2i$$
 
-### Trade-off
+The two solutions are $-1 + 2i$ and $-1 - 2i$. When a real-coefficient quadratic has complex roots, they always come in *conjugate pairs* — one with $+bi$, one with $-bi$. This is a structural fact, not a coincidence.
 
-Quadratic equations are powerful enough to model many physical situations (projectile motion, area optimization, conic-section geometry) but limited to relationships that involve at most a squared term. Higher-degree polynomial equations exist (chapter 5) and require additional techniques. The four methods given here form a complete toolkit for any quadratic; the choice of method is a matter of efficiency.
+A natural question is whether complex numbers are "real" in any meaningful sense. They were called "fictitious" for centuries. Negative numbers were once described the same way. The test isn't whether they correspond to something you can hold in your hand; it's whether the rules of arithmetic are consistent and whether the system is useful. Complex numbers underlie quantum mechanics, signal processing, and alternating-current electrical engineering. They're real enough.
 
-### Common misconceptions
+### A note on method choice
 
-**"$\sqrt{a^2} = a$."** Half-right. $\sqrt{a^2} = |a|$. The square root always returns the non-negative root.
-
-**"If $x^2 = 9$, then $x = 3$."** Half-right. The square-root property gives $x = \pm 3$. The "$\pm$" is essential.
-
-**"Complex numbers don't really exist."** They are as well-defined as negative numbers, which were once also called "false" or "fictitious." Complex numbers underlie quantum mechanics, AC electrical engineering, signal processing, and most of modern physics.
-
-**"You always need the quadratic formula."** No — when factoring is fast, factor. Use the formula when factoring is hard or impossible.
+The four methods aren't in competition. Factoring is fastest when the roots are rational; use it first as a quick test. The square-root property applies when you already have a perfect square. Completing the square is for when you don't, and it always works. The quadratic formula is what completing the square gives you when you do it symbolically rather than numerically — it's the general-purpose fallback when the other methods stall.
 
 ---
 
-## 4. Concept 3 — Inequalities and Other Equations
+## Part 3 — Inequalities: when the answer is a range
 
-A driver enters a highway with a posted speed limit: $45 \leq v \leq 65$. The same kind of statement — a range of acceptable values rather than a single one — appears all over engineering and finance. *The structural beam must support a load between 1,000 and 5,000 pounds. The bank account must remain above $0$ at all times. The medication must be taken in doses between 200 mg and 800 mg per day.* Each is an *inequality*, and solving them requires modifying the linear-equation technique with a single critical change in rule.
+So far every equation has asked: *what single value makes this true?* But some questions have ranges as answers. A toll road is free for vehicles under 26,000 pounds; a medication is safe in doses between 200 mg and 800 mg per day; a structural beam must support loads between 1,000 and 5,000 pounds. The answer to these questions is not a number — it's a set of numbers.
 
-An *inequality* is a statement of the form $a < b$, $a \leq b$, $a > b$, or $a \geq b$. Solving means finding the set of values that make the statement true.
+An *inequality* is a statement using $<$, $\leq$, $>$, or $\geq$ instead of $=$. Solving means finding the set of values that make the statement true.
 
 ### Interval notation
 
-The solution to an inequality is rarely a single number; it is usually a *range*, written most compactly in *interval notation*. Five conventions:
+A range of real numbers is most compactly written in *interval notation*. The conventions:
 
-- $(a, b)$: all real numbers strictly between $a$ and $b$. Endpoints excluded.
-- $[a, b]$: all real numbers between $a$ and $b$, including endpoints.
-- $[a, b)$: half-open. Includes $a$, excludes $b$.
-- $(a, \infty)$: all real numbers greater than $a$. Infinity is always written with an open parenthesis (it is not a number, just a direction).
-- $\mathbb{R} = (-\infty, \infty)$.
+- $(a, b)$: all real numbers strictly between $a$ and $b$ — endpoints excluded
+- $[a, b]$: all real numbers between $a$ and $b$ — endpoints included
+- $[a, b)$: includes $a$, excludes $b$
+- $(a, \infty)$: all real numbers greater than $a$; infinity is always written with an open parenthesis because it's a direction, not a number
 
-So the inequality $-2 \leq x < 5$ is written as $[-2, 5)$ in interval notation.
+So "$x$ is at least $-2$ and strictly less than $5$" writes as $[-2, 5)$.
 
-### Properties of inequalities
-
-Most algebraic moves work the same way for inequalities as for equations:
-
-- Add or subtract the same number from both sides: inequality preserved.
-- Multiply or divide both sides by the *same positive number*: inequality preserved.
-
-**The exception** — and the one rule worth memorizing carefully:
-
-- Multiply or divide both sides by a *negative number*: **the inequality reverses**.
-
-Example: $-2x < 6$. Divide both sides by $-2$: $x > -3$. The "$<$" flipped to "$>$" because we divided by a negative.
+<!-- → [INFOGRAPHIC: number line showing five interval-notation examples side by side — $(a,b)$ with open circles, $[a,b]$ with closed circles, $[a,b)$ mixed, $(a, \infty)$ with arrow, $(-\infty, \infty)$ full line; each labeled with its notation and plain-English meaning; student should have this as a reference when first reading interval answers] -->
 
 ### Solving linear inequalities
 
-The technique is the same as for linear equations — isolate the variable — with the flip rule applied whenever you multiply or divide by a negative.
+The technique is the same as for linear equations — isolate the variable — with one critical difference.
 
-**Example.** Solve $5 - 2x \geq 11$.
+Multiplying or dividing both sides by a *negative number* reverses the inequality.
 
-$$\begin{aligned}
-5 - 2x &\geq 11 \\
--2x &\geq 6 && \text{subtract } 5 \\
-x &\leq -3 && \text{divide by } -2; \text{ flip the inequality}
-\end{aligned}$$
+Why? Consider $2 < 5$. Multiply by $-1$: $-2 > -5$. The original order flipped. On the number line, multiplying by a negative reflects everything through zero, and reflections reverse the order of points.
+
+<!-- → [IMAGE: number line showing $2$ and $5$ with an arrow indicating "multiply by $-1$" and the resulting positions $-2$ and $-5$, with the inequality sign explicitly flipping direction; the reflection through zero should be visually clear — this is the one rule students consistently forget and a picture cements why it's true] -->
+
+$$5 - 2x \geq 11 \implies -2x \geq 6 \implies x \leq -3$$
+
+The flip on the last step is not optional. Forgetting it is the single most common error in working with inequalities.
 
 In interval notation: $(-\infty, -3]$.
 
 ### Compound inequalities
 
-A *compound inequality* combines two inequalities. The two cases:
+A *compound inequality* combines two. The two cases:
 
-**"And" (intersection).** Both must be true. Written $a < x < b$ or as the intersection $\{x : a < x \text{ and } x < b\}$.
+**Intersection ("and"):** both conditions must hold simultaneously. Written as a chain: $a < x < b$, meaning $x > a$ *and* $x < b$.
 
-**"Or" (union).** Either is sufficient. Written as $\{x : x < a \text{ or } x > b\}$.
+**Union ("or"):** either condition is sufficient. Written separately: $x < a$ or $x > b$.
 
-**Example (and).** Solve $-1 \leq 3x + 2 < 8$.
+To solve a chain inequality, apply the same operations to all three parts simultaneously:
 
-Subtract $2$ from all three parts: $-3 \leq 3x < 6$. Divide by $3$: $-1 \leq x < 2$. In interval notation: $[-1, 2)$.
+$$-1 \leq 3x + 2 < 8 \implies -3 \leq 3x < 6 \implies -1 \leq x < 2$$
+
+In interval notation: $[-1, 2)$.
 
 ### Absolute-value inequalities
 
-The absolute value $|x|$ is the distance of $x$ from $0$. So $|x| < 3$ means *all $x$ within distance 3 of zero*, which is $-3 < x < 3$. And $|x| > 3$ means *all $x$ farther than distance 3 from zero*, which is $x < -3$ or $x > 3$.
+The absolute value $|x|$ is the *distance* of $x$ from zero. This geometric reading makes the inequality rules easy to see.
 
-The general rules:
+$|x| < 3$ means: all $x$ within distance 3 of zero. That's $-3 < x < 3$.
+
+$|x| > 3$ means: all $x$ farther than distance 3 from zero. That's $x < -3$ or $x > 3$.
+
+<!-- → [IMAGE: number line with zero at center — two diagrams stacked: top shows $|x| < 3$ with a shaded interval between $-3$ and $3$ (the "within distance 3" region); bottom shows $|x| > 3$ with shading on both outer rays beyond $-3$ and $3$ (the "farther than distance 3" regions); student should see why one case is an intersection and the other is a union before reading the formula] -->
+
+In general:
 
 $$|x| < a \iff -a < x < a$$
 $$|x| > a \iff x < -a \text{ or } x > a$$
 
 **Example.** Solve $|2x - 1| \leq 5$.
 
-$$\begin{aligned}
--5 &\leq 2x - 1 \leq 5 \\
--4 &\leq 2x \leq 6 \\
--2 &\leq x \leq 3
-\end{aligned}$$
+Translate: the distance of $2x - 1$ from zero is at most 5. So:
+
+$$-5 \leq 2x - 1 \leq 5 \implies -4 \leq 2x \leq 6 \implies -2 \leq x \leq 3$$
 
 In interval notation: $[-2, 3]$.
 
-### Other types of equations: radical, rational-exponent, absolute-value
+### Other equations that reduce to the same families
 
-Source m51258 collects the equations that don't fit neatly into linear or quadratic. Three patterns are worth naming.
+Some equations look unfamiliar but collapse into familiar form.
 
-**Radical equations** have the variable inside a radical. Solve by isolating the radical and squaring (or raising to whatever power undoes the radical), then *check for extraneous solutions* — squaring can introduce them.
+**Radical equations** have the variable inside a radical. Isolate the radical, then raise both sides to the appropriate power. The hazard: raising both sides to an even power can introduce extraneous solutions. Check every candidate.
 
 $$\sqrt{x + 5} = x - 1 \implies x + 5 = (x-1)^2 = x^2 - 2x + 1 \implies x^2 - 3x - 4 = 0 \implies (x-4)(x+1) = 0$$
 
-Candidates: $x = 4$ or $x = -1$. Check: $\sqrt{4+5} = 3$ and $4 - 1 = 3$ ✓; $\sqrt{-1+5} = 2$ and $-1 - 1 = -2$ ✗. Only $x = 4$ is a real solution.
+Candidates: $x = 4$ or $x = -1$. Check $x = 4$: $\sqrt{9} = 3$ and $4 - 1 = 3$. ✓  
+Check $x = -1$: $\sqrt{4} = 2$ and $-1 - 1 = -2$. ✗  
 
-**Equations with rational exponents.** Treat the rational exponent as an instruction to raise both sides to the reciprocal power. To solve $x^{2/3} = 4$, raise both sides to the $3/2$ power: $x = 4^{3/2} = 8$.
+Only $x = 4$ is a solution.
 
-**Absolute-value equations.** $|x - 3| = 5$ means $x - 3 = 5$ or $x - 3 = -5$, so $x = 8$ or $x = -2$. The absolute-value bars say the *distance* is 5; that distance can land on either side.
+**Rational-exponent equations.** $x^{2/3} = 4$ — raise both sides to the $3/2$ power: $x = 4^{3/2} = (4^3)^{1/2} = 64^{1/2} = 8$.
 
-### Trade-off
-
-Inequalities give you ranges of valid values rather than single solutions, which is what most physical and engineering constraints require. The cost is one extra rule (the flip on negative multiplication) and the need to track interval notation. The investment is small; the application range is large.
-
-### Common misconceptions
-
-**"$|x| < -3$ has solutions."** It doesn't. Absolute values are never negative; no $x$ satisfies $|x| < -3$.
-
-**"You can square both sides of any equation safely."** Squaring can introduce extraneous solutions (it can also lose them, in some configurations). Always check the candidates against the original equation.
-
-**"$\sqrt{x + 5} = -3$ has a solution somewhere."** It doesn't — the principal square root is always non-negative.
+**Absolute-value equations.** $|x - 3| = 5$ — the distance from $x$ to $3$ is exactly $5$, so $x = 8$ or $x = -2$.
 
 ---
 
-## 5. Integration — One Worked Problem, All Three Concepts
+## Putting it together: a garden, all at once
 
-A homeowner wants to build a fenced rectangular garden against the side of their house. They have $40$ feet of fencing to enclose three sides (the house forms the fourth side). Let $x$ be the side perpendicular to the house. (a) Express the enclosed area as a function of $x$. (b) For what value of $x$ is the area maximized? (c) For what range of $x$ does the area exceed 150 square feet?
+A homeowner wants a rectangular garden against the back wall of the house. Three sides of fencing, $40$ feet total. The house forms the fourth side. Let $x$ = the length of the sides running perpendicular to the house.
 
-**Setup (Concept 1).** With $x$ feet on each of the two perpendicular sides, the parallel side gets $40 - 2x$ feet. The area is
+**Setting up the relationship.** The two perpendicular sides use $2x$ feet of fencing. The parallel side gets $40 - 2x$ feet. The area is:
 
 $$A = x(40 - 2x) = 40x - 2x^2$$
 
-This is a polynomial in $x$ — Chapter 1 territory, applied here.
-
-**Where is the area maximized?** This is a *quadratic* in $x$ (Concept 2), and we want the vertex of the parabola. Complete the square:
+**Where is the area maximized?** This is a question about the vertex of a downward-opening parabola. Complete the square:
 
 $$A = -2x^2 + 40x = -2(x^2 - 20x) = -2(x^2 - 20x + 100) + 200 = -2(x - 10)^2 + 200$$
 
-The maximum of $-2(x-10)^2 + 200$ occurs when $(x-10)^2 = 0$, i.e. when $x = 10$. The maximum area is $200$ square feet, with dimensions $x = 10$ ft (the two perpendicular sides) and $40 - 2(10) = 20$ ft (the parallel side).
+The maximum occurs when $(x - 10)^2 = 0$, i.e., $x = 10$. Maximum area: $200$ square feet. Dimensions: $10$ ft perpendicular, $20$ ft parallel.
 
-**For what range does $A > 150$?** This is an *inequality* (Concept 3). Solve:
+**For what range of $x$ does the area exceed 150 square feet?** Now it's an inequality.
 
-$$40x - 2x^2 > 150$$
-$$-2x^2 + 40x - 150 > 0$$
-$$x^2 - 20x + 75 < 0 \quad \text{(divide by } -2\text{; flip the inequality)}$$
+$$40x - 2x^2 > 150 \implies -2x^2 + 40x - 150 > 0 \implies x^2 - 20x + 75 < 0$$
+
+Dividing by $-2$ flipped the inequality. Factor the left side:
+
 $$(x - 5)(x - 15) < 0$$
 
-The product is negative when the two factors have opposite signs. That happens for $5 < x < 15$. In interval notation: $(5, 15)$.
+The product is negative when the two factors have opposite signs. That happens when $5 < x < 15$. In interval notation: $(5, 15)$.
 
-So if the homeowner wants more than 150 square feet, the perpendicular dimension must be between 5 and 15 feet — and the maximum is reached at $x = 10$.
+So: the homeowner gets more than 150 square feet of garden when the perpendicular dimension is between 5 and 15 feet. The sweet spot — the maximum — is at exactly 10 feet. The same piece of land, the same fence, described three ways: as an algebraic expression, as a quadratic extremum, as an inequality with a range solution. All three descriptions are about the same situation. The different forms exist because we asked different questions.
 
-The problem used all three concepts: setting up an algebraic relationship from a word problem (Concept 1), finding a quadratic optimum by completing the square (Concept 2), and solving a quadratic inequality (Concept 3). *The same family of techniques applies whether the rectangle is a garden or a steel beam or a marketing campaign budget.* That is the design philosophy of this chapter — the algebraic moves are general; the contexts that use them are everything.
+<!-- → [IMAGE: two-panel figure — left panel: top-down diagram of the rectangular garden with the house as one wall, the two perpendicular sides labeled $x$, and the parallel side labeled $40-2x$; right panel: downward-opening parabola $A = 40x - 2x^2$ with vertex marked at $(10, 200)$, zeros at $x=0$ and $x=20$, horizontal dashed line at $A=150$ intersecting the curve at $x=5$ and $x=15$, and the interval $(5,15)$ shaded on the x-axis — student should see the geometry, the algebra, and the inequality solution all in one picture] -->
 
-[FIGURE: A rectangle drawn against a horizontal house line, with the two perpendicular sides labeled $x$ and the parallel side labeled $40 - 2x$. Inside the rectangle, the area $A = x(40-2x)$. Below, a small graph of $A(x) = 40x - 2x^2$ showing a downward parabola with vertex at $(10, 200)$ and zeros at $0$ and $20$. The horizontal line $y = 150$ crosses the parabola at $x = 5$ and $x = 15$, marking the interval where $A > 150$. The student should notice that the geometry, the algebra, and the inequality all describe the same situation from different angles.]
-
----
-
-## 6. Exercises
-
-### Warm-up
-
-**Exercise 2.1.** *Tests Learning Objective 1.* Plot the points $(2, 3)$, $(-1, 4)$, $(-3, -2)$, and $(0, -1)$. Find the distance between the first and third points. Difficulty: low.
-
-**Exercise 2.2.** *Tests Learning Objective 2.* Solve each linear equation. (a) $4x - 7 = 5$. (b) $\frac{x}{3} + 2 = 7$. (c) $5(x - 2) = 3x + 4$. Difficulty: low.
-
-**Exercise 2.3.** *Tests Learning Objective 3.* For each quadratic, compute the discriminant and state how many real solutions it has. (a) $x^2 - 6x + 9 = 0$. (b) $2x^2 + 3x + 5 = 0$. (c) $x^2 - 5x + 4 = 0$. Difficulty: low.
-
-### Application
-
-**Exercise 2.4.** *Tests Learning Objective 2.* A taxi charges a $\$3.50$ flag drop plus $\$2.40$ per mile. If the total fare is $\$23.90$, how far did the passenger ride? Difficulty: medium.
-
-**Exercise 2.5.** *Tests Learning Objective 3.* Solve by factoring. (a) $x^2 - 9x + 20 = 0$. (b) $3x^2 + 5x - 2 = 0$. (c) $x^2 = 4x$. Difficulty: medium.
-
-**Exercise 2.6.** *Tests Learning Objective 3.* Solve by the quadratic formula. (a) $x^2 + 4x - 1 = 0$. (b) $2x^2 - 3x - 7 = 0$. (c) $x^2 + x + 1 = 0$ (express complex solutions in $a + bi$ form). Difficulty: medium.
-
-**Exercise 2.7.** *Tests Learning Objective 5.* Solve and write the solution in interval notation. (a) $3x - 7 \leq 8$. (b) $-4 < 2x + 1 \leq 11$. (c) $|x - 3| < 5$. (d) $|2x + 1| \geq 7$. Difficulty: medium.
-
-### Synthesis
-
-**Exercise 2.8.** *Tests Learning Objectives 1 and 2.* The midpoint of a segment is $(2, -1)$. One endpoint is $(5, 3)$. Find the other endpoint. Difficulty: medium-high.
-
-**Exercise 2.9.** *Tests Learning Objectives 3 and 4.* A rectangular field with one side along a river is to be enclosed using $200$ meters of fencing. (a) Find the dimensions that maximize the enclosed area. (b) Find the range of widths for which the area exceeds $4{,}000$ m². Difficulty: medium-high.
-
-**Exercise 2.10.** *Tests Learning Objective 3.* A ball is thrown upward from a height of $6$ ft with initial velocity $48$ ft/s. Its height after $t$ seconds is $h(t) = -16t^2 + 48t + 6$. (a) When does it hit the ground? (b) What is the maximum height? (c) For what time interval is the ball above $30$ ft? Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 2.11.** *Tests Learning Objectives 3 and 4.* Find all complex solutions of $x^4 - 16 = 0$. (Hint: factor as a difference of squares first.) Difficulty: high.
-
-**Exercise 2.12.** *Tests Learning Objective 5.* Solve $\frac{x - 1}{x + 2} \geq 2$. Be careful with the sign of the denominator. Difficulty: high.
+That's the honest summary of this chapter. One question: what value makes this sentence true? Three sentence types — linear, quadratic, inequality — each requiring its own set of moves, all driven by the same organizing idea: *undo what was done to the unknown until it stands alone*.
 
 ---
 
-## 7. Chapter Summary
+## LLM Exercises
 
-You can do something now you may not have been able to do an hour ago. You can take a real-world situation described in words — a toll booth, a taxi fare, a garden against a house — and translate it into an equation or inequality you can solve. You can plot points and measure between them. You can solve any quadratic equation by choosing the right method (factoring when possible; otherwise the formula). You can recognize when the discriminant tells you to expect real or complex solutions, and you can perform the basic operations on complex numbers. You can solve linear, compound, and absolute-value inequalities and write the solution in interval notation.
-
-The single idea that matters most: **solving an equation is undoing operations until the unknown stands alone.** Every technique in this chapter — clearing fractions, factoring, completing the square, applying the formula, flipping inequality signs — is a controlled application of that one idea. The variety of techniques exists because the variety of equation forms exists; the underlying move is one.
-
-The common mistake to watch for: confusing *algebraic equivalence* with *solution equivalence*. Squaring both sides, multiplying by an expression containing the variable, dividing by a negative — each of these can change the solution set. *Always check candidates against the original equation*, especially when squaring, when multiplying by a denominator, and when working with absolute values.
-
-If you want a test of your understanding: pick any real-world situation that involves a numerical relationship — a recipe scaling, a fuel-economy estimate, a budget allocation — and translate it into an equation. If you can solve it without referring to this chapter, you have the fluency. If you stumble, the part you stumble on is the part to revisit.
+The following prompts are designed for extended engagement with a large language model. Use them to deepen your intuition, test the edges of the techniques, and generate your own practice problems. Treat the LLM's responses as starting points for your own reasoning — verify, push back, and request derivations, not just answers.
 
 ---
 
-## 8. Connections Forward
-
-Chapter 1 built algebraic objects; chapter 2 solved equations involving them. Chapter 3 — Functions — generalizes both. A function is, roughly, a rule that produces an output for each input; equations of the form $y = f(x)$ define curves in the plane that we can plot, intersect, transform, and analyze. The linear equations of chapter 2 become *linear functions* in chapter 4; the quadratic equations become the zeros of *polynomial functions* in chapter 5. The structural moves you have just learned — solving, factoring, applying inequality logic — get reapplied as analytical tools on these function families. Read on.
+**LLM Exercise 2-A.** Ask the LLM to generate five linear word problems of increasing difficulty: one involving a flat fee and per-unit cost, one involving two people's ages, one involving mixing two solutions to hit a target concentration, one involving a rate-time-distance problem, and one that requires setting up two linear equations (even though you only know Chapter 2 linear tools — ask it to design one that reduces to a single equation). For each problem, write out the translation step explicitly — English sentence to algebraic expression — before solving. Compare your translations to the LLM's.
 
 ---
 
-### Sources (from chapter source files)
+**LLM Exercise 2-B.** Ask the LLM: *"Give me a quadratic equation for which (a) factoring over the integers is fast, (b) factoring over the integers is impossible but the quadratic formula gives rational roots, and (c) the quadratic formula gives irrational roots. For each, show me all four methods and explain which is most efficient and why."* Work through each example yourself before reading the LLM's explanation. Note where your efficiency judgments agree or disagree.
 
-- *College Algebra* with Co-Requisite Skills, source modules m51251 through m51259 (OpenStax-derived).
+---
+
+**LLM Exercise 2-C.** Ask the LLM to walk you through the derivation of the quadratic formula from scratch — starting with $ax^2 + bx + c = 0$ and arriving at $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ by completing the square, one step at a time. After it does, reproduce the derivation yourself on paper without looking. Then ask the LLM: *"What does the discriminant tell us geometrically, in terms of where the parabola $y = ax^2 + bx + c$ intersects the $x$-axis?"* Sketch a parabola for each of the three discriminant cases.
+
+---
+
+**LLM Exercise 2-D.** Ask the LLM to generate a quadratic inequality problem — something like *"a ball thrown upward is above 30 feet for what time interval?"* — and walk you through solving it step by step. Then ask it to generate three more, each with a different structure: one where the solution is a union of two intervals, one where it's a single closed interval, and one where the solution is all real numbers (ask it to explain why that can happen). Work each problem yourself before reading the solution.
+
+---
+
+**LLM Exercise 2-E.** Ask the LLM: *"I want to understand extraneous solutions. Generate three radical equations — one where squaring introduces exactly one extraneous solution, one where it introduces two, and one where it introduces none. For each, explain geometrically or algebraically why the extraneous solution appeared."* After reading the explanations, ask a follow-up: *"When I clear denominators in a rational equation, am I at risk of the same phenomenon? Why or why not?"*
+
+---
+
+**LLM Exercise 2-F.** Describe the fencing optimization problem in this chapter to the LLM (homeowner, 40 feet of fencing, garden against the house). Ask it to: (a) solve it by completing the square, (b) solve it by calculus (derivative = 0) if you want a preview of where this goes, (c) explain why the maximum always occurs when the parallel side is twice the perpendicular side. Then vary the problem — 60 feet of fencing, or fencing on all four sides with a budget — and work the variations yourself before asking the LLM to check your setup.
