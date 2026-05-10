@@ -1,269 +1,197 @@
 # Chapter 13 — Sequences, Probability, and Counting Theory
+*Surprising but Certain: What Mathematics Produces When It Works Correctly.*
 
-## 1. Chapter Opening
+Here is a question that sounds easy: what is $0.\overline{36}$?
 
-A bank account earns 5% interest, compounded annually, on an initial deposit of $\$1{,}000$. Year 1: $\$1{,}050$. Year 2: $\$1{,}102.50$. Year 3: $\$1{,}157.63$. Each year's balance is the previous year's multiplied by $1.05$. The list — $1000, 1050, 1102.50, 1157.63, \ldots$ — is a *sequence*. Specifically, a *geometric sequence*, where each term is a constant multiple of the one before. Sequences and series — sums of sequences — describe everything from compound interest to population dynamics to mathematical physics.
+Not as a decimal — you know that. As a fraction. The decimal $0.363636\ldots$ repeats forever, which means you cannot just read off a numerator and denominator. It seems to require infinitely many steps. And yet the answer is $\frac{4}{11}$, and you can prove it in three lines using a tool you will learn in this chapter.
 
-This final chapter covers sequences and series, the binomial theorem, counting principles (permutations and combinations), and the basics of probability. These topics are *discrete* — about counting and combinations rather than continuous curves — and they complete the foundation that calculus, statistics, and discrete mathematics will build upon.
+That is not the only surprising thing in these pages. The probability that two strangers in a room of 23 people share a birthday turns out to be over 50% — a result that most people refuse to believe until they work it out. The number of ways to arrange a 10-item menu into a 5-course dinner is 252, but the number of ways to assign them to a *specific order of courses* is 30,240. Counting and probability produce numbers that routinely surprise human intuition, and the discipline of actually working them out is one of the most valuable habits this course can leave you with.
 
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Identify** arithmetic and geometric sequences and write their terms using explicit and recursive formulas.
-- **Compute** sums of arithmetic and geometric series, including infinite geometric series.
-- **Apply** the binomial theorem to expand $(a + b)^n$.
-- **Use** the multiplication principle, permutations, and combinations to count outcomes.
-- **Compute** probabilities of simple, mutually exclusive, and complementary events.
-
-### Prerequisites
-
-Algebraic manipulation from Chapter 1; functions from Chapter 3; exponentials from Chapter 6.
+This chapter is about the mathematics of discrete things — things you count rather than measure, add up rather than integrate, list rather than graph. Sequences, series, the algebra of binomial powers, counting arguments, and probability are all, at root, about the same question: *given a structured collection of possibilities, what can we say about them?*
 
 ---
 
-## 2. Concept 1 — Sequences and Series
+## Sequences: The Rules Behind the List
 
-A *sequence* is an ordered list of numbers, typically denoted $a_1, a_2, a_3, \ldots, a_n, \ldots$.
+A sequence is an ordered list of numbers. What makes it mathematical is that the terms follow a rule — the list is not arbitrary. Two families of sequences appear everywhere.
 
-A sequence is defined by giving a rule for $a_n$: either an *explicit formula* (telling you $a_n$ in terms of $n$) or a *recursive formula* (telling you $a_n$ in terms of earlier terms).
+In an *arithmetic* sequence, each term is the previous plus a fixed constant $d$, the *common difference*. The simplest example: $5, 8, 11, 14, 17, \ldots$ with $d = 3$. The sequence grows by 3 at every step. The $n$th term is
 
-### Arithmetic sequences
+$$a_n = a_1 + (n-1)d$$
 
-Each term is the previous plus a constant — the *common difference* $d$.
+This is just repeated addition: starting from $a_1$, add $d$ exactly $n-1$ times to reach $a_n$.
 
-Explicit: $a_n = a_1 + (n-1)d$.
+In a *geometric* sequence, each term is the previous times a fixed constant $r$, the *common ratio*. The bank account: $1000, 1050, 1102.50, 1157.63, \ldots$ with $r = 1.05$. The $n$th term is
 
-Example: $5, 8, 11, 14, 17, \ldots$ is arithmetic with $a_1 = 5$ and $d = 3$. So $a_n = 5 + 3(n-1) = 3n + 2$.
+$$a_n = a_1 \cdot r^{n-1}$$
 
-### Geometric sequences
+Repeated multiplication instead of repeated addition. The two sequences — arithmetic and geometric — are the simplest possible structures you can impose on a list. Any more complicated sequence is either a combination of these or a departure from the pattern entirely.
 
-Each term is the previous times a constant — the *common ratio* $r$.
+The distinction matters because the long-run behavior of each is completely different. An arithmetic sequence grows without bound if $d > 0$, shrinks without bound if $d < 0$, and stays constant if $d = 0$. The growth is *linear* — proportional to the number of steps taken. A geometric sequence with $r > 1$ grows *exponentially* — each step multiplies by $r$, so the terms accelerate. A geometric sequence with $0 < r < 1$ shrinks toward zero, each term a fixed fraction of the last. The bank account with $r = 1.05$ keeps growing, faster and faster in absolute terms, because each year's interest is computed on a larger base. The key word here is *compounding* — and compounding is geometric, not arithmetic.
 
-Explicit: $a_n = a_1 \cdot r^{n-1}$.
+<!-- → [CHART: Two side-by-side line graphs over n = 1 to 20 — left shows arithmetic sequence a_n = 5 + 3(n−1) as a straight line; right shows geometric sequence a_n = 1000 · (1.05)^(n−1) as an accelerating curve; both use the same n-axis scale; student should see at a glance that arithmetic growth is linear and geometric growth accelerates, making the compound-interest claim visually immediate rather than just asserted] -->
 
-Example: $3, 6, 12, 24, 48, \ldots$ is geometric with $a_1 = 3$ and $r = 2$. So $a_n = 3 \cdot 2^{n-1}$.
+---
 
-### Series — sums of sequences
+## Series: Adding Up the Terms
 
-A *series* is the sum of the terms of a sequence. *Sigma notation*:
+A *series* is the sum of a sequence. It seems like a simple extension — just add the terms — but the formulas that result are both clean and powerful.
 
-$$\sum_{i=1}^n a_i = a_1 + a_2 + \ldots + a_n$$
+**The arithmetic series.** Add the first $n$ terms of an arithmetic sequence. There is a famous shortcut, attributed to the young Gauss, who reportedly computed the sum of all integers from 1 to 100 in seconds: pair the first and last terms ($1 + 100 = 101$), the second and second-to-last ($2 + 99 = 101$), and so on. There are 50 such pairs. So the sum is $50 \times 101 = 5050$.
 
-**Arithmetic series.** The sum of the first $n$ terms of an arithmetic sequence:
+The same argument gives the general formula. The first term is $a_1$, the last is $a_n$, and there are $n$ terms. Pair first with last, second with second-to-last; each pair sums to $a_1 + a_n$, and there are $n/2$ pairs:
 
-$$S_n = \frac{n(a_1 + a_n)}{2} = \frac{n}{2}[2a_1 + (n-1)d]$$
+$$S_n = \frac{n(a_1 + a_n)}{2}$$
 
-**Geometric series.** The sum of the first $n$ terms of a geometric sequence:
+The sum of $n$ terms is $n$ times their average. Arithmetic sequences have a constant average over any symmetric interval, which is why this works.
 
-$$S_n = a_1 \cdot \frac{1 - r^n}{1 - r}, \quad r \neq 1$$
+**The geometric series.** For the geometric sequence with first term $a_1$ and common ratio $r \neq 1$, the sum of $n$ terms is
 
-**Infinite geometric series.** When $|r| < 1$, the sequence terms shrink toward zero, and the series converges:
+$$S_n = a_1 \cdot \frac{1 - r^n}{1 - r}$$
 
-$$S_\infty = \frac{a_1}{1 - r}$$
+The derivation is elegant. Write $S = a_1 + a_1 r + a_1 r^2 + \cdots + a_1 r^{n-1}$. Multiply both sides by $r$: $rS = a_1 r + a_1 r^2 + \cdots + a_1 r^n$. Subtract: $S - rS = a_1 - a_1 r^n$. Factor: $S(1 - r) = a_1(1 - r^n)$. Divide: $S = a_1\frac{1-r^n}{1-r}$.
 
-If $|r| \geq 1$, the series diverges (sum is infinite or undefined).
+The algebra is three lines. What it reveals is more interesting.
 
-### Worked example
+**The infinite geometric series.** What happens if we let $n \to \infty$? The term $r^n$ appears in the numerator. If $|r| < 1$ — if the ratio is between $-1$ and $1$ — then $r^n$ shrinks toward zero as $n$ grows. In the limit:
 
-Find the sum of the first 20 terms of the arithmetic sequence with $a_1 = 4$ and $d = 3$.
+$$S_\infty = \frac{a_1}{1-r} \qquad (|r| < 1)$$
 
-$a_{20} = 4 + 19 \cdot 3 = 61$. Sum: $S_{20} = \frac{20(4 + 61)}{2} = 10 \cdot 65 = 650$.
+The sum of infinitely many terms is finite. This is the result that lets us handle repeating decimals.
 
-### Worked example — repeating decimal as infinite series
+Consider $0.\overline{36} = 0.36 + 0.0036 + 0.000036 + \cdots$. This is a geometric series with $a_1 = 0.36$ and $r = 0.01$. Since $|0.01| < 1$:
 
-The repeating decimal $0.\overline{36} = 0.363636\ldots$ is an infinite geometric series:
-$$0.36 + 0.0036 + 0.000036 + \ldots = \sum_{n=1}^\infty 0.36 \cdot (0.01)^{n-1}$$
-
-With $a_1 = 0.36$ and $r = 0.01$, since $|r| < 1$:
 $$S_\infty = \frac{0.36}{1 - 0.01} = \frac{0.36}{0.99} = \frac{36}{99} = \frac{4}{11}$$
 
-So $0.\overline{36} = 4/11$. The infinite sum gives a clean rational fraction.
+The infinite decimal is exactly $\frac{4}{11}$. Not approximately — exactly. The repeating decimal is a geometric series in disguise, and the geometric series formula converts it to a fraction in three steps. This is how we proved, in Chapter 1, that all repeating decimals are rational numbers — not just asserted it, but showed the mechanism.
+
+<!-- → [IMAGE: Number line zoomed in between 0 and 1, showing the partial sums of the geometric series for 0.36̄ converging from the left — S₁ = 0.36, S₂ = 0.3636, S₃ = 0.363636, with arrows showing each partial sum landing closer to the target 4/11 ≈ 0.3636̄; the gap between each partial sum and the limit halved (approximately) each step; student should see convergence not just as an algebraic limit but as a sequence of points visibly closing in on a value] -->
 
 ---
 
-## 3. Concept 2 — Binomial Theorem and Counting
+## The Binomial Theorem: What Happens When You Expand $(a + b)^n$
 
-### Binomial theorem
+You know how to expand $(a + b)^2 = a^2 + 2ab + b^2$. The coefficient of $ab$ is 2 because there are two ways to pick one $a$ and one $b$ from the two factors $(a+b)(a+b)$: take $a$ from the first and $b$ from the second, or $b$ from the first and $a$ from the second.
 
-The expansion of $(a + b)^n$ has $n+1$ terms:
-
-$$(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^k$$
-
-The coefficients $\binom{n}{k}$ — *binomial coefficients* — count the number of ways to choose $k$ items from $n$:
+That combinatorial observation scales. When you expand $(a + b)^n$, you multiply $n$ copies of $(a + b)$ together. Each term in the expansion comes from choosing either $a$ or $b$ from each factor. A term with $a^{n-k}b^k$ arises whenever you chose $b$ from exactly $k$ of the $n$ factors — and the number of ways to choose which $k$ factors give the $b$ is $\binom{n}{k}$, the *binomial coefficient*:
 
 $$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$
 
-where $n! = n \cdot (n-1) \cdot (n-2) \cdots 2 \cdot 1$ is the *factorial*.
+Here $n! = n \cdot (n-1) \cdot (n-2) \cdots 2 \cdot 1$ is the *factorial* of $n$. So the full expansion is:
 
-The first few rows of *Pascal's triangle* give the coefficients:
+$$(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k} b^k$$
+
+This is the Binomial Theorem. The coefficients $\binom{n}{k}$ form Pascal's triangle, where each entry is the sum of the two above it:
 
 ```
-                  1
-                1   1
-              1   2   1
-            1   3   3   1
-          1   4   6   4   1
-        1   5   10  10  5   1
+Row 0:          1
+Row 1:        1   1
+Row 2:      1   2   1
+Row 3:    1   3   3   1
+Row 4:  1   4   6   4   1
 ```
 
-Each entry is the sum of the two above it. Row $n$ gives the coefficients of $(a+b)^n$.
+Row $n$ gives the coefficients for $(a+b)^n$. Pascal's triangle is not just a pattern — each row entry counts something real: the number of ways to select $k$ items from $n$, which is exactly the coefficient that appears in the expansion.
 
-### Worked example
+<!-- → [IMAGE: Pascal's triangle through Row 6 with each entry labeled both as C(n,k) and its numeric value; Row 4 highlighted to match the (x+2)⁴ expansion, with each entry annotated to show which term it produces — e.g., C(4,2)=6 labeled with "coefficient of x²·2²=24"; alongside, a small diagram showing the combinatorial interpretation: for C(4,2), four factor-slots with two marked "choose b" in all possible 6 arrangements; student should see that the triangle is a counting device, not just a pattern to memorize] -->
 
-Expand $(x + 2)^4$.
+Here is the expansion of $(x + 2)^4$ in full:
 
-$$(x + 2)^4 = \binom{4}{0}x^4 + \binom{4}{1}x^3 \cdot 2 + \binom{4}{2}x^2 \cdot 4 + \binom{4}{3}x \cdot 8 + \binom{4}{4}\cdot 16$$
+$$(x + 2)^4 = \binom{4}{0}x^4 + \binom{4}{1}x^3 \cdot 2 + \binom{4}{2}x^2 \cdot 4 + \binom{4}{3}x \cdot 8 + \binom{4}{4} \cdot 16$$
 $$= x^4 + 8x^3 + 24x^2 + 32x + 16$$
 
-### Counting principles
+Notice where the 24 comes from: $\binom{4}{2} \cdot 2^2 = 6 \cdot 4 = 24$. The binomial coefficient counts the ways, the power of 2 scales the term. Both pieces are necessary.
 
-**Multiplication principle.** If task A can be done in $m$ ways and task B in $n$ ways (independently), the total is $mn$.
+---
 
-A pizza shop offers 4 sizes and 6 toppings. Number of ways to order one size with one topping: $4 \cdot 6 = 24$.
+## Counting: The Multiplication Principle and Its Consequences
 
-**Permutations.** Arrangements of objects where order matters. Permutations of $r$ objects from $n$:
+Before you can find the probability of an event, you need to know how many outcomes are possible. Counting structured collections is a skill — and it is easy to get wrong, in both directions. People regularly undercount (missing cases they didn't realize existed) and overcount (counting the same arrangement twice under different names).
+
+The foundation is the *multiplication principle*: if task A can be done in $m$ ways and task B in $n$ ways, independently, then doing both tasks can be done in $mn$ ways. Four sizes of pizza times six topping choices gives $24$ distinct pizza orders. This sounds obvious, but its consequences extend further than intuition suggests.
+
+**Permutations.** How many ways can 8 horses finish 1st, 2nd, and 3rd in a race? The first-place finisher can be any of 8. Given that, the second-place finisher can be any of the remaining 7. The third-place finisher can be any of the remaining 6. Multiply: $8 \times 7 \times 6 = 336$. This is a *permutation* — an arrangement of $r$ items from $n$, where order matters.
 
 $$P(n, r) = \frac{n!}{(n-r)!}$$
 
-Number of ways 8 horses can finish 1st, 2nd, 3rd in a race: $P(8, 3) = 8!/5! = 8 \cdot 7 \cdot 6 = 336$.
+For $P(8, 3)$: $\frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336$. The denominator $5!$ cancels the factors you don't use.
 
-**Combinations.** Selections where order doesn't matter:
+**Combinations.** How many 5-card hands can be dealt from a 52-card deck? Order doesn't matter — the hand $\{A\heartsuit, K\spadesuit, Q\diamondsuit, J\clubsuit, 10\heartsuit\}$ is the same hand regardless of which card you were dealt first. We want *selections*, not arrangements.
 
 $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
 
-Number of 5-card poker hands from a 52-card deck: $C(52, 5) = 2{,}598{,}960$.
+For $C(52, 5)$: $\frac{52!}{5! \cdot 47!} = 2{,}598{,}960$ distinct 5-card hands. The denominator $r!$ divides out all the orderings you don't want to count separately.
 
-The relationship: $P(n,r) = C(n,r) \cdot r!$ — every selection produces $r!$ orderings.
+The relationship between permutations and combinations is clean: $P(n,r) = C(n,r) \cdot r!$. Every combination (unordered selection) generates $r!$ permutations (ordered arrangements). If you want orderings, multiply by $r!$. If you want just selections, divide.
+
+The practical skill is reading the problem and deciding: does order matter here? Finishing positions in a race: yes. Committee membership: no. Card hands: no. Assignment of prizes to ranked places: yes. The formula is always the same; the judgment about which formula applies requires understanding what you are actually counting.
+
+<!-- → [TABLE: Counting technique decision guide — columns: Situation, Order Matters?, Formula, Example; rows: (race finishing positions) ordered arrangement of r from n → P(n,r) = n!/(n−r)! → P(8,3)=336; (committee selection) unordered selection of r from n → C(n,r) = n!/r!(n−r)! → C(10,5)=252; (pizza order) independent sequential choices → multiplication principle → 4×6=24; (relationship between them) every C(n,r) selection × r! orderings = P(n,r); student should identify which row applies before picking up a formula] -->
 
 ---
 
-## 4. Concept 3 — Probability
+## Probability: From Counting to Likelihood
 
-The *probability* of an event $E$ is
+The definition of probability, for equally likely outcomes, is simple:
 
-$$P(E) = \frac{\text{number of outcomes in } E}{\text{number of equally-likely outcomes}}$$
+$$P(E) = \frac{\text{number of outcomes in } E}{\text{total number of equally likely outcomes}}$$
 
-assuming all outcomes are equally likely. Probability is between 0 (impossible) and 1 (certain).
+Probability is between 0 and 1. An impossible event has probability 0; a certain event has probability 1. Everything else is between.
 
-### Basic events
+The machinery of combinations is exactly what you need to compute most interesting probabilities. A random 5-card hand: how likely is it to contain exactly two aces? There are $C(4, 2) = 6$ ways to choose 2 aces from 4, and $C(48, 3) = 17{,}296$ ways to fill the remaining 3 cards from the non-ace cards. Total favorable hands: $6 \times 17{,}296 = 103{,}776$. Probability: $\frac{103{,}776}{2{,}598{,}960} \approx 3.99\%$. The counting principles are the engine; the probability formula is just the final ratio.
 
-**Single event.** Roll a die. Probability of rolling a 4: $1/6$.
+A few rules extend the basic definition to combinations of events.
 
-**Multiple favorable outcomes.** Probability of rolling an even number: $3/6 = 1/2$ (three favorable out of six total).
+**Complement.** The probability of "not $E$" is $1 - P(E)$. This is useful when $E$ is complicated but its complement is simple. If the probability of rolling at least one 6 in three dice rolls is hard to compute directly, the complement (rolling no 6 in three rolls) is $\left(\frac{5}{6}\right)^3 = \frac{125}{216}$, and the original probability is $1 - \frac{125}{216} = \frac{91}{216}$.
 
-**Complementary events.** $P(\text{not } E) = 1 - P(E)$. Probability of *not* rolling a 4: $1 - 1/6 = 5/6$.
+**Union.** The probability of $A$ or $B$ occurring is
 
-### Combinations of events
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
 
-**Union (or):** $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+The subtraction prevents double-counting outcomes where both events occur. If $A$ and $B$ cannot both occur (they are *mutually exclusive*), then $P(A \cap B) = 0$ and the formula reduces to $P(A) + P(B)$.
 
-The subtraction prevents double-counting outcomes that are in both events.
+**Independence.** For events that have no influence on each other, the probability of both occurring is $P(A) \times P(B)$. Roll two dice: the first result has no effect on the second. The probability of two sixes is $\frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$.
 
-If $A$ and $B$ are *mutually exclusive* (cannot both occur), $P(A \cap B) = 0$ and the formula reduces to $P(A) + P(B)$.
+These three rules — complement, union, independence — handle most practical probability problems at this level.
 
-**Intersection (and).** For independent events, $P(A \cap B) = P(A) \cdot P(B)$.
+---
 
-Roll two dice. Probability of two sixes: $\frac{1}{6} \cdot \frac{1}{6} = \frac{1}{36}$.
+## The Birthday Problem, and Why Intuition Fails
 
-### Worked example
-
-A jar contains 5 red, 3 blue, 2 green marbles. Draw one at random.
-
-$P(\text{red}) = 5/10 = 1/2$. $P(\text{blue}) = 3/10$. $P(\text{green}) = 2/10$.
-
-$P(\text{red or blue}) = 5/10 + 3/10 = 8/10 = 4/5$ (mutually exclusive: a marble can't be both colors).
-
-$P(\text{not red}) = 1 - 5/10 = 1/2$.
-
-### Worked example — birthday problem
+Here is the birthday problem done honestly.
 
 In a room of 23 people, what is the probability that at least two share a birthday?
 
-Easier to compute the complement — probability all 23 have *different* birthdays. The first person has 365 choices; the second 364; the third 363; and so on.
+The direct computation is messy — you'd have to account for every possible pair, triple, or larger group of people who might share a birthday. The complement is cleaner: what is the probability that *all 23 people have different birthdays*?
 
-$$P(\text{all different}) = \frac{365 \cdot 364 \cdot 363 \cdots 343}{365^{23}} \approx 0.493$$
+Line the 23 people up in some order. The first person has a birthday: 365 choices out of 365. The second person must have a different birthday: 364 choices out of 365. The third: 363 out of 365. Continue:
 
-So $P(\text{at least one match}) = 1 - 0.493 = 0.507$ — slightly more than half. The number 23 is a famous threshold.
+$$P(\text{all different}) = \frac{365}{365} \cdot \frac{364}{365} \cdot \frac{363}{365} \cdots \frac{343}{365} = \frac{365!/(342!)}{365^{23}}$$
 
----
+Computing this numerically: $P(\text{all different}) \approx 0.493$.
 
-## 5. Integration — One Worked Problem
+So $P(\text{at least two share}) = 1 - 0.493 = 0.507$.
 
-A startup is planning a 3-year financial projection. They expect:
-- $\$50{,}000$ in revenue in year 1, growing at 25% per year.
-- A one-time grant of $\$30{,}000$ at the start of year 1.
-- The grant is invested at 4% annual interest, compounded annually.
+With only 23 people, there is already a better-than-even chance that two of them share a birthday. Most people, when asked, guess this threshold is somewhere around 180 people — roughly half of 365. That intuition is wrong by nearly an order of magnitude.
 
-(a) What is total revenue across 3 years?
+Why is it so low? Because it is not about any specific birthday — it is about whether *any* pair matches among all $\binom{23}{2} = 253$ possible pairs. Each pair is unlikely to match, but 253 tries is a lot of tries. The multiplication of many small probabilities accumulates fast when the number of pairs grows as the square of the number of people. This is the same structural reason that networks become densely connected much faster than their size grows, that diseases spread faster than headcounts suggest, and that mutual acquaintances appear unexpectedly in large groups. Combinatorial growth is counterintuitive at the gut level; the calculation is the only reliable guide.
 
-Geometric sequence with $a_1 = 50000$, $r = 1.25$. Sum of three terms:
-$$S_3 = 50000 \cdot \frac{1 - 1.25^3}{1 - 1.25} = 50000 \cdot \frac{1 - 1.953125}{-0.25} = 50000 \cdot 3.8125 = 190{,}625$$
-
-(b) What is the grant's value at the end of year 3?
-
-$30000 \cdot 1.04^3 = 30000 \cdot 1.124864 \approx 33{,}746$.
-
-(c) The startup's pitch deck claims they have a 60% chance of profitability by year 3, and a 40% chance the grant fully covers shortfall. What is the probability that *both* events happen (profitable AND grant covers)?
-
-If independent: $0.60 \cdot 0.40 = 0.24$. So 24% chance both occur.
-
-What is the probability *at least one* occurs?
-
-$P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.60 + 0.40 - 0.24 = 0.76$.
-
-The example uses Concept 1 (geometric series), Concept 2 (compound interest using sequences), and Concept 3 (probability of unions).
-
-[FIGURE: A growing-revenue bar chart for 3 years (50k, 62.5k, 78.125k), beside a compound-interest curve for the grant (30k → 33.7k). The student should notice the geometric structure of both.]
+<!-- → [CHART: Line graph of P(at least one shared birthday) on the y-axis (0 to 1) vs. number of people in the room on the x-axis (1 to 60); the curve rises steeply, crossing 0.5 at n=23 (marked with a vertical dashed line and label "50% threshold: 23 people"), reaching ~0.97 by n=50; a horizontal annotation at n=180 labeled "common intuition" shown dramatically to the right of where the curve has already reached ~1; student should see how fast the probability saturates and how far off the intuitive estimate of "half of 365" actually is] -->
 
 ---
 
-## 6. Exercises
+## What This Chapter Is Really About
 
-### Warm-up
+The topics in this chapter — sequences, series, the binomial theorem, counting, probability — are sometimes taught as separate methods, each with its own set of formulas. But there is a single thread running through all of them.
 
-**Exercise 13.1.** Find the 10th term of the arithmetic sequence with $a_1 = 7$ and $d = 4$. Difficulty: low.
+Each topic is about a *structured collection of discrete things*, and the question is always: *how many?* or *how likely?*
 
-**Exercise 13.2.** Find the sum of the first 10 terms of the geometric sequence with $a_1 = 3$ and $r = 2$. Difficulty: low.
+A sequence is a structured list. Its formula tells you how many steps to reach a given term. A series is a structured sum. Its formula tells you how much all the terms add up to — finitely or infinitely. The binomial theorem is a structured expansion. Its coefficients count how many ways each term can arise. Permutations and combinations count structured arrangements and selections. Probability turns those counts into likelihoods.
 
-**Exercise 13.3.** Compute $\binom{6}{2}$. Difficulty: low.
+The connection between the binomial theorem and probability is especially close. The binomial coefficient $\binom{n}{k}$ counts the number of ways to choose $k$ items from $n$. It also counts the number of heads-and-tails sequences with exactly $k$ heads in $n$ flips. The expansion $(p + (1-p))^n$ — where $p$ is the probability of heads — gives you the probability of each possible number of heads directly as a term in the expansion. This connection is the origin of the *binomial distribution*, which is the foundation of a large part of statistics.
 
-### Application
+The patterns found in this chapter have echoes everywhere — in computer science (how many subsets does a set have?), in finance (how does compound interest accumulate?), in genetics (how likely is a particular combination of traits?), in cryptography (how hard is it to guess a password?). Discrete mathematics turns out to underlie much of the computational world in ways that continuous mathematics does not.
 
-**Exercise 13.4.** Convert $0.\overline{72}$ to a fraction using infinite geometric series. Difficulty: medium.
+This is the last chapter of college algebra. The subject has traveled from the arithmetic of real numbers, through equations and functions, through polynomials and exponentials and logarithms and trigonometry, to the discrete tools of sequences and counting. These are not thirteen unrelated topics. They are a single connected language for describing quantitative structure — the language that the sciences, the social sciences, and engineering all share as their mathematical foundation.
 
-**Exercise 13.5.** Expand $(2x - 1)^3$ using the binomial theorem. Difficulty: medium.
-
-**Exercise 13.6.** A committee of 5 is to be chosen from 10 people. How many possible committees? Difficulty: medium.
-
-**Exercise 13.7.** A card is drawn from a standard 52-card deck. Find the probability that it is (a) a heart, (b) a face card, (c) a heart or a face card. Difficulty: medium.
-
-### Synthesis
-
-**Exercise 13.8.** A loan of $\$10{,}000$ at 6% annual interest is paid off by equal annual payments of $\$2{,}000$. Express the remaining balance after $n$ years as a geometric/arithmetic combination. After how many years is the balance zero? Difficulty: medium-high.
-
-### Challenge
-
-**Exercise 13.9.** Five fair coins are flipped. (a) Probability of exactly 3 heads. (b) Probability of at least 3 heads. Difficulty: high.
-
----
-
-## 7. Chapter Summary
-
-You can identify arithmetic and geometric sequences, write their terms, and compute sums (including infinite geometric series). You can use the binomial theorem to expand binomial powers. You can apply counting principles (multiplication, permutations, combinations) and compute probabilities of simple events, unions, intersections, and complements.
-
-The single idea that matters most: **discrete mathematics counts; algebra describes.** This chapter completes the algebra-and-trigonometry tour by adding the discrete tools that count and combine — and that scaffold further study in statistics, computer science, and combinatorics.
-
----
-
-## 8. Connections Forward (Out of the Book)
-
-This is the final chapter. Across thirteen chapters, the book has built the algebraic, geometric, trigonometric, and discrete tools that constitute college algebra. What you do with them — calculus, statistics, engineering, computer science, finance — is the next step. The vocabulary is in place; the work that fills the vocabulary into a career is the work of years that follow this course.
-
-Read on, in everything that comes.
-
----
-
-### Sources (from chapter source files)
-
-- *College Algebra*, source modules m49443 through m49450 (OpenStax-derived).
+The repeating decimal $0.\overline{36}$ is $\frac{4}{11}$. The room of 23 people has better than even odds of containing a shared birthday. Both results are surprising. Both are certain. That combination — surprising but certain — is what mathematics produces when it works correctly.
