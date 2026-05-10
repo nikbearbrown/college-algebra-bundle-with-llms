@@ -1,240 +1,325 @@
 # Chapter 9 — Trigonometric Identities and Equations
 
-## 1. Chapter Opening
-
-A radio engineer wants to combine two signals — one a pure $440$-Hz tone, the other a $660$-Hz tone — into a single waveform that the receiver can decode. The mathematics is one line of trigonometry: $\sin(2\pi \cdot 440\, t) + \sin(2\pi \cdot 660\, t)$. Whether the engineer can simplify or solve equations involving such expressions depends on a small but powerful set of *trigonometric identities* — equations that hold for every angle.
-
-This chapter develops those identities and uses them to solve equations involving trig functions. The identities are not memorization for its own sake; they are the moves that let trig calculations be done at all.
-
-### Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- **Apply** the fundamental Pythagorean, reciprocal, and quotient identities to simplify trig expressions.
-- **Use** sum and difference formulas for sine, cosine, and tangent.
-- **Apply** double-angle, reduction (power-reducing), and half-angle formulas.
-- **Convert** product expressions to sums and sum expressions to products.
-- **Solve** trigonometric equations algebraically using identities and inverse functions.
-
-### Prerequisites
-
-Chapters 7 and 8 (unit circle, trig functions and graphs).
+*The chapter where the same angle, looked at from different directions, turns out to be the same angle.*
 
 ---
 
-## 2. Concept 1 — Fundamental and Sum/Difference Identities
+A radio engineer wants to send two tones simultaneously — one at 440 Hz, one at 660 Hz. The combined signal is:
 
-### Fundamental identities
+$$\sin(2\pi \cdot 440\, t) + \sin(2\pi \cdot 660\, t)$$
 
-Already met in Chapter 7. The Pythagorean identity:
+The receiver needs to decode this. The engineer needs to know: can this sum be written differently? Is there a single sinusoid that captures it? Is there a moment when it equals zero? These are not abstract questions — they determine whether the signal is decodable at all.
+
+Every one of them reduces to the same thing: manipulating trig expressions using *identities* — equations that are true for every angle, not just particular ones. This chapter is about those identities and what you can do with them.
+
+---
+
+## What an identity is, and why it is different from an equation
+
+An *equation* is a condition on an unknown. $2x + 3 = 7$ is true for $x = 2$ and false for everything else. Solving it means finding which values work.
+
+An *identity* is a statement that is true for all valid values of the variable. $\sin^2\theta + \cos^2\theta = 1$ is not a condition on $\theta$ — it holds for every $\theta$, always, without exception. You do not solve it; you use it.
+
+The distinction matters because identities are tools, not problems. When a complicated trig expression appears, you do not solve it — you reach for the right identity and rewrite it into something simpler. The skill is knowing which identity to reach for.
+
+The foundation is one geometric fact: a point on the unit circle has coordinates $(\cos\theta, \sin\theta)$, and every point on the unit circle satisfies $x^2 + y^2 = 1$. Therefore:
+
 $$\sin^2\theta + \cos^2\theta = 1$$
 
-Two consequences (divide by $\cos^2\theta$ or $\sin^2\theta$):
-$$1 + \tan^2\theta = \sec^2\theta, \quad 1 + \cot^2\theta = \csc^2\theta$$
+Divide both sides by $\cos^2\theta$:
 
-Reciprocal identities:
-$$\sec\theta = \frac{1}{\cos\theta}, \quad \csc\theta = \frac{1}{\sin\theta}, \quad \cot\theta = \frac{1}{\tan\theta}$$
+$$\frac{\sin^2\theta}{\cos^2\theta} + 1 = \frac{1}{\cos^2\theta}$$
+$$\tan^2\theta + 1 = \sec^2\theta$$
 
-Quotient identities:
-$$\tan\theta = \frac{\sin\theta}{\cos\theta}, \quad \cot\theta = \frac{\cos\theta}{\sin\theta}$$
+Divide the original by $\sin^2\theta$ instead:
 
-Even/odd:
-$$\sin(-\theta) = -\sin\theta, \quad \cos(-\theta) = \cos\theta, \quad \tan(-\theta) = -\tan\theta$$
+$$1 + \cot^2\theta = \csc^2\theta$$
 
-### Sum and difference formulas
+Three identities from one geometric fact. This is the pattern throughout the chapter: a single source idea, explored from multiple angles.
 
-These take the trig of a sum (or difference) of two angles and break it into trig of the individual angles.
+There are also the reciprocal identities — $\sec\theta = 1/\cos\theta$, $\csc\theta = 1/\sin\theta$, $\cot\theta = 1/\tan\theta$ — and the quotient identities: $\tan\theta = \sin\theta/\cos\theta$ and $\cot\theta = \cos\theta/\sin\theta$. These are definitions as much as identities. And the even/odd identities: sine and tangent are odd ($\sin(-\theta) = -\sin\theta$, $\tan(-\theta) = -\tan\theta$), cosine is even ($\cos(-\theta) = \cos\theta$). The graph of cosine is symmetric about the vertical axis; the graph of sine is symmetric about the origin.
 
-$$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$$
+<!-- → [IMAGE: unit circle with a point at angle θ labeled (cos θ, sin θ), a right triangle drawn from the origin to the point to the x-axis, and the Pythagorean identity written beside it — student should see that sin²θ + cos²θ = 1 is just x² + y² = 1 read in trig notation, not a separate fact to memorize] -->
 
-$$\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$$
+---
+
+## The sum and difference formulas
+
+Now for the identities that expand the toolkit substantially.
+
+The cosine of a sum is *not* the sum of the cosines. $\cos(A + B) \neq \cos A + \cos B$. You can check: $\cos(60°) = 1/2$, but $\cos(30°) + \cos(30°) = \sqrt{3} \neq 1/2$. The actual formula is:
+
+$$\cos(A + B) = \cos A \cos B - \sin A \sin B$$
+$$\cos(A - B) = \cos A \cos B + \sin A \sin B$$
+
+The signs flip between sum and difference — the $\mp$ tracks opposite the $\pm$. For sine:
+
+$$\sin(A + B) = \sin A \cos B + \cos A \sin B$$
+$$\sin(A - B) = \sin A \cos B - \cos A \sin B$$
+
+Here the signs track *with* the $\pm$. And for tangent:
 
 $$\tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B}$$
 
-(Watch the signs carefully — the $\mp$ in cosine flips relative to the $\pm$ in the input; same for the denominator of tangent.)
+The denominator's $\mp$ is again opposite the numerator's $\pm$.
 
-**Example.** Compute $\cos(75°) = \cos(45° + 30°)$.
-$$\cos 45° \cos 30° - \sin 45° \sin 30° = \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} - \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} - \sqrt{2}}{4}$$
+These formulas are worth sitting with. They say that the trig of a compound angle is built from the trig of its component angles. This is not obvious — it is a non-trivial geometric fact about how angles combine on the unit circle.
 
-The exact value of $\cos 75°$ — derived from two angles whose values are known.
+### What you can do with them immediately
 
-### Verifying identities
+Exact values for angles like $75°$, $15°$, $\pi/12$, $5\pi/12$ — angles not on the standard unit circle — become computable by decomposing into angles that are.
 
-A common exercise: prove that two trig expressions are equal for all valid $\theta$. The standard technique:
+$$\cos 75° = \cos(45° + 30°) = \cos 45° \cos 30° - \sin 45° \sin 30°$$
+$$= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} - \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} - \sqrt{2}}{4}$$
 
-1. Start with the more complicated side.
-2. Rewrite using fundamental identities until you reach the simpler side.
+That is an exact value — no approximation, no decimal rounding — derived entirely from the sum formula and the known values at $45°$ and $30°$. The same approach works for $\sin 75°$, $\tan 15°$, any angle that can be expressed as a sum or difference of $30°$, $45°$, and $60°$.
 
-**Example.** Verify $\frac{1 - \cos 2\theta}{\sin 2\theta} = \tan\theta$.
+The sum formulas also let you verify identities that would otherwise look like guesswork. To show that $\sin(\pi/2 - \theta) = \cos\theta$, apply the difference formula:
 
-(Using the double-angle formulas from Concept 2: $\cos 2\theta = 1 - 2\sin^2\theta$ and $\sin 2\theta = 2\sin\theta\cos\theta$.)
+$$\sin\!\left(\frac{\pi}{2} - \theta\right) = \sin\frac{\pi}{2}\cos\theta - \cos\frac{\pi}{2}\sin\theta = 1 \cdot \cos\theta - 0 \cdot \sin\theta = \cos\theta$$
 
-$$\frac{1 - (1 - 2\sin^2\theta)}{2\sin\theta\cos\theta} = \frac{2\sin^2\theta}{2\sin\theta\cos\theta} = \frac{\sin\theta}{\cos\theta} = \tan\theta \quad \checkmark$$
+The cofunction identities — sine and cosine are complements, tangent and cotangent are complements, secant and cosecant are complements — all fall out of the sum and difference formulas in exactly this way.
+
+<!-- → [TABLE: two-column reference table — left: sum/difference formula; right: the sign rule in plain English ("cosine: signs flip"; "sine: signs follow"; "tangent: denominator flips") — student should be able to reconstruct the formula from the rule rather than memorizing each line independently] -->
 
 ---
 
-## 3. Concept 2 — Double, Half, and Power-Reducing Formulas
+## Double angles and half angles
 
-### Double-angle formulas
+Set $A = B = \theta$ in the sine sum formula:
 
-Set $A = B = \theta$ in the sum formulas:
+$$\sin(\theta + \theta) = \sin\theta\cos\theta + \cos\theta\sin\theta = 2\sin\theta\cos\theta$$
 
-$$\sin 2\theta = 2\sin\theta\cos\theta$$
-$$\cos 2\theta = \cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta$$
-$$\tan 2\theta = \frac{2\tan\theta}{1 - \tan^2\theta}$$
+So $\sin 2\theta = 2\sin\theta\cos\theta$. The sine of a doubled angle is twice the product of the original sine and cosine. This is one of those results that looks almost too clean. It is clean — and it is exactly right.
 
-Three forms of $\cos 2\theta$ — all equivalent, useful in different contexts.
+For cosine, the same substitution gives:
 
-### Half-angle formulas
+$$\cos 2\theta = \cos^2\theta - \sin^2\theta$$
 
-Solve $\cos 2\theta = 1 - 2\sin^2\theta$ for $\sin\theta$:
-$$\sin\frac{\theta}{2} = \pm\sqrt{\frac{1 - \cos\theta}{2}}, \quad \cos\frac{\theta}{2} = \pm\sqrt{\frac{1 + \cos\theta}{2}}$$
+Apply $\sin^2\theta = 1 - \cos^2\theta$ to the right side:
 
-Choose the sign based on which quadrant $\theta/2$ is in.
+$$\cos 2\theta = 2\cos^2\theta - 1$$
+
+Apply $\cos^2\theta = 1 - \sin^2\theta$ instead:
+
+$$\cos 2\theta = 1 - 2\sin^2\theta$$
+
+Three equivalent forms of the cosine double-angle formula. They are all the same identity, just algebraically rearranged. Which form is useful depends on context — in particular, on what you already know about the angle. If you know $\cos\theta$, use the second; if you know $\sin\theta$, use the third.
+
+For tangent: $\tan 2\theta = \frac{2\tan\theta}{1 - \tan^2\theta}$, from the tangent sum formula with $A = B = \theta$.
+
+<!-- → [INFOGRAPHIC: derivation tree showing the sum formulas at the top, with arrows branching down — one branch: set A = B to get double-angle formulas; second branch: solve double-angle for θ/2 to get half-angle formulas; third branch: add sum and difference formulas to get product-to-sum formulas — student should see the entire chapter's identity catalog as a single derivation tree with two source formulas at the root] -->
+
+### Half angles
+
+Take the double-angle formula $\cos 2\theta = 1 - 2\sin^2\theta$ and solve for $\sin\theta$:
+
+$$\sin^2\theta = \frac{1 - \cos 2\theta}{2}$$
+
+$$\sin\theta = \pm\sqrt{\frac{1 - \cos 2\theta}{2}}$$
+
+Now substitute $\theta \to \theta/2$ — let the doubled angle be $\theta$ instead:
+
+$$\sin\frac{\theta}{2} = \pm\sqrt{\frac{1 - \cos\theta}{2}}$$
+
+The sign is chosen based on the quadrant that $\theta/2$ falls in. Similarly:
+
+$$\cos\frac{\theta}{2} = \pm\sqrt{\frac{1 + \cos\theta}{2}}$$
 
 $$\tan\frac{\theta}{2} = \frac{1 - \cos\theta}{\sin\theta} = \frac{\sin\theta}{1 + \cos\theta}$$
 
-**Example.** Find $\sin 22.5° = \sin(45°/2)$.
+The tangent half-angle formulas have no $\pm$ ambiguity — both forms are always defined when the right side is, and both give the correct sign automatically. This makes them the preferred form when working with tangent.
+
+The half-angle formulas extend the reach of exact computation. $\sin 22.5°$ is not on the unit circle, but $22.5° = 45°/2$ is, so:
 
 $$\sin 22.5° = \sqrt{\frac{1 - \cos 45°}{2}} = \sqrt{\frac{1 - \sqrt{2}/2}{2}} = \frac{\sqrt{2 - \sqrt{2}}}{2}$$
 
-### Power-reducing (reduction) formulas
+Exact.
 
-These rewrite $\sin^2$ and $\cos^2$ in terms of $\cos 2\theta$:
-$$\sin^2\theta = \frac{1 - \cos 2\theta}{2}, \quad \cos^2\theta = \frac{1 + \cos 2\theta}{2}$$
+### Power-reducing forms
 
-These are useful in calculus for integration of $\sin^2$ and $\cos^2$.
+The half-angle derivation also produces what are called *power-reducing* identities:
 
-### Product-to-sum and sum-to-product
+$$\sin^2\theta = \frac{1 - \cos 2\theta}{2}, \qquad \cos^2\theta = \frac{1 + \cos 2\theta}{2}$$
 
-These convert between products and sums:
-
-$$\sin A \cos B = \tfrac{1}{2}[\sin(A+B) + \sin(A-B)]$$
-$$\cos A \cos B = \tfrac{1}{2}[\cos(A-B) + \cos(A+B)]$$
-$$\sin A \sin B = \tfrac{1}{2}[\cos(A-B) - \cos(A+B)]$$
-
-And the reverse direction (sum-to-product):
-
-$$\sin A + \sin B = 2\sin\frac{A+B}{2}\cos\frac{A-B}{2}$$
-$$\cos A + \cos B = 2\cos\frac{A+B}{2}\cos\frac{A-B}{2}$$
-
-These appear in signal processing (mixing frequencies) and acoustics (beats).
+These rewrite squared trig functions in terms of cosine of a doubled angle. The immediate use here is verification and simplification; in calculus, they are the standard tool for integrating $\sin^2$ and $\cos^2$ — a fact worth knowing even if calculus is ahead rather than behind you.
 
 ---
 
-## 4. Concept 3 — Solving Trigonometric Equations
+## Products and sums
 
-A trig equation is solved when you find all $\theta$ that satisfy it.
+There is a family of identities that convert *products* of trig functions into *sums*, and vice versa.
 
-### Equations involving a single trig function
+Add the cosine sum and difference formulas:
 
-To solve $\sin\theta = c$ for some constant $c \in [-1, 1]$:
+$$\cos(A - B) + \cos(A + B) = 2\cos A \cos B$$
 
-1. Find one solution: $\theta = \sin^{-1}(c)$.
-2. Find the second solution in $[0, 2\pi)$: $\theta = \pi - \sin^{-1}(c)$ (using sine's symmetry).
-3. The general solution is each plus $2\pi n$ for integer $n$.
+So: $\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$.
 
-For cosine, the symmetry is different: solutions are $\theta = \pm\cos^{-1}(c) + 2\pi n$.
+Similarly:
 
-For tangent, period is $\pi$, so solutions are $\theta = \tan^{-1}(c) + \pi n$.
+$$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$$
+$$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$$
 
-**Example.** Solve $2\sin\theta - 1 = 0$ on $[0, 2\pi)$.
+Running these in reverse — from sums to products — requires a substitution. Let $A = \frac{u+v}{2}$ and $B = \frac{u-v}{2}$, so $A + B = u$ and $A - B = v$. Then:
 
-$$\sin\theta = \frac{1}{2} \implies \theta = \frac{\pi}{6} \text{ or } \theta = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$$
+$$\sin u + \sin v = 2\sin\frac{u+v}{2}\cos\frac{u-v}{2}$$
+$$\cos u + \cos v = 2\cos\frac{u+v}{2}\cos\frac{u-v}{2}$$
 
-### Equations in quadratic form
+This is where the engineer's signal problem lives. Adding two sinusoids of different frequencies produces a *beating* pattern — the amplitude rises and falls at the difference frequency while oscillating at the average frequency. Physically: two guitar strings slightly out of tune produce a sound that pulses at the difference in their frequencies. Mathematically: that pulsing is exactly the product-to-sum formula at work.
 
-If the equation is quadratic in a trig function, treat the trig function as a single variable, factor or apply the quadratic formula, then back out.
+<!-- → [IMAGE: graph showing sin(2π·440t) + sin(2π·660t) over a short time window — the rapid oscillation at the average frequency (550 Hz) is visibly modulated by a slower envelope at the difference frequency (220 Hz / 2 = 110 Hz); student should see the beating pattern and connect it to the sum-to-product formula that produces a product of a fast oscillation and a slow amplitude envelope] -->
 
-**Example.** Solve $2\sin^2\theta - 3\sin\theta + 1 = 0$ on $[0, 2\pi)$.
+---
 
-Let $u = \sin\theta$. Equation becomes $2u^2 - 3u + 1 = 0$, factoring to $(2u - 1)(u - 1) = 0$. So $u = 1/2$ or $u = 1$.
+## Verifying identities
+
+The task: given a trig equation that claims to hold for all $\theta$, prove it.
+
+The method: start with one side — usually the more complicated one — and rewrite it using identities until it matches the other side. Do not treat this like solving an equation. Do not work on both sides simultaneously and meet in the middle. Work on one side only.
+
+Strategy guide:
+
+- Express everything in terms of sine and cosine first. Secants, cosecants, and cotangents usually simplify once converted.
+- Look for Pythagorean opportunities: $1 - \sin^2\theta = \cos^2\theta$, $\sec^2\theta - 1 = \tan^2\theta$.
+- If products appear, try converting to sums; if sums appear, try factoring.
+- A common denominator often clarifies a sum of fractions.
+
+A worked verification: show that $\frac{\sin 2\theta}{1 + \cos 2\theta} = \tan\theta$.
+
+Start with the left side. Substitute the double-angle formulas $\sin 2\theta = 2\sin\theta\cos\theta$ and $\cos 2\theta = 2\cos^2\theta - 1$:
+
+$$\frac{2\sin\theta\cos\theta}{1 + (2\cos^2\theta - 1)} = \frac{2\sin\theta\cos\theta}{2\cos^2\theta} = \frac{\sin\theta}{\cos\theta} = \tan\theta \quad \checkmark$$
+
+Notice the choice of which form of $\cos 2\theta$ to use. The denominator is $1 + \cos 2\theta$, so the form $2\cos^2\theta - 1$ is the right pick — it makes the $1 + (\ldots - 1)$ collapse cleanly to $2\cos^2\theta$. That kind of pattern recognition is what gets better with practice.
+
+---
+
+## Solving trigonometric equations
+
+An identity holds for all $\theta$. A *trig equation* — $\sin\theta = 1/2$, or $2\cos^2\theta - \cos\theta = 0$ — is true for some values of $\theta$ and false for others. Solving it means finding all values.
+
+### The inverse function and the symmetry
+
+To solve $\sin\theta = c$ for $c \in [-1, 1]$:
+
+- The inverse sine function $\sin^{-1}(c)$ returns one value, in $[-\pi/2, \pi/2]$.
+- Sine's symmetry about $\pi/2$ means there is a second solution in $[0, 2\pi)$: $\pi - \sin^{-1}(c)$.
+- The general solution extends periodically: $\theta = \sin^{-1}(c) + 2\pi n$ and $\theta = \pi - \sin^{-1}(c) + 2\pi n$ for integer $n$.
+
+For cosine: solutions come in a $\pm$ pair. $\cos\theta = c$ gives $\theta = \pm\cos^{-1}(c) + 2\pi n$.
+
+For tangent: period is $\pi$, not $2\pi$. $\tan\theta = c$ gives $\theta = \tan^{-1}(c) + \pi n$.
+
+The pattern to internalize: use the inverse function to get one solution, then use the symmetry of the function to find the rest within one period, then append the periodic repetition.
+
+<!-- → [IMAGE: three unit-circle diagrams side by side — one for sine showing the two solutions θ and π − θ that share the same sine value; one for cosine showing the two solutions θ and −θ; one for tangent showing the single solution per π-period — student should see that the symmetry rules for finding the second solution come directly from the geometry of the circle, not from a formula to memorize] -->
+
+### Quadratic form
+
+Sometimes the equation is quadratic in a trig function. Factor or apply the quadratic formula to the algebraic variable, then solve the resulting trig equations separately.
+
+$2\sin^2\theta - 3\sin\theta + 1 = 0$ on $[0, 2\pi)$.
+
+Let $u = \sin\theta$. Then $2u^2 - 3u + 1 = 0$, which factors as $(2u-1)(u-1) = 0$. So $u = 1/2$ or $u = 1$.
 
 $\sin\theta = 1/2$: $\theta = \pi/6$ or $5\pi/6$.
+
 $\sin\theta = 1$: $\theta = \pi/2$.
 
-Three solutions on $[0, 2\pi)$: $\pi/6, \pi/2, 5\pi/6$.
+Three solutions: $\pi/6, \, \pi/2, \, 5\pi/6$.
 
-### Equations using identities
+### Using identities to simplify first
 
-Sometimes the equation is solvable only after using an identity to simplify.
+Some equations are not directly solvable until an identity converts them into a solvable form.
 
-**Example.** Solve $\sin 2\theta = \cos\theta$ on $[0, 2\pi)$.
+$\sin 2\theta = \cos\theta$ on $[0, 2\pi)$.
 
-Use the double-angle formula:
+The equation mixes $2\theta$ and $\theta$. Substitute $\sin 2\theta = 2\sin\theta\cos\theta$:
+
 $$2\sin\theta\cos\theta = \cos\theta$$
 $$\cos\theta(2\sin\theta - 1) = 0$$
 
-So $\cos\theta = 0$ (giving $\theta = \pi/2$ or $3\pi/2$) or $\sin\theta = 1/2$ (giving $\theta = \pi/6$ or $5\pi/6$).
+Now the equation is factored. Either $\cos\theta = 0$ or $2\sin\theta - 1 = 0$.
 
-Four solutions: $\pi/6, \pi/2, 5\pi/6, 3\pi/2$.
+$\cos\theta = 0$: $\theta = \pi/2$ or $3\pi/2$.
+
+$\sin\theta = 1/2$: $\theta = \pi/6$ or $5\pi/6$.
+
+Four solutions: $\pi/6, \, \pi/2, \, 5\pi/6, \, 3\pi/2$.
+
+The key step was recognizing that $\cos\theta$ appeared on the right and could be factored out of the left after applying the double-angle formula. Factoring is often the right instinct once identities have reduced everything to a common variable.
+
+### The structure of the solution set
+
+One more thing worth understanding: trig equations typically have infinitely many solutions (because trig functions are periodic), and the restriction to $[0, 2\pi)$ is a choice — a way of listing one full period's worth. The *general* solution uses integer multiples of the period to capture everything. Whether you need the general solution or the solution on a given interval depends on the context; know which one you are being asked for before you start.
 
 ---
 
-## 5. Integration — One Worked Problem
+## One function, combined two ways
 
-A pendulum's angular displacement (in radians) from vertical is modeled by $\theta(t) = 0.2\cos(2t) + 0.05\sin(2t)$. (a) Express this as a single sinusoid $R\cos(2t - \phi)$. (b) Find the maximum amplitude. (c) When is the pendulum first at zero displacement after $t = 0$?
+A pendulum's angular displacement from vertical is:
 
-**(a) Convert to single sinusoid.** The form $R\cos(2t - \phi)$ expands as $R\cos\phi \cos 2t + R\sin\phi \sin 2t$. Matching:
+$$\theta(t) = 0.2\cos(2t) + 0.05\sin(2t)$$
 
-$$R\cos\phi = 0.2, \quad R\sin\phi = 0.05$$
+This is not obviously a single sinusoid. But the sum formula — run backward — says that any expression of the form $a\cos\omega t + b\sin\omega t$ can be written as $R\cos(\omega t - \phi)$ for some amplitude $R$ and phase shift $\phi$.
 
-Then $R^2 = 0.2^2 + 0.05^2 = 0.0425$, giving $R \approx 0.206$ rad. And $\tan\phi = 0.05/0.2 = 0.25$, giving $\phi \approx 0.245$ rad.
+Expand $R\cos(2t - \phi)$ using the cosine difference formula:
+
+$$R\cos(2t - \phi) = R\cos\phi\cos 2t + R\sin\phi\sin 2t$$
+
+Match coefficients: $R\cos\phi = 0.2$ and $R\sin\phi = 0.05$. Then:
+
+$$R = \sqrt{0.2^2 + 0.05^2} = \sqrt{0.04 + 0.0025} = \sqrt{0.0425} \approx 0.206$$
+
+$$\tan\phi = \frac{0.05}{0.2} = 0.25 \implies \phi \approx 0.245 \text{ rad}$$
 
 So $\theta(t) \approx 0.206\cos(2t - 0.245)$.
 
-**(b) Maximum amplitude.** $R \approx 0.206$ rad, or about $11.8°$.
+The maximum displacement is $R \approx 0.206$ radians, or about $11.8°$. The first zero occurs when $\cos(2t - 0.245) = 0$, i.e., when $2t - 0.245 = \pi/2$, giving $t \approx 0.908$ seconds.
 
-**(c) First zero.** $\cos(2t - 0.245) = 0$ when $2t - 0.245 = \pi/2$, i.e. $t = (\pi/2 + 0.245)/2 \approx 0.908$ s.
+A sum of two trig terms became one. The maximum, the phase, and the zeros all became readable from the single-function form. This is what the sum formulas are for in practice: not just computing $\cos 75°$, but combining oscillations into a manageable form.
 
-The example uses Concept 1 (sum/difference formula run in reverse, for the linear combination), Concept 2 (the implicit double-angle identity for $\cos$), and Concept 3 (solving for the zero).
-
-[FIGURE: Graph of $\theta(t) = 0.2\cos(2t) + 0.05\sin(2t)$ over the first 3 seconds, with the equivalent $0.206\cos(2t - 0.245)$ overlaid. The student should notice that the two are identical functions. Marked: maximum at $t = 0.245/2 \approx 0.123$, first zero at $t \approx 0.908$.]
+<!-- → [IMAGE: graph of θ(t) = 0.2·cos(2t) + 0.05·sin(2t) over t ∈ [0, 3] with the equivalent 0.206·cos(2t − 0.245) overlaid as a dashed curve (the two are identical — student should see they coincide), the maximum at t ≈ 0.123 labeled with R ≈ 0.206, and the first zero at t ≈ 0.908 labeled; a small right-triangle inset shows how R and φ are computed from the coefficients 0.2 and 0.05] -->
 
 ---
 
-## 6. Exercises
+## What you can do now
+
+You can apply the fundamental Pythagorean, reciprocal, and quotient identities to simplify any trig expression. You can use the sum and difference formulas to compute exact values at non-standard angles and to verify identities by rewriting one side. You can apply the double-angle formulas — all three forms of $\cos 2\theta$, the single form of $\sin 2\theta$ — and derive the half-angle and power-reducing formulas from them. You can convert products of trig functions to sums, and sums to products.
+
+You can solve any trig equation that reduces to a single trig function equal to a constant, by using the appropriate inverse function and the symmetry of the function over one period. You can handle quadratic-form equations by treating the trig function as an algebraic variable, and you can handle mixed-angle equations by applying identities to unify the angles before solving.
+
+The catalog of identities is not large. The Pythagorean identity is one geometric fact. The sum formulas are two — for sine and cosine — from which everything else follows by substitution. The double-angle formulas come from setting $A = B$. The half-angle formulas come from solving the double-angle formula for $\theta/2$. The product-to-sum and sum-to-product formulas come from adding and subtracting the sum and difference formulas.
+
+It is a small, interconnected structure. Every identity in the chapter either is one of two or three source identities, or follows from them by straightforward algebra. Once you see the structure, the catalog is not a list to memorize — it is a web of consequences from a few starting points.
+
+---
+
+## Exercises
 
 ### Warm-up
 
-**Exercise 9.1.** Verify the Pythagorean identity for $\theta = 5\pi/6$. Difficulty: low.
+**Exercise 9.1.** *Tests the Pythagorean identity and its derived forms.* Given $\sin\theta = 3/5$ and $\theta$ is in Quadrant II, find $\cos\theta$, $\tan\theta$, $\sec\theta$, and $\csc\theta$ exactly. Do not use a calculator — use the Pythagorean identity and the signs appropriate to Quadrant II. Difficulty: low.
 
-**Exercise 9.2.** Use the sum formula to find $\sin 75°$. Difficulty: low.
+**Exercise 9.2.** *Tests the sum and difference formulas.* Use a sum or difference formula to find the exact value of each. (a) $\sin 75°$. (b) $\cos 15°$. (c) $\tan(7\pi/12)$. Difficulty: low.
+
+**Exercise 9.3.** *Tests the double-angle formulas.* If $\cos\theta = -4/5$ and $\theta$ is in Quadrant III, find $\sin 2\theta$, $\cos 2\theta$, and $\tan 2\theta$ exactly. State which form of the $\cos 2\theta$ formula you are using and why. Difficulty: low.
 
 ### Application
 
-**Exercise 9.3.** Solve $2\cos\theta + \sqrt{3} = 0$ on $[0, 2\pi)$. Difficulty: medium.
+**Exercise 9.4.** *Tests identity verification.* Verify the identity $\frac{\cos^2\theta - \sin^2\theta}{1 - \tan^2\theta} = \cos^2\theta$. Work on one side only. Difficulty: medium.
 
-**Exercise 9.4.** Verify: $\frac{\sin 2\theta}{1 + \cos 2\theta} = \tan\theta$. Difficulty: medium.
+**Exercise 9.5.** *Tests solving a basic trig equation with the full solution set.* Solve $\sqrt{3}\tan\theta + 1 = 0$. (a) Give all solutions in $[0, 2\pi)$. (b) Give the general solution. Difficulty: medium.
 
-**Exercise 9.5.** Solve $\cos 2\theta + \cos\theta = 0$ on $[0, 2\pi)$. Difficulty: medium.
+**Exercise 9.6.** *Tests solving by factoring after applying an identity.* Solve $\cos 2\theta + \cos\theta = 0$ on $[0, 2\pi)$. Use the double-angle formula to express everything in terms of $\cos\theta$ first. Difficulty: medium.
 
 ### Synthesis
 
-**Exercise 9.6.** Find $\cos\theta$ exactly if $\sin\theta = 1/3$ and $\theta$ is in Q II. Difficulty: medium-high.
+**Exercise 9.7.** *Tests quadratic-form equation with identity simplification.* Solve $2\sin^2\theta + 3\sin\theta - 2 = 0$ on $[0, 2\pi)$. Show the substitution, the factoring, and check that no candidate is extraneous. Difficulty: medium-high.
 
-**Exercise 9.7.** Solve $2\sin^2\theta = 1 + \cos\theta$ on $[0, 2\pi)$. Difficulty: medium-high.
+**Exercise 9.8.** *Tests combining two sinusoids into one.* A signal has the form $f(t) = 3\cos(5t) - 4\sin(5t)$. (a) Write this as $R\cos(5t - \phi)$, finding $R$ and $\phi$ exactly (or to four decimal places). (b) What is the maximum value of the signal? (c) Find the first positive time $t$ at which the signal equals zero. Difficulty: medium-high.
 
 ### Challenge
 
-**Exercise 9.8.** Express $\sin 4\theta$ as a polynomial in $\sin\theta$ and $\cos\theta$. Difficulty: high.
-
----
-
-## 7. Chapter Summary
-
-You can now apply the fundamental Pythagorean identity, the sum/difference formulas, the double-angle and half-angle formulas, and the product-to-sum and sum-to-product formulas. You can verify identities and solve trigonometric equations using algebraic factoring and quadratic-form techniques.
-
-The single idea that matters most: **trig identities reduce complex trig expressions to simpler ones using a small, structured catalog.** With the catalog in hand, most trig equations become solvable.
-
----
-
-## 8. Connections Forward
-
-Chapter 10 takes trigonometry to non-right triangles (law of sines, law of cosines) and to vectors. Chapter 12's analytic geometry uses trig parameterizations of conic sections. The identity machinery from this chapter is the foundation for both.
-
----
-
-### Sources (from chapter source files)
-
-- *College Algebra*, source modules m51287 through m51292 (OpenStax-derived).
+**Exercise 9.9.** *Tests the structure of the identity catalog.* Starting only from the sum formulas for $\sin(A + B)$ and $\cos(A + B)$, derive the following in order, showing each step: (a) $\sin 2\theta$ and $\cos 2\theta$; (b) the power-reducing formula for $\sin^2\theta$; (c) the half-angle formula for $\sin(\theta/2)$; (d) the product-to-sum formula $\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$. Each derivation should take no more than three lines. The goal is to see the entire chapter as four steps from two starting points. Difficulty: high.
